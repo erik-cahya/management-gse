@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('gse_master', function (Blueprint $table) {
             $table->id();
-            $table->text('gse_serial')->unique();
+            $table->string('gse_serial')->unique();
             $table->string('gse_type');
             $table->string('operator');
             $table->string('operation_area');

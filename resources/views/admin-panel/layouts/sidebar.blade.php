@@ -61,6 +61,30 @@
                 </div>
             </li>
 
+            <li class="side-nav-item {{ request()->routeIs('user.*') ? 'menuitem-active' : '' }}">
+                <a data-bs-toggle="collapse" href="#userManagement" aria-expanded="false" aria-controls="userManagement" class="side-nav-link">
+                    <i class="ri-user-fill"></i>
+                    <span> Users Management</span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="{{ request()->routeIs('user.*') ? 'show' : '' }} collapse" id="userManagement">
+                    <ul class="side-nav-second-level">
+                        <li class="side-nav-item {{ request()->routeIs('user.index') ? 'menuitem-active' : '' }}">
+                            <a class="side-nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}" href="{{ route('user.index') }}">
+                                List User
+                                <span class="badge bg-success float-end">{{ App\Models\GseMasterModel::count() }}</span>
+
+                            </a>
+                        </li>
+
+                        <li class="side-nav-item {{ request()->routeIs('user.create') ? 'menuitem-active' : '' }}">
+                            <a class="side-nav-link {{ request()->routeIs('user.create') ? 'active' : '' }}" href="{{ route('user.create') }}">Create New User</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
         </ul>
     </div>
 </div>

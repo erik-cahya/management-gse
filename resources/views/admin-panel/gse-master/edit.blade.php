@@ -15,11 +15,12 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form enctype="multipart/form-data" method="POST" action="{{ route('gse.store') }}">
+                                    <form enctype="multipart/form-data" method="POST" action="{{ route('gse.update', $dataGse->id) }}">
                                         @csrf
+                                        @method('PUT')
                                         <div class="mb-3">
                                             <label for="simpleinput" class="form-label">Nomor Seri GSE</label>
-                                            <input type="text" id="simpleinput" class="form-control" name="gse_serial" placeholder="Masukkan Nomor Seri GSE">
+                                            <input type="text" id="simpleinput" class="form-control" name="gse_serial" placeholder="Masukkan Nomor Seri GSE" value="{{ old('gse_serial', $dataGse->gse_serial) }}">
                                             @error('gse_serial')
                                                 <style>
                                                     .form-control {
@@ -35,10 +36,21 @@
                                         <div class="mb-3">
                                             <label for="gse_type" class="form-label">Jenis GSE</label>
                                             <select class="form-select" id="gse_type" name="gse_type">
-                                                <option value="#" disabled selected hidden>Pilih Jenis GSE</option>
-                                                <option value="Bus" {{ old('gse_type') === 'Bus' ? 'selected' : '' }}>Bus</option>
-                                                <option value="Tractor" {{ old('gse_type') === 'Tractor' ? 'selected' : '' }}>Tractor</option>
-                                                <option value="Belt Loader" {{ old('gse_type') === 'Belt Loader' ? 'selected' : '' }}>Belt Loader</option>
+                                                <option value="" disabled hidden {{ old('gse_type', $dataGse->gse_type) === null ? 'selected' : '' }}>
+                                                    Pilih Jenis GSE
+                                                </option>
+
+                                                <option value="Bus" {{ old('gse_type', $dataGse->gse_type) === 'Bus' ? 'selected' : '' }}>
+                                                    Bus
+                                                </option>
+
+                                                <option value="Tractor" {{ old('gse_type', $dataGse->gse_type) === 'Tractor' ? 'selected' : '' }}>
+                                                    Tractor
+                                                </option>
+
+                                                <option value="Belt Loader" {{ old('gse_type', $dataGse->gse_type) === 'Belt Loader' ? 'selected' : '' }}>
+                                                    Belt Loader
+                                                </option>
                                             </select>
 
                                             @error('gse_type')
@@ -56,10 +68,10 @@
                                         <div class="mb-3">
                                             <label for="operator" class="form-label">Operator GSE</label>
                                             <select class="form-select" id="operator" name="operator">
-                                                <option value="" disabled selected hidden>Pilih Operator</option>
-                                                <option value="Operator" {{ old('operator') === 'Operator' ? 'selected' : '' }}>Operator</option>
-                                                <option value="Maskapai" {{ old('operator') === 'Maskapai' ? 'selected' : '' }}>Maskapai</option>
-                                                <option value="Ground Handling" {{ old('operator') === 'Ground Handling' ? 'selected' : '' }}>Ground Handling</option>
+                                                <option value="" disabled hidden {{ old('operator', $dataGse->operator) === null ? 'selected' : '' }}>Pilih Operator</option>
+                                                <option value="Operator" {{ old('operator', $dataGse->operator) === 'Operator' ? 'selected' : '' }}>Operator</option>
+                                                <option value="Maskapai" {{ old('operator', $dataGse->operator) === 'Maskapai' ? 'selected' : '' }}>Maskapai</option>
+                                                <option value="Ground Handling" {{ old('operator', $dataGse->operator) === 'Ground Handling' ? 'selected' : '' }}>Ground Handling</option>
                                             </select>
                                             @error('operator')
                                                 <style>
@@ -76,19 +88,19 @@
                                         <div class="mb-3">
                                             <label for="operation_area" class="form-label">Area Operasi</label>
                                             <select class="form-select" id="operation_area" name="operation_area">
-                                                <option value="" disabled selected hidden>Pilih Area Operasi GSE</option>
-                                                <option value="Operator">Operator</option>
-                                                <option value="Maskapai" {{ old('operation_area') === 'Maskapai' ? 'selected' : '' }}>Maskapai</option>
-                                                <option value="Ground Handling" {{ old('operation_area') === 'Ground Handling' ? 'selected' : '' }}>Ground Handling</option>
+                                                <option value="" disabled hidden {{ old('operation_area', $dataGse->operation_area) === null ? 'selected' : '' }}>Pilih Area Operasi GSE</option>
+                                                <option value="Operator" {{ old('operation_area', $dataGse->operation_area) === 'Operator' ? 'selected' : '' }}>Operator</option>
+                                                <option value="Maskapai" {{ old('operation_area', $dataGse->operation_area) === 'Maskapai' ? 'selected' : '' }}>Maskapai</option>
+                                                <option value="Ground Handling" {{ old('operation_area', $dataGse->operation_area) === 'Ground Handling' ? 'selected' : '' }}>Ground Handling</option>
                                             </select>
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="status_gse" class="form-label">Status GSE</label>
                                             <select class="form-select" id="status_gse" name="status">
-                                                <option value="" disabled selected hidden>Pilih Status GSE</option>
-                                                <option value="1">Active</option>
-                                                <option value="0">Not Active</option>
+                                                <option value="" disabled hidden {{ old('status', $dataGse->status) === null ? 'selected' : '' }}>Pilih Status GSE</option>
+                                                <option value="1" {{ old('status', $dataGse->status) === 1 ? 'selected' : '' }}>Active</option>
+                                                <option value="0" {{ old('status', $dataGse->status) === 0 ? 'selected' : '' }}>Not Active</option>
                                             </select>
                                             @error('status')
                                                 <style>

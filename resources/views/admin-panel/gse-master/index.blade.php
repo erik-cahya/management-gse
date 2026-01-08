@@ -37,7 +37,9 @@
                                     <td>{{ $gse->gse_type }}</td>
                                     <td>{{ $gse->operator }}</td>
                                     <td>{{ $gse->operation_area }}</td>
-                                    <td><span class="badge {{ $gse->status == 1 ? 'bg-success' : 'bg-danger' }} rounded-pill">{{ $gse->status == 1 ? 'Active' : 'Not Active' }}</span></td>
+                                    <td>
+                                        <span class="badge {{ $gse->status == 1 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' }} ">{{ $gse->status == 1 ? 'Active' : 'Not Active' }}</span>
+                                    </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                                             <button type="button" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="See Details" data-bs-custom-class="success-tooltip"><i class="mdi mdi-eye"></i> </button>
@@ -61,8 +63,6 @@
     </div> <!-- end row-->
 @endsection
 @push('script')
-    <!-- App js -->
-    <script src="{{ asset('admin') }}/assets/js/app.min.js"></script>
     <!-- Datatables js -->
     <script src="{{ asset('admin') }}/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('admin') }}/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
@@ -78,7 +78,7 @@
     <script src="{{ asset('admin') }}/assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="{{ asset('admin') }}/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
 
-    <!-- Datatable Demo Aapp js -->
+    <!-- Datatable Demo App js -->
     <script src="{{ asset('admin') }}/assets/js/pages/datatable.init.js"></script>
 
     {{-- Sweet Alert --}}
@@ -86,8 +86,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Saat halaman sudah ready
             const deleteButtons = document.querySelectorAll('.deleteButton');
-
-            console.log(deleteButtons);
 
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function(e) {

@@ -15,10 +15,10 @@
     <script src="{{ asset('admin') }}/assets/js/config.js"></script>
 
     <!-- App css -->
-    <link href="{{ asset('admin') }}/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="{{ asset('admin') }}/assets/css/app.css" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- Icons css -->
-    <link href="{{ asset('admin') }}/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin') }}/assets/css/icons.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="authentication-bg position-relative" style="height: 100vh;">
@@ -58,8 +58,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input"
-                                                        id="checkbox-signin">
+                                                    <input type="checkbox" class="form-check-input" id="checkbox-signin">
                                                     <label class="form-check-label" for="checkbox-signin">Remember
                                                         me</label>
                                                 </div>
@@ -83,8 +82,7 @@
             </div>
             <div class="row">
                 <div class="col-12 text-center">
-                    <p class="text-dark-emphasis">Don't have an account? <a href="auth-register.html"
-                            class="text-dark fw-bold link-offset-3 text-decoration-underline ms-1"><b>Sign up</b></a>
+                    <p class="text-dark-emphasis">Don't have an account? <a href="{{ route('register') }}" class="text-dark fw-bold link-offset-3 text-decoration-underline ms-1"><b>Sign up</b></a>
                     </p>
                 </div> <!-- end col -->
             </div>

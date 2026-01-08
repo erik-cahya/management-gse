@@ -70,7 +70,7 @@ class GSEController extends Controller
      */
     public function edit(string $id)
     {
-        $data['gseData'] = GseMasterModel::where('gse_serial', $id)->first();
+        $data['dataGse'] = GseMasterModel::where('gse_serial', $id)->first();
         return view('admin-panel.gse-master.edit', $data);
     }
 
@@ -79,7 +79,21 @@ class GSEController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        GseMasterModel::where('id', $id)->update([
+            'gse_serial' => $request->gse_serial,
+            'gse_type' => $request->gse_type,
+            'operator' => $request->operator,
+            'operation_area' => $request->operation_area,
+            'status' => $request->status,
+        ]);
+
+        $flashData = [
+            'title' => 'Edit GSE Data Success',
+            'message' => 'GSE Data Edited Successfully',
+            'swalFlashIcon' => 'success',
+        ];
+        return redirect()->route('gse.index')->with('flashData', $flashData);
     }
 
     /**

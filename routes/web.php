@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GSEController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,7 +12,9 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
-Route::resource('/gse', GSEController::class);
+
+Route::resource('/gse', GSEController::class)->middleware(['auth', 'verified']);
+Route::resource('/user', UserController::class)->middleware(['auth', 'verified']);
 
 
 Route::middleware('auth')->group(function () {

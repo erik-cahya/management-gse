@@ -81,28 +81,18 @@
                     </a>
 
                     <!-- item-->
-                    <a href="pages-profile.html" class="dropdown-item">
-                        <i class="ri-settings-4-line fs-16 me-1 align-middle"></i>
-                        <span>Settings</span>
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
 
-                    <!-- item-->
-                    <a href="pages-faq.html" class="dropdown-item">
-                        <i class="ri-customer-service-2-line fs-16 me-1 align-middle"></i>
-                        <span>Support</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="auth-lock-screen.html" class="dropdown-item">
-                        <i class="ri-lock-line fs-16 me-1 align-middle"></i>
-                        <span>Lock Screen</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="auth-logout.html" class="dropdown-item">
+                        <button type="submit" class="dropdown-item">
+                            <i class="ri-logout-circle-r-line me-1 align-middle"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                    {{-- <a href="auth-logout.html" class="dropdown-item">
                         <i class="ri-logout-circle-r-line me-1 align-middle"></i>
                         <span>Logout</span>
-                    </a>
+                    </a> --}}
                 </div>
             </li>
         </ul>

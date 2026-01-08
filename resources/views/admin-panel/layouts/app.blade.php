@@ -8,24 +8,13 @@
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
 
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('admin') }}/assets/images/favicon.ico">
-    <!-- App css -->
-    <link href="{{ asset('admin') }}/assets/css/app.css" rel="stylesheet" type="text/css" id="app-style" />
-    <!-- Vector Map css -->
-    <link rel="stylesheet" href="{{ asset('admin') }}/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css">
-    <!-- Theme Config Js -->
-    <script src="{{ asset('admin') }}/assets/js/config.js"></script>
-    <!-- Icons css -->
-    <link href="{{ asset('admin') }}/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-
-    {{-- SweetAlert --}}
-    <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.26.17/dist/sweetalert2.min.css " rel="stylesheet">
-
     @stack('style')
 
-    <!-- Daterangepicker css -->
-    {{-- <link rel="stylesheet" href="{{ asset('admin') }}/assets/vendor/daterangepicker/daterangepicker.css"> --}}
+    {{-- !-- App favicon --> --}}
+    <link rel="shortcut icon" href="{{ asset('admin') }}/assets/images/favicon.ico">
+    <script src="{{ asset('admin') }}/assets/js/config.js"></script>
+    <link href="{{ asset('admin') }}/assets/css/app.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="{{ asset('admin') }}/assets/css/icons.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -56,11 +45,8 @@
 
     <!-- Vendor js -->
     <script src="{{ asset('admin') }}/assets/js/vendor.min.js"></script>
-    <!-- App js -->
-    <script src="{{ asset('admin') }}/assets/js/app.min.js"></script>
-
     <script src="{{ asset('admin') }}/assets/vendor/lucide/umd/lucide.min.js"></script>
-
+    <script src="{{ asset('admin') }}/assets/js/app.min.js"></script>
     @stack('script')
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
