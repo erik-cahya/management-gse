@@ -32,7 +32,6 @@
                 <a href="{{ route('dashboard') }}" class="side-nav-link">
                     <i class="ri-dashboard-2-line"></i>
                     <span> Dashboard </span>
-                    <span class="badge bg-success float-end">9+</span>
                 </a>
             </li>
 
@@ -47,8 +46,13 @@
                 <div class="{{ request()->routeIs('gse.*') ? 'show' : '' }} collapse" id="gseMenu">
                     <ul class="side-nav-second-level">
                         <li class="side-nav-item {{ request()->routeIs('gse.index') ? 'menuitem-active' : '' }}">
-                            <a class="side-nav-link {{ request()->routeIs('gse.index') ? 'active' : '' }}" href="{{ route('gse.index') }}">List GSE</a>
+                            <a class="side-nav-link {{ request()->routeIs('gse.index') ? 'active' : '' }}" href="{{ route('gse.index') }}">
+                                List GSE
+                                <span class="badge bg-success float-end">{{ App\Models\GseMasterModel::count() }}</span>
+
+                            </a>
                         </li>
+
                         <li class="side-nav-item {{ request()->routeIs('gse.create') ? 'menuitem-active' : '' }}">
                             <a class="side-nav-link {{ request()->routeIs('gse.create') ? 'active' : '' }}" href="{{ route('gse.create') }}">Create Data GSE</a>
                         </li>
