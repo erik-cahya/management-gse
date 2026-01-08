@@ -72,15 +72,10 @@
                         <li class="side-nav-item {{ request()->routeIs('user.index') ? 'menuitem-active' : '' }}">
                             <a class="side-nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}" href="{{ route('user.index') }}">
                                 List User
-                                <span class="badge bg-success float-end">{{ App\Models\GseMasterModel::count() }}</span>
+                                <span class="badge bg-success float-end">{{ App\Models\User::count() }}</span>
 
                             </a>
                         </li>
-
-                        <li class="side-nav-item {{ request()->routeIs('user.create') ? 'menuitem-active' : '' }}">
-                            <a class="side-nav-link {{ request()->routeIs('user.create') ? 'active' : '' }}" href="{{ route('user.create') }}">Create New User</a>
-                        </li>
-
                     </ul>
                 </div>
             </li>

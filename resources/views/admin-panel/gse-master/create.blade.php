@@ -7,7 +7,7 @@
         <div class="container-fluid">
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-header">
                             <h4 class=".card-title">Add New Data GSE</h4>
@@ -15,7 +15,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <form enctype="multipart/form-data" method="POST" action="{{ route('gse.store') }}">
                                         @csrf
                                         <div class="mb-3">
