@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EquipmentModel extends Model
+class GseMasterModel extends Model
 {
-    protected $table = 'equipment';
+    protected $table = 'gse_master';
     protected $guarded = ['id'];
     protected $primaryKey = 'id';
 }
