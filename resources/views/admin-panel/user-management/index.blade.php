@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
                 <div>
-                    <h4 class="card-title">User List</h4>
+                    <h4 class="card-title">Add New User</h4>
                 </div>
             </div>
             <div class="card-body">
@@ -14,7 +14,7 @@
                             @csrf
                             <div class="mb-3">
                                 <div class="row g-2">
-                                    <div class="mb-3 col-md-4">
+                                    <div class="col-md-4 mb-3">
                                         <label for="name" class="form-label">Name</label>
                                         <input type="text" class="form-control" id="name" placeholder="Input Nama User" name="name">
                                         @error('name')
@@ -28,7 +28,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="mb-3 col-md-4">
+                                    <div class="col-md-4 mb-3">
                                         <label for="email" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="email" placeholder="Input Email" name="email">
                                         @error('email')
@@ -42,9 +42,9 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="mb-3 col-md-4">
+                                    <div class="col-md-4 mb-3">
                                         <label for="roles" class="form-label">Role User</label>
-                                        <select class="form-select text-capitalize" id="roles" name="roles">
+                                        <select class="text-capitalize form-select" id="roles" name="roles">
                                             <option value="#" disabled selected hidden>Pilih Role User</option>
                                             <option value="Master" {{ old('roles') === 'Master' ? 'selected' : '' }}>Master</option>
                                             <option value="AMC" {{ old('roles') === 'AMC' ? 'selected' : '' }}>AMC</option>
@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                                 <div class="row g-2">
-                                    <div class="mb-3 col-md-6">
+                                    <div class="col-md-6 mb-3">
                                         <label for="password" class="form-label">Password</label>
                                         <input type="password" class="form-control" id="password" placeholder="Email" name="password">
                                         @error('password')
@@ -77,7 +77,7 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="mb-3 col-md-6">
+                                    <div class="col-md-6 mb-3">
                                         <label for="password_confirmation" class="form-label">Password Confirmation</label>
                                         <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Password">
                                     </div>
@@ -95,7 +95,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="col-xxl-8 order-lg-1 order-2">
         <div class="card">
@@ -147,7 +146,7 @@
                                             <a href="{{ route('gse.edit', $user->id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Data" data-bs-custom-class="warning-tooltip"><i class="mdi mdi-lead-pencil"></i> </a>
 
                                             <input type="hidden" class="gseID" value="{{ $user->id }}">
-                                            <button type="button" class="btn btn-sm btn-danger deleteButton" data-nama="{{ $user->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Data" data-bs-custom-class="danger-tooltip">
+                                            <button type="button" class="btn btn-sm btn-danger deleteButton" data-nama="{{ $user->name }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Data" data-bs-custom-class="danger-tooltip">
                                                 <i class="mdi mdi-trash-can"></i>
                                             </button>
                                         </div>
@@ -164,3 +163,59 @@
         </div>
     </div>
 @endsection
+@push('script')
+    {{-- Sweet Alert --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Saat halaman sudah ready
+            const deleteButtons = document.querySelectorAll('.deleteButton');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    let nameUser = this.getAttribute('data-nama');
+                    let gseID = this.parentElement.querySelector('.gseID').value;
+
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Delete user " + nameUser + "?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Kirim DELETE request manual lewat JavaScript
+                            fetch('/user/' + gseID, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                        'Content-Type': 'application/json'
+                                    }
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    Swal.fire({
+                                        title: data.judul,
+                                        text: data.pesan,
+                                        icon: data.swalFlashIcon,
+                                    });
+
+                                    // Optional: reload table / halaman
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 1500);
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    Swal.fire('Error', 'Something went wrong!', 'error');
+                                });
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+@endpush

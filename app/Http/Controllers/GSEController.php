@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GSEInspectionModel;
 use App\Models\GseMasterModel;
+use App\Models\GSEViolationModel;
 use Illuminate\Http\Request;
 
 class GSEController extends Controller
@@ -62,7 +64,26 @@ class GSEController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // dd($request->all());
+        $data['dataGse'] = GseMasterModel::where('gse_master.gse_serial', $id)
+            ->first();
+        $data['dataViolations'] = GSEInspectionModel::where('gse_inspections.gse_serial', $id)
+            ->select(
+                'gse_violations.violation_name',
+                'gse_violations.violation_type',
+                'gse_violations.violation_level',
+                'gse_violations.description',
+                'gse_inspections.examination_date',
+                'gse_inspections.employee',
+                'gse_inspections.location',
+            )
+            ->join('gse_violations', 'gse_violations.inspection_id', '=', 'gse_inspections.id')
+            ->orderBy('gse_inspections.examination_date', 'DESC')->get();
+
+        // dd($data['dataViolations']);
+        $data['inputSerial'] = $id;
+        // return view('admin-panel.gse-master.search', $data);
+        return view('admin-panel.gse-master.show', $data);
     }
 
     /**
@@ -109,5 +130,33 @@ class GSEController extends Controller
         ];
 
         return response()->json($flashData);
+    }
+
+    public function search()
+    {
+        return view('admin-panel.gse-master.search');
+    }
+
+    public function getSearchData(Request $request)
+    {
+        // dd($request->all());
+        $data['dataGse'] = GseMasterModel::where('gse_master.gse_serial', $request->gse_serial)
+            ->first();
+        $data['dataViolations'] = GSEInspectionModel::where('gse_inspections.gse_serial', $request->gse_serial)
+            ->select(
+                'gse_violations.violation_name',
+                'gse_violations.violation_type',
+                'gse_violations.violation_level',
+                'gse_violations.description',
+                'gse_inspections.examination_date',
+                'gse_inspections.employee',
+                'gse_inspections.location',
+            )
+            ->join('gse_violations', 'gse_violations.inspection_id', '=', 'gse_inspections.id')
+            ->orderBy('gse_inspections.examination_date', 'DESC')->get();
+
+        // dd($data['dataViolations']);
+        $data['inputSerial'] = $request->gse_serial;
+        return view('admin-panel.gse-master.search', $data);
     }
 }

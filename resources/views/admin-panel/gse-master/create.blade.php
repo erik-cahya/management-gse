@@ -20,7 +20,7 @@
                                         @csrf
                                         <div class="mb-3">
                                             <label for="simpleinput" class="form-label">Nomor Seri GSE</label>
-                                            <input type="text" id="simpleinput" class="form-control" name="gse_serial" placeholder="Masukkan Nomor Seri GSE">
+                                            <input type="text" id="simpleinput" class="form-control" name="gse_serial" placeholder="Masukkan Nomor Seri GSE" value="{{ old('gse_serial') }}">
                                             @error('gse_serial')
                                                 <style>
                                                     .form-control {
@@ -88,8 +88,8 @@
                                             <label for="status_gse" class="form-label">Status GSE</label>
                                             <select class="form-select" id="status_gse" name="status">
                                                 <option value="" disabled selected hidden>Pilih Status GSE</option>
-                                                <option value="1">Active</option>
-                                                <option value="0">Not Active</option>
+                                                <option value="1" {{ old('status') === '1' ? 'selected' : '' }}>Active</option>
+                                                <option value="0" {{ old('status') === '0' ? 'selected' : '' }}>Not Active</option>
                                             </select>
                                             @error('status')
                                                 <style>

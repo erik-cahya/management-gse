@@ -82,6 +82,13 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::destroy($id);
+        $flashData = [
+            'judul' => 'Delete User Success',
+            'pesan' => 'Data User Deleted Successfully',
+            'swalFlashIcon' => 'success',
+        ];
+
+        return response()->json($flashData);
     }
 }

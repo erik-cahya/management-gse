@@ -1,10 +1,8 @@
 @extends('admin-panel.layouts.app')
 @section('content')
     <div class="content">
-
         <!-- Start Content-->
         <div class="container-fluid">
-
             <div class="row">
                 <div class="col-6">
                     <div class="card">
@@ -36,21 +34,10 @@
                                         <div class="mb-3">
                                             <label for="gse_type" class="form-label">Jenis GSE</label>
                                             <select class="form-select" id="gse_type" name="gse_type">
-                                                <option value="" disabled hidden {{ old('gse_type', $dataGse->gse_type) === null ? 'selected' : '' }}>
-                                                    Pilih Jenis GSE
-                                                </option>
-
-                                                <option value="Bus" {{ old('gse_type', $dataGse->gse_type) === 'Bus' ? 'selected' : '' }}>
-                                                    Bus
-                                                </option>
-
-                                                <option value="Tractor" {{ old('gse_type', $dataGse->gse_type) === 'Tractor' ? 'selected' : '' }}>
-                                                    Tractor
-                                                </option>
-
-                                                <option value="Belt Loader" {{ old('gse_type', $dataGse->gse_type) === 'Belt Loader' ? 'selected' : '' }}>
-                                                    Belt Loader
-                                                </option>
+                                                <option value="" disabled hidden {{ old('gse_type', $dataGse->gse_type) === null ? 'selected' : '' }}>Pilih Jenis GSE</option>
+                                                <option value="Bus" {{ old('gse_type', $dataGse->gse_type) === 'Bus' ? 'selected' : '' }}>Bus</option>
+                                                <option value="Tractor" {{ old('gse_type', $dataGse->gse_type) === 'Tractor' ? 'selected' : '' }}>Tractor</option>
+                                                <option value="Belt Loader" {{ old('gse_type', $dataGse->gse_type) === 'Belt Loader' ? 'selected' : '' }}>Belt Loader</option>
                                             </select>
 
                                             @error('gse_type')
