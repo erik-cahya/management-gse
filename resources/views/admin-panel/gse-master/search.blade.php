@@ -13,7 +13,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-12">xw
+                                <div class="col-lg-12">
                                     <form method="POST" action="{{ route('gse.searchData') }}">
                                         @csrf
                                         <div class="mb-3">
@@ -150,7 +150,6 @@
                                                         </div>
                                                     </article>
                                                 @endforeach
-
                                             </div>
                                         </div>
                                     </div>
@@ -166,7 +165,7 @@
                             <div class="alert alert-danger d-flex align-items-center" role="alert">
                                 <i class="mdi mdi-alert fs-16 me-1"></i>
                                 <div>
-                                    Data GSE Tidak Ditemukan
+                                    Data GSE Tidak Ditemukan | <a href="{{ route('gse.create') }}" class="alert-link">Tambah Data GSE Baru ?</a>
                                 </div>
                             </div>
                         </div>

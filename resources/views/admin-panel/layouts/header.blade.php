@@ -31,7 +31,7 @@
             </button>
 
             <!-- Page Title -->
-            <h4 class="page-title d-none d-sm-block">Dashboards</h4>
+            <h4 class="page-title d-none d-sm-block">{{ $title ?? 'Dashboard' }}</h4>
         </div>
 
         <ul class="topbar-menu d-flex align-items-center gap-3">

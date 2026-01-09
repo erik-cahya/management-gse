@@ -39,7 +39,7 @@
 
             <li class="side-nav-item {{ request()->routeIs('gse.*') ? 'menuitem-active' : '' }}">
                 <a data-bs-toggle="collapse" href="#gseMenu" aria-expanded="false" aria-controls="gseMenu" class="side-nav-link">
-                    <i class="ri-compass-3-line"></i>
+                    <i class="ri-flight-takeoff-fill"></i>
                     <span> GSE </span>
                     <span class="menu-arrow"></span>
                 </a>
@@ -64,6 +64,13 @@
                         </li>
                     </ul>
                 </div>
+            </li>
+
+            <li class="side-nav-item {{ request()->routeIs('violation.index') ? 'menuitem-active' : '' }}">
+                <a href="{{ route('violation.index') }}" class="side-nav-link">
+                    <i class="ri-flag-2-fill"></i>
+                    <span> Input Pelanggaran </span>
+                </a>
             </li>
 
             @if (Auth::user()->roles === 'master')

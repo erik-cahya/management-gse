@@ -6,9 +6,14 @@ use App\Models\GSEInspectionModel;
 use App\Models\GseMasterModel;
 use App\Models\GSEViolationModel;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class GSEController extends Controller
 {
+    public function __construct()
+    {
+        View()->share('title', 'GSE Management');
+    }
     /**
      * Display a listing of the resource.
      */
