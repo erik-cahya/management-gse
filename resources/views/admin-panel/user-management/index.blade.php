@@ -145,10 +145,12 @@
 
                                             <a href="{{ route('gse.edit', $user->id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Data" data-bs-custom-class="warning-tooltip"><i class="mdi mdi-lead-pencil"></i> </a>
 
-                                            <input type="hidden" class="userID" value="{{ $user->id }}">
-                                            <button type="button" class="btn btn-sm btn-danger deleteButton" data-nama="{{ $user->name }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Data" data-bs-custom-class="danger-tooltip">
-                                                <i class="mdi mdi-trash-can"></i>
-                                            </button>
+                                            @if ($user->id !== Auth::user()->id)
+                                                <input type="hidden" class="userID" value="{{ $user->id }}">
+                                                <button type="button" class="btn btn-sm btn-danger deleteButton" data-nama="{{ $user->name }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Data" data-bs-custom-class="danger-tooltip">
+                                                    <i class="mdi mdi-trash-can"></i>
+                                                </button>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

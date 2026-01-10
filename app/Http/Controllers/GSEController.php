@@ -77,7 +77,6 @@ class GSEController extends Controller
 
         // dd($data['dataViolations']);
         $data['inputSerial'] = $id;
-        // return view('admin-panel.gse-master.search', $data);
         return view('admin-panel.gse-master.show', $data);
     }
 

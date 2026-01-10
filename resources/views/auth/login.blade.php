@@ -29,6 +29,8 @@
                     <div class="card overflow-hidden">
                         <div class="row g-0">
                             <div class="col-lg-12">
+
+
                                 <div class="d-flex flex-column h-100">
                                     <div class="auth-brand p-4 text-center">
                                         <a href="index.html" class="logo-light">
@@ -63,6 +65,12 @@
                                                         me</label>
                                                 </div>
                                             </div>
+                                            @error('email')
+                                                <div class="alert alert-danger mt-4" role="alert">
+                                                    <i data-feather="alert-circle"></i>
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                             <div class="mb-0 text-start">
                                                 <button class="btn btn-soft-primary w-100" type="submit">
                                                     <i class="ri-login-circle-fill me-1"></i>
