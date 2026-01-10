@@ -72,18 +72,8 @@ class GSEController extends Controller
         // dd($request->all());
         $data['dataGse'] = GseMasterModel::where('gse_master.gse_serial', $id)
             ->first();
-        $data['dataViolations'] = GSEInspectionModel::where('gse_inspections.gse_serial', $id)
-            ->select(
-                'gse_violations.violation_name',
-                'gse_violations.violation_type',
-                'gse_violations.violation_level',
-                'gse_violations.description',
-                'gse_inspections.examination_date',
-                'gse_inspections.employee',
-                'gse_inspections.location',
-            )
-            ->join('gse_violations', 'gse_violations.inspection_id', '=', 'gse_inspections.id')
-            ->orderBy('gse_inspections.examination_date', 'DESC')->get();
+        $data['dataViolations'] = GSEViolationModel::where('gse_serial', $id)
+            ->orderBy('examination_date', 'DESC')->get();
 
         // dd($data['dataViolations']);
         $data['inputSerial'] = $id;
@@ -145,20 +135,18 @@ class GSEController extends Controller
     public function getSearchData(Request $request)
     {
         // dd($request->all());
-        $data['dataGse'] = GseMasterModel::where('gse_master.gse_serial', $request->gse_serial)
-            ->first();
-        $data['dataViolations'] = GSEInspectionModel::where('gse_inspections.gse_serial', $request->gse_serial)
+        $data['dataGse'] = GseMasterModel::where('gse_master.gse_serial', $request->gse_serial)->first();
+
+        $data['dataViolations'] = GSEViolationModel::where('gse_serial', $request->gse_serial)
             ->select(
-                'gse_violations.violation_name',
-                'gse_violations.violation_type',
-                'gse_violations.violation_level',
-                'gse_violations.description',
-                'gse_inspections.examination_date',
-                'gse_inspections.employee',
-                'gse_inspections.location',
-            )
-            ->join('gse_violations', 'gse_violations.inspection_id', '=', 'gse_inspections.id')
-            ->orderBy('gse_inspections.examination_date', 'DESC')->get();
+                'violation_name',
+                'violation_type',
+                'violation_level',
+                'description',
+                'examination_date',
+                'employee',
+                'location',
+            )->orderBy('examination_date', 'DESC')->get();
 
         // dd($data['dataViolations']);
         $data['inputSerial'] = $request->gse_serial;

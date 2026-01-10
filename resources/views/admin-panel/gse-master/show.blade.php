@@ -113,7 +113,6 @@
                                                 <td>{{ $pelanggaran->violation_type }}</td>
                                                 <td>
                                                     <span class="badge rounded-pill fs-12 {{ $bgClass . ' ' . $textClass }}">{{ $pelanggaran->violation_level }}</span>
-
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($pelanggaran->examination_date)->format('d M Y') }}</td>
                                                 <td>{{ $pelanggaran->employee }}</td>

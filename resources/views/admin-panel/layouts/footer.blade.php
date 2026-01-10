@@ -5,7 +5,7 @@
              <div class="col-12 text-center">
                  <script>
                      document.write(new Date().getFullYear())
-                 </script> © Techmin - Theme by <b>Techzaa</b>
+                 </script> © GSE Management
              </div>
          </div>
      </div>

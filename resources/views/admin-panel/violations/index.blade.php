@@ -1,159 +1,139 @@
 @extends('admin-panel.layouts.app')
+@push('style')
+    <!-- Datatables css -->
+    <link href="{{ asset('admin') }}/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+@endpush
 @section('content')
-    <div class="col-xxl-12 order-lg-1 order-2">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
-                <div>
-                    <h4 class="card-title">Tambah Data Pelanggaran GSE</h4>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form method="POST" action="{{ route('violation.store') }}">
-                            @csrf
-                            <div class="mb-3">
-                                <div class="row g-2">
-                                    <div class="col-md-6 mb-1">
-                                        <label for="name_checker" class="form-label">Nama Pemeriksa</label>
-                                        <input type="text" class="form-control" id="name_checker" placeholder="Input Nama Pemeriksa" name="name_checker">
-                                        @error('name_checker')
-                                            <style>
-                                                #name_checker {
-                                                    border-color: #d03f3f
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class=".card-title">List Pelanggaran GSE</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <table id="scroll-horizontal-datatable" class="table-striped w-100 nowrap table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Kode GSE</th>
+                                            <th>Nama Pelanggaran</th>
+                                            <th>Jenis Pelanggaran</th>
+                                            <th>Level Pelanggaran</th>
+                                            <th>Tanggal Pengecekan</th>
+                                            <th>Pelapor</th>
+                                            <th>Lokasi</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($dataViolation as $pelanggaran)
+                                            @php
+                                                if ($pelanggaran->violation_level === 'berat') {
+                                                    $textClass = 'text-danger';
+                                                    $bgClass = 'bg-danger-subtle';
+                                                } elseif ($pelanggaran->violation_level === 'sedang') {
+                                                    $textClass = 'text-primary';
+                                                    $bgClass = 'bg-primary-subtle';
+                                                } else {
+                                                    $textClass = 'text-success';
+                                                    $bgClass = 'bg-success-subtle';
                                                 }
-                                            </style>
-                                            <div class="invalid-tooltip d-block position-static">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6 mb-1">
-                                        <label for="date_checking" class="form-label">Tanggal Pemeriksaan</label>
-                                        <input type="date" class="form-control" id="date_checking" name="date_checking">
-                                        @error('date_checking')
-                                            <style>
-                                                #date_checking {
-                                                    border-color: #d03f3f
-                                                }
-                                            </style>
-                                            <div class="invalid-tooltip d-block position-static">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label for="gse_serial" class="form-label">GSE</label>
-                                        <select class="text-capitalize form-select" id="gse_serial" name="gse_serial">
-                                            <option value="#" disabled selected hidden>Pilih Serial GSE</option>
-                                            @foreach ($gseData as $gse)
-                                                <option value={{ $gse->gse_serial }} {{ old('gse_serial') === $gse->gse_serial ? 'selected' : '' }}>{{ $gse->gse_serial . ' | ' . $gse->gse_type }}</option>
-                                            @endforeach
-                                        </select>
+                                            @endphp
+                                            <tr class="text-capitalize">
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    <span class="badge bg-primary">{{ $pelanggaran->gse_serial }}</span>
+                                                </td>
+                                                <td>{{ $pelanggaran->violation_name }}</td>
+                                                <td>{{ $pelanggaran->violation_type }}</td>
+                                                <td>
+                                                    <span class="badge {{ $bgClass . ' ' . $textClass }}">{{ $pelanggaran->violation_level }}</span>
+                                                </td>
+                                                <td>{{ \Carbon\Carbon::parse($pelanggaran->examination_date)->format('d M Y') }}</td>
+                                                <td>{{ $pelanggaran->employee }}</td>
+                                                <td>{{ $pelanggaran->location }}</td>
+                                                <td class="text-center">
+                                                    <input type="hidden" class="gseID" value="{{ $pelanggaran->inspectionID }}">
+                                                    <a href="javascript:void(0)" class="text-reset fs-16 deleteButton px-1" data-nama="{{ $pelanggaran->gse_serial }}"> <i class="ri-delete-bin-2-line"></i></a>
+                                                </td>
 
-                                        @error('gse_serial')
-                                            <style>
-                                                #gse_serial {
-                                                    border-color: #d03f3f
-                                                }
-                                            </style>
-                                            <div class="invalid-tooltip d-block position-static">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6 mb-1">
-                                        <label for="location" class="form-label">Lokasi</label>
-                                        <input type="text" class="form-control" id="location" placeholder="Input Lokasi Pemeriksaan" name="location">
-                                        @error('location')
-                                            <style>
-                                                #location {
-                                                    border-color: #d03f3f
-                                                }
-                                            </style>
-                                            <div class="invalid-tooltip d-block position-static">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
+                                            </tr>
+                                        @endforeach
 
-                                    <div class="col-md-4 mb-2">
-                                        <label for="violation_name" class="form-label">Nama Pelanggaran</label>
-                                        <input type="text" class="form-control" id="violation_name" placeholder="Input Nama Pemeriksa" name="violation_name">
-                                        @error('violation_name')
-                                            <style>
-                                                #violation_name {
-                                                    border-color: #d03f3f
-                                                }
-                                            </style>
-                                            <div class="invalid-tooltip d-block position-static">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-md-4 mb-2">
-                                        <label for="violation_type" class="form-label">Jenis Pelanggaran</label>
-                                        <select class="text-capitalize form-select" id="violation_type" name="violation_type">
-                                            <option value="#" disabled selected hidden>Pilih Jenis Pelanggaran GSE</option>
-                                            <option value="Pelanggaran Administratif" {{ old('violation_type') === 'Pelanggaran Administratif' ? 'selected' : '' }}>Pelanggaran Administratif</option>
-                                            <option value="Pelanggaran Kondisi Fisik" {{ old('violation_type') === 'Pelanggaran Kondisi Fisik' ? 'selected' : '' }}>Pelanggaran Kodisi Fisik</option>
-                                            <option value="Pelanggaran Operasional" {{ old('violation_type') === 'Pelanggaran Operasional' ? 'selected' : '' }}>Pelanggaran Operasional</option>
-                                            <option value="Pelanggaran Keselamatan" {{ old('violation_type') === 'Pelanggaran Keselamatan' ? 'selected' : '' }}>Pelanggaran Keselamatan</option>
-                                            <option value="Pelanggaran Personal / Human Error" {{ old('violation_type') === 'Pelanggaran Personal / Human Error' ? 'selected' : '' }}>Pelanggaran Personel / Human Error</option>
-                                            <option value="Pelanggaran Lingkungan" {{ old('violation_type') === 'Pelanggaran Lingkungan' ? 'selected' : '' }}>Pelanggaran Lingkungan</option>
-                                            <option value="AMC" {{ old('violation_type') === 'AMC' ? 'selected' : '' }}>AMC</option>
-                                        </select>
-
-                                        @error('violation_type')
-                                            <style>
-                                                #violation_type {
-                                                    border-color: #d03f3f
-                                                }
-                                            </style>
-                                            <div class="invalid-tooltip d-block position-static">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-md-4 mb-2">
-                                        <label for="level" class="form-label">Level Pelanggaran</label>
-                                        <select class="text-capitalize form-select" id="level" name="level">
-                                            <option value="#" disabled selected hidden>Pilih Level Pelanggaran GSE</option>
-                                            <option value="Ringan" {{ old('level') === 'Ringan' ? 'selected' : '' }}>Ringan</option>
-                                            <option value="Berat" {{ old('level') === 'Berat' ? 'selected' : '' }}>Berat</option>
-                                            <option value="Sedang" {{ old('level') === 'Sedang' ? 'selected' : '' }}>Sedang</option>
-                                        </select>
-
-                                        @error('level')
-                                            <style>
-                                                #level {
-                                                    border-color: #d03f3f
-                                                }
-                                            </style>
-                                            <div class="invalid-tooltip d-block position-static">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-md-12 mb-1">
-                                        <label for="description" class="form-label">Deksripsi Pelanggaran</label>
-                                        <textarea class="form-control" id="example-textarea" name="description" rows="5"></textarea>
-                                    </div>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
-
-                            <div class="mb-3">
-                                <button class="btn btn-primary" type="submit">Add New User</button>
-                            </div>
-
-                        </form>
-                    </div> <!-- end col -->
-
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@push('script')
+    <!-- Datatables js -->
+    <script src="{{ asset('admin') }}/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('admin') }}/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="{{ asset('admin') }}/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+
+    <!-- Datatable Demo App js -->
+    <script src="{{ asset('admin') }}/assets/js/pages/datatable.init.js"></script>
+
+    {{-- Sweet Alert --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Saat halaman sudah ready
+            const deleteButtons = document.querySelectorAll('.deleteButton');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    let dataName = this.getAttribute('data-nama');
+                    let gseID = this.parentElement.querySelector('.gseID').value;
+
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Delete data pelanggaran " + dataName + "?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Kirim DELETE request manual lewat JavaScript
+                            fetch('/violation/' + gseID, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                        'Content-Type': 'application/json'
+                                    }
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    Swal.fire({
+                                        title: data.judul,
+                                        text: data.pesan,
+                                        icon: data.swalFlashIcon,
+                                    });
+
+                                    // Optional: reload table / halaman
+                                    setTimeout(() => {
+                                        location.reload();
+                                    }, 1500);
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    Swal.fire('Error', 'Something went wrong!', 'error');
+                                });
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+@endpush

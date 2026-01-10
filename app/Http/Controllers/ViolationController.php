@@ -15,7 +15,21 @@ class ViolationController extends Controller
      */
     public function index()
     {
-        $data['gseData'] = GseMasterModel::select('id', 'gse_serial', 'gse_type', 'status')->get();
+        $data['dataViolation'] = GSEViolationModel::select(
+            'gse_violations.id as inspectionID',
+            'gse_violations.gse_serial',
+            'gse_violations.employee',
+            'gse_violations.examination_date',
+            'gse_violations.location',
+
+            // 'gse_violations.id as violationID',
+            'gse_violations.violation_name',
+            'gse_violations.violation_level',
+            'gse_violations.violation_type',
+        )
+            ->get();
+        // dd($data['dataViolation']);
+
         return view('admin-panel.violations.index', $data);
     }
 
@@ -24,7 +38,8 @@ class ViolationController extends Controller
      */
     public function create()
     {
-        //
+        $data['gseData'] = GseMasterModel::select('id', 'gse_serial', 'gse_type', 'status')->get();
+        return view('admin-panel.violations.create', $data);
     }
 
     /**
@@ -34,27 +49,22 @@ class ViolationController extends Controller
     {
         // dd($request->all());
 
-        //   "name_checker" => "Erik Cahya"
-        //   "date_checking" => "2026-01-08"
-        //   "gse_serial" => "SN-1231"
-        //   "location" => "Sanur"
-        //   "violation_name" => "Tidak Sesuai SOP"
-        //   "violation_type" => "Pelanggaran Administratif"
-        //   "level" => "Berat"
-        //   "description" => "Mesin tidak sesuai dengan spesifikasi"
+        // $inspectionCreate = GSEInspectionModel::create([
+        //     'gse_serial' => $request->gse_serial,
+        //     // 'user_id' => Auth::user()->id,
+        //     'user_id' => NULL,
 
-        $inspectionCreate = GSEInspectionModel::create([
-            'gse_serial' => $request->gse_serial,
-            'user_id' => Auth::user()->id,
-            'examination_date' => $request->date_checking,
-            'employee' => $request->name_checker,
-            'location' => $request->location
-        ]);
+        // ]);
 
         GSEViolationModel::create([
             'gse_serial' => $request->gse_serial,
-            'inspection_id' => $inspectionCreate->id,
-            'violation_name' => $request->violation_name,
+            // 'inspection_id' => $inspectionCreate->id,
+
+            'employee' => strtolower(trim($request->name_checker)),
+            'location' => strtolower(trim($request->location)),
+            'examination_date' => $request->date_checking,
+
+            'violation_name' => strtolower(trim($request->violation_name)),
             'violation_type' => strtolower(trim($request->violation_type)),
             'violation_level' => strtolower(trim($request->level)),
             'description' => $request->description,
@@ -97,6 +107,14 @@ class ViolationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // GSEViolationModel::where('id', $id)->delete();
+        GSEViolationModel::where('id', $id)->delete();
+        $flashData = [
+            'judul' => 'Delete User Success',
+            'pesan' => 'Data User Deleted Successfully',
+            'swalFlashIcon' => 'success',
+        ];
+
+        return response()->json($flashData);
     }
 }

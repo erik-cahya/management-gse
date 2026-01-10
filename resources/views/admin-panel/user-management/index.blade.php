@@ -145,7 +145,7 @@
 
                                             <a href="{{ route('gse.edit', $user->id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Data" data-bs-custom-class="warning-tooltip"><i class="mdi mdi-lead-pencil"></i> </a>
 
-                                            <input type="hidden" class="gseID" value="{{ $user->id }}">
+                                            <input type="hidden" class="userID" value="{{ $user->id }}">
                                             <button type="button" class="btn btn-sm btn-danger deleteButton" data-nama="{{ $user->name }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Data" data-bs-custom-class="danger-tooltip">
                                                 <i class="mdi mdi-trash-can"></i>
                                             </button>
@@ -175,8 +175,9 @@
                     e.preventDefault();
 
                     let nameUser = this.getAttribute('data-nama');
-                    let gseID = this.parentElement.querySelector('.gseID').value;
+                    let userID = this.parentElement.querySelector('.userID').value;
 
+                    console.log(userID);
                     Swal.fire({
                         title: 'Are you sure?',
                         text: "Delete user " + nameUser + "?",
@@ -188,7 +189,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Kirim DELETE request manual lewat JavaScript
-                            fetch('/user/' + gseID, {
+                            fetch('/user/' + userID, {
                                     method: 'DELETE',
                                     headers: {
                                         'X-CSRF-TOKEN': '{{ csrf_token() }}',

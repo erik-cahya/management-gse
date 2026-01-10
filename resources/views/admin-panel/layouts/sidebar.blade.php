@@ -1,10 +1,10 @@
 <div class="leftside-menu">
 
     <!-- Logo Light -->
-    <a href="index.html" class="logo logo-light">
+    <a href="{{ route('dashboard') }}" class="logo logo-light">
         <span class="logo-lg">
             {{-- <img src="{{ asset('admin') }}/assets/images/logo.png" alt="logo"> --}}
-            <h4 class="mt-3 text-white">GseManagement</h4>
+            <h4 class="mt-3 text-white">Gse Management</h4>
         </span>
         <span class="logo-sm">
             <img src="{{ asset('admin') }}/assets/images/logo-sm.png" alt="small logo">
@@ -13,10 +13,10 @@
     </a>
 
     <!-- Logo Dark -->
-    <a href="index.html" class="logo logo-dark">
+    <a href="{{ route('dashboard') }}" class="logo logo-dark">
         <span class="logo-lg">
             {{-- <img src="{{ asset('admin') }}/assets/images/logo-dark.png" alt="dark logo"> --}}
-            <h4 class="text-dark mt-3">GseManagement</h4>
+            <h4 class="text-dark mt-3">Gse Management</h4>
         </span>
         <span class="logo-sm">
             <img src="{{ asset('admin') }}/assets/images/logo-sm.png" alt="small logo">
@@ -66,11 +66,29 @@
                 </div>
             </li>
 
-            <li class="side-nav-item {{ request()->routeIs('violation.index') ? 'menuitem-active' : '' }}">
-                <a href="{{ route('violation.index') }}" class="side-nav-link">
+            <li class="side-nav-item {{ request()->routeIs('violation.*') ? 'menuitem-active' : '' }}">
+                <a data-bs-toggle="collapse" href="#violationMenu" aria-expanded="false" aria-controls="violationMenu" class="side-nav-link">
                     <i class="ri-flag-2-fill"></i>
-                    <span> Input Pelanggaran </span>
+                    <span> Pelanggaran GSE </span>
+                    <span class="menu-arrow"></span>
                 </a>
+                <div class="{{ request()->routeIs('violation.*') ? 'show' : '' }} collapse" id="violationMenu">
+                    <ul class="side-nav-second-level">
+                        <li class="side-nav-item {{ request()->routeIs('violation.index') ? 'menuitem-active' : '' }}">
+                            <a class="side-nav-link {{ request()->routeIs('violation.index') ? 'active' : '' }}" href="{{ route('violation.index') }}">
+                                List Pelanggaran
+
+                            </a>
+                        </li>
+
+                        <li class="side-nav-item {{ request()->routeIs('violation.create') ? 'menuitem-active' : '' }}">
+                            <a class="side-nav-link {{ request()->routeIs('violation.create') ? 'active' : '' }}" href="{{ route('violation.create') }}">
+                                Input Pelanggaran GSE
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </li>
 
             @if (Auth::user()->roles === 'master')
