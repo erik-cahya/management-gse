@@ -79,7 +79,7 @@
 
                                     <div class="col-md-4 mb-2">
                                         <label for="violation_name" class="form-label">Nama Pelanggaran</label>
-                                        <input type="text" class="form-control" id="violation_name" placeholder="Input Nama Pemeriksa" name="violation_name">
+                                        <input type="text" class="form-control" id="violation_name" placeholder="Input Nama Pelanggaran" name="violation_name">
                                         @error('violation_name')
                                             <style>
                                                 #violation_name {

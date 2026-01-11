@@ -32,14 +32,14 @@
 
 
                                 <div class="d-flex flex-column h-100">
-                                    <div class="auth-brand p-4 text-center">
+                                    {{-- <div class="auth-brand p-4 text-center">
                                         <a href="index.html" class="logo-light">
                                             <img src="{{ asset('admin') }}/assets/images/logo.png" alt="logo" height="28">
                                         </a>
                                         <a href="index.html" class="logo-dark">
                                             <img src="{{ asset('admin') }}/assets/images/logo-dark.png" alt="dark logo" height="28">
                                         </a>
-                                    </div>
+                                    </div> --}}
                                     <div class="my-auto p-4 text-center">
                                         <h4 class="fs-20">Sign In</h4>
                                         <p class="text-muted mb-4">Enter your email address and password to <br> access

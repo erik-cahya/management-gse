@@ -47,14 +47,23 @@ class ViolationController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-
-        // $inspectionCreate = GSEInspectionModel::create([
-        //     'gse_serial' => $request->gse_serial,
-        //     // 'user_id' => Auth::user()->id,
-        //     'user_id' => NULL,
-
-        // ]);
+        $validated = $request->validate([
+            'name_checker' => 'required',
+            'date_checking' => 'required',
+            'gse_serial' => 'required',
+            'location' => 'required',
+            'violation_name' => 'required',
+            'violation_type' => 'required',
+            'level' => 'required',
+        ], [
+            'name_checker.required' => 'Silahkan inputkan nama pemeriksa',
+            'date_checking.required' => 'Masukkan tanggal pemeriksaan',
+            'gse_serial.required' => 'Pilih GSE yang akan diinputkan',
+            'location.required' => 'Inputkan lokasi pelanggaran',
+            'violation_name.required' => 'Inputkan nama pelanggaran',
+            'violation_type.required' => 'Inputkan tipe pelanggaran',
+            'level.required' => 'Inputkan level pelanggaran',
+        ]);
 
         GSEViolationModel::create([
             'gse_serial' => $request->gse_serial,
