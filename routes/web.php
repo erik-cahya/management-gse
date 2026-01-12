@@ -7,11 +7,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViolationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
 
 Route::resource('/violation', ViolationController::class)->middleware(['auth', 'verified']);
