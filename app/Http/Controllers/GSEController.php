@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BahanBakarModel;
 use App\Models\GSEInspectionModel;
 use App\Models\GseMasterModel;
 use App\Models\GSEViolationModel;
+use App\Models\KategoriModel;
+use App\Models\KepemilikanModel;
+use App\Models\KodeGhModel;
+use App\Models\KodeGseModel;
+use App\Models\PeralatanModel;
+use App\Models\PerusahaanModel;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -28,7 +35,14 @@ class GSEController extends Controller
      */
     public function create()
     {
-        return view('admin-panel.gse-master.create');
+        $data['dataPerusahaan'] = PerusahaanModel::get();
+        $data['typePeralatan'] = PeralatanModel::get();
+        $data['dataKategori'] = KategoriModel::get();
+        $data['dataBahanBakar'] = BahanBakarModel::get();
+        $data['dataStatusKepemilikan'] = KepemilikanModel::get();
+        $data['dataKodeGH'] = KodeGhModel::get();
+        $data['dataKodeGSE'] = KodeGseModel::get();
+        return view('admin-panel.gse-master.create', $data);
     }
 
     /**
@@ -37,13 +51,13 @@ class GSEController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'gse_serial' => 'required|unique:gse_master',
+            'sticker_gse' => 'required|unique:gse_master',
             'gse_type' => 'required',
             'operator' => 'required',
             'status' => 'required',
         ], [
-            'gse_serial.required' => 'Silahkan inputkan nomor serial',
-            'gse_serial.unique' => 'Nomor Serial Ini Sudah Terdaftar Di Sistem',
+            'sticker_gse.required' => 'Silahkan inputkan nomor serial',
+            'sticker_gse.unique' => 'Nomor Serial Ini Sudah Terdaftar Di Sistem',
 
             'gse_type.unique' => 'Pilih Jenis GSE',
             'operator.unique' => 'Pilih Jenis Operator',

@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('gse_master', function (Blueprint $table) {
             $table->ulid('gse_id')->primary()->unique();
-            $table->string('gse_serial')->unique();
-            $table->string('nomor_asset');
-            $table->string('nopol_kendaraan');
+            $table->string('gse_serial')->nullable();
+            $table->string('nomor_asset')->nullable();
+            $table->string('nopol_kendaraan')->nullable();
 
             $table->foreignUlid('perusahaan_id')->references('perusahaan_id')->on('perusahaan')->cascadeOnDelete();
             $table->foreignUlid('type_peralatan_gse')->references('peralatan_id')->on('peralatan')->cascadeOnDelete();
-            $table->string('merk');
+            $table->string('merk')->nullable();
             $table->foreignUlid('kategori')->references('kategori_id')->on('kategori')->cascadeOnDelete();
             $table->foreignUlid('bahan_bakar')->references('bahan_bakar_id')->on('bahan_bakar')->cascadeOnDelete();
-            $table->float('panjang');
-            $table->float('lebar');
-            $table->float('luas');
-            $table->integer('manufacture_year');
+            $table->float('panjang')->nullable();
+            $table->float('lebar')->nullable();
+            $table->float('luas')->nullable();
+            $table->integer('manufacture_year')->nullable();
             $table->foreignUlid('status_kepemilikan')->references('kepemilikan_id')->on('kepemilikan')->cascadeOnDelete();
             $table->text('perusahaan_sewa')->nullable();
             $table->string('status_sewa')->nullable();
