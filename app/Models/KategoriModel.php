@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GseMasterModel extends Model
+class KategoriModel extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $table = 'gse_master';
-    protected $guarded = ['gse_id'];
+    protected $table = 'kategori';
+    protected $guarded = ['kategori_id'];
 
     public function uniqueIds()
     {
-        return ['gse_id'];
+        return ['kategori_id'];
     }
 }
