@@ -1,4 +1,5 @@
 @extends('admin-panel.layouts.app')
+<link href="{{ asset('admin') }}/assets/vendor/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 
 @section('content')
     <div class="content">
@@ -7,17 +8,19 @@
         <div class="container-fluid">
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class=".card-title">Add New Data GSE</h4>
 
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <form enctype="multipart/form-data" method="POST" action="{{ route('gse.store') }}">
-                                        @csrf
+
+                            <form enctype="multipart/form-data" method="POST" action="{{ route('gse.store') }}">
+                                @csrf
+                                <div class="row">
+
+                                    <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label for="simpleinput" class="form-label">Nomor Seri GSE</label>
                                             <input type="text" id="simpleinput" class="form-control" name="gse_serial" placeholder="Masukkan Nomor Seri GSE" value="{{ old('gse_serial') }}">
@@ -32,10 +35,12 @@
                                                 </div>
                                             @enderror
                                         </div>
+                                    </div>
 
+                                    <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label for="gse_type" class="form-label">Jenis GSE</label>
-                                            <select class="form-select" id="gse_type" name="gse_type">
+                                            <select class="select2 form-select" data-toggle="select2" id="gse_type" name="gse_type">
                                                 <option value="#" disabled selected hidden>Pilih Jenis GSE</option>
                                                 <option value="Bus" {{ old('gse_type') === 'Bus' ? 'selected' : '' }}>Bus</option>
                                                 <option value="Tractor" {{ old('gse_type') === 'Tractor' ? 'selected' : '' }}>Tractor</option>
@@ -53,10 +58,12 @@
                                                 </div>
                                             @enderror
                                         </div>
+                                    </div>
 
+                                    <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label for="operator" class="form-label">Operator GSE</label>
-                                            <select class="form-select" id="operator" name="operator">
+                                            <select class="select2 form-select" data-toggle="select2" id="operator" name="operator">
                                                 <option value="" disabled selected hidden>Pilih Operator</option>
                                                 <option value="Operator" {{ old('operator') === 'Operator' ? 'selected' : '' }}>Operator</option>
                                                 <option value="Maskapai" {{ old('operator') === 'Maskapai' ? 'selected' : '' }}>Maskapai</option>
@@ -73,17 +80,21 @@
                                                 </div>
                                             @enderror
                                         </div>
+                                    </div>
 
+                                    <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label for="operation_area" class="form-label">Area Operasi</label>
-                                            <select class="form-select" id="operation_area" name="operation_area">
+                                            <select class="select2 form-select" data-toggle="select2" id="operation_area" name="operation_area">
                                                 <option value="" disabled selected hidden>Pilih Area Operasi GSE</option>
                                                 <option value="Operator">Operator</option>
                                                 <option value="Maskapai" {{ old('operation_area') === 'Maskapai' ? 'selected' : '' }}>Maskapai</option>
                                                 <option value="Ground Handling" {{ old('operation_area') === 'Ground Handling' ? 'selected' : '' }}>Ground Handling</option>
                                             </select>
                                         </div>
+                                    </div>
 
+                                    <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label for="status_gse" class="form-label">Status GSE</label>
                                             <select class="form-select" id="status_gse" name="status">
@@ -102,15 +113,15 @@
                                                 </div>
                                             @enderror
                                         </div>
+                                    </div>
 
-                                        <div class="mb-3">
-                                            <button class="btn btn-primary" type="submit">Create Data GSE</button>
-                                        </div>
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary" type="submit">Create Data GSE</button>
+                                    </div>
 
-                                    </form>
-                                </div> <!-- end col -->
+                                </div>
+                            </form>
 
-                            </div>
                             <!-- end row-->
                         </div> <!-- end card-body -->
                     </div> <!-- end card -->
@@ -121,3 +132,6 @@
 
     </div>
 @endsection
+@push('script')
+    <script src="{{ asset('admin') }}/assets/vendor/select2/js/select2.min.js"></script>
+@endpush
