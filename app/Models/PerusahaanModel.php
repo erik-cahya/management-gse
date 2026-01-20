@@ -18,4 +18,11 @@ class PerusahaanModel extends Model
     {
         return ['perusahaan_id'];
     }
+
+    public function setPerusahaanIdAttribute($value)
+    {
+        if ($value !== null) {
+            $this->attributes['perusahaan_id'] = strtoupper($value);
+        }
+    }
 }

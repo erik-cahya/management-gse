@@ -17,4 +17,11 @@ class BahanBakarModel extends Model
     {
         return ['bahan_bakar_id'];
     }
+
+    public function setBahanBakarIdAttribute($value)
+    {
+        if ($value !== null) {
+            $this->attributes['bahan_bakar_id'] = strtoupper($value);
+        }
+    }
 }

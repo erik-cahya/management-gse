@@ -17,4 +17,11 @@ class KodeGhModel extends Model
     {
         return ['kode_gh_id'];
     }
+
+    public function setKodeGhIdAttribute($value)
+    {
+        if ($value !== null) {
+            $this->attributes['kode_gh_id'] = strtoupper($value);
+        }
+    }
 }

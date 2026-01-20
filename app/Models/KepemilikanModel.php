@@ -17,4 +17,11 @@ class KepemilikanModel extends Model
     {
         return ['kepemilikan_id'];
     }
+
+    public function setKepemilikanIdAttribute($value)
+    {
+        if ($value !== null) {
+            $this->attributes['kepemilikan_id'] = strtoupper($value);
+        }
+    }
 }

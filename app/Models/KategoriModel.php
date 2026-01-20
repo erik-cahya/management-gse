@@ -17,4 +17,11 @@ class KategoriModel extends Model
     {
         return ['kategori_id'];
     }
+
+    public function setKategoriIdAttribute($value)
+    {
+        if ($value !== null) {
+            $this->attributes['kategori_id'] = strtoupper($value);
+        }
+    }
 }

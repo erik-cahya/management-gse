@@ -17,4 +17,11 @@ class PeralatanModel extends Model
     {
         return ['peralatan_id'];
     }
+
+    public function setPeralatanIdAttribute($value)
+    {
+        if ($value !== null) {
+            $this->attributes['peralatan_id'] = strtoupper($value);
+        }
+    }
 }

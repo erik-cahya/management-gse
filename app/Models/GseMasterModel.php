@@ -17,4 +17,11 @@ class GseMasterModel extends Model
     {
         return ['gse_id'];
     }
+
+    public function setGseIdAttribute($value)
+    {
+        if ($value !== null) {
+            $this->attributes['gse_id'] = strtoupper($value);
+        }
+    }
 }

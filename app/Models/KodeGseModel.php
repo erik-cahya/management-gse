@@ -17,4 +17,11 @@ class KodeGseModel extends Model
     {
         return ['kode_gse_id'];
     }
+
+    public function setKodeGseIdAttribute($value)
+    {
+        if ($value !== null) {
+            $this->attributes['kode_gse_id'] = strtoupper($value);
+        }
+    }
 }

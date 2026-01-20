@@ -9,4 +9,6 @@ class GSEViolationModel extends Model
     protected $table = 'gse_violations';
     protected $guarded = ['id'];
     protected $primaryKey = 'id';
+
+    
 }
