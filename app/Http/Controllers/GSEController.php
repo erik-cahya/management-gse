@@ -50,24 +50,57 @@ class GSEController extends Controller
      */
     public function store(Request $request)
     {
+
+        // "sticker_gse" => "234234"
+        //   "nomor_asset" => "2345324"
+        //   "nopol_kendaraan" => "23234"
+        //   "perusahaan_id" => "01kfe244g3ezsgpavapmrq3n9g"
+        //   "type_peralatan_gse" => "01kfe244wkvbbnpk52kqd9e8f4"
+        //   "merk" => "ferger"
+        //   "kategori" => "01kfe245rg4qz9bnq5k96pemtb"
+        //   "bahan_bakar" => "01kfe245sh4wb4qgphjzgqdqa2"
+        //   "panjang" => "23"
+        //   "lebar" => "3214"
+        //   "luas" => "4213"
+        //   "manufacture_year" => "2312"
+        //   "status_kepemilikan" => "01kfe245vw9jca7b7233ekpx78"
+        //   "perusahaan_sewa" => "2344f"
+        //   "status_sewa" => "1234"
+        //   "tanggal_sewa" => "2026-01-19"
+        //   "kode_gh" => "01kfe245xd23ygv28txpasa50r"
+        //   "kode_gse" => "01kfe246dazskp0paepf9w9zy4"
+        //   "status" => "0"
+
+
         $validated = $request->validate([
-            'sticker_gse' => 'required|unique:gse_master',
-            'gse_type' => 'required',
-            'operator' => 'required',
+            'gse_serial' => 'required|unique:gse_master',
             'status' => 'required',
         ], [
-            'sticker_gse.required' => 'Silahkan inputkan nomor serial',
-            'sticker_gse.unique' => 'Nomor Serial Ini Sudah Terdaftar Di Sistem',
+            'gse_serial.required' => 'Silahkan inputkan nomor serial',
+            'gse_serial.unique' => 'Nomor Serial Ini Sudah Terdaftar Di Sistem',
 
-            'gse_type.unique' => 'Pilih Jenis GSE',
-            'operator.unique' => 'Pilih Jenis Operator',
-            'status.unique' => 'Pilih Status GSE',
         ]);
+
+
         GseMasterModel::create([
             'gse_serial' => $request->gse_serial,
-            'gse_type' => $request->gse_type,
-            'operator' => $request->operator,
-            'operation_area' => $request->operation_area,
+            'nomor_asset' => $request->nomor_asset,
+            'nopol_kendaraan' => $request->nopol_kendaraan,
+            'perusahaan_id' => $request->perusahaan_id,
+            'type_peralatan_gse' => $request->type_peralatan_gse,
+            'merk' => $request->merk,
+            'kategori' => $request->kategori,
+            'bahan_bakar' => $request->bahan_bakar,
+            'panjang' => $request->panjang,
+            'lebar' => $request->lebar,
+            'luas' => $request->luas,
+            'manufacture_year' => $request->manufacture_year,
+            'status_kepemilikan' => $request->status_kepemilikan,
+            'perusahaan_sewa' => $request->perusahaan_sewa,
+            'status_sewa' => $request->status_sewa,
+            'tanggal_sewa' => $request->tanggal_sewa,
+            'kode_gh' => $request->kode_gh,
+            'kode_gse' => $request->kode_gse,
             'status' => $request->status,
         ]);
 

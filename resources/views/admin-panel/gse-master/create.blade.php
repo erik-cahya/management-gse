@@ -22,9 +22,9 @@
 
                                     <div class="col-lg-4">
                                         <div class="mb-3">
-                                            <label for="sticker_gse" class="form-label">Nomor Sticker GSE</label>
-                                            <input type="text" id="sticker_gse" class="form-control @error('sticker_gse') is-invalid @enderror" name="sticker_gse" placeholder="Masukkan Nomor Sticker GSE" value="{{ old('sticker_gse') }}">
-                                            @error('sticker_gse')
+                                            <label for="gse_serial" class="form-label">Nomor Sticker GSE</label>
+                                            <input type="text" id="gse_serial" class="form-control @error('gse_serial') is-invalid @enderror" name="gse_serial" placeholder="Masukkan Nomor Sticker GSE" value="{{ old('gse_serial') }}">
+                                            @error('gse_serial')
                                                 <div class="invalid-feedback" bis_skin_checked="1">
                                                     {{ $message }}
                                                 </div>
