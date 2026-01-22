@@ -91,6 +91,8 @@
                 </div>
             </li>
 
+            <li class="side-nav-title">Settings</li>
+
             @if (Auth::user()->roles === 'master')
                 <li class="side-nav-item {{ request()->routeIs('user.*') ? 'menuitem-active' : '' }}">
                     <a data-bs-toggle="collapse" href="#userManagement" aria-expanded="false" aria-controls="userManagement" class="side-nav-link">

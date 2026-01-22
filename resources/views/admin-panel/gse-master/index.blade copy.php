@@ -1,7 +1,7 @@
 @extends('admin-panel.layouts.app')
 @push('style')
     <!-- Datatables css -->
-    {{-- <link href="{{ asset('admin') }}/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" /> --}}
+    <link href="{{ asset('admin') }}/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin') }}/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin') }}/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
@@ -49,9 +49,6 @@
                                 <tr>
                                     <td> <span class="bg-primary rounded-4 px-2 text-white">{{ $loop->iteration }}</span></td>
 
-                                    <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
-                                    </td>
                                     <td>
                                         <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
                                     </td>
