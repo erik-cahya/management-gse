@@ -36,29 +36,6 @@ class GSEController extends Controller
             'kodeGSE',
         )->get();
 
-        // "gse_id" => "01KFJA4NPVMSYJFY8JQ1RT1T0N"
-        // "gse_serial" => "92090213"
-        // "nomor_asset" => "INV-2149123"
-        // "nopol_kendaraan" => "DK-2133-KDN"
-        // "perusahaan_id" => "01KFJ9TVPNZP98WRNKN28SWTKT"
-        // "type_peralatan_gse" => "01KFJ9TVQ3A5REDKMFD0M3DY4J"
-        // "merk" => "HIACE"
-        // "kategori" => "01KFJ9TVQNB7T2SHF1CT5981VM"
-        // "bahan_bakar" => "01KFJ9TVQQP8TK8TZ8RF2P9D12"
-        // "panjang" => 23.0
-        // "lebar" => 3214.0
-        // "luas" => 312.0
-        // "manufacture_year" => 2011
-        // "status_kepemilikan" => "01KFJ9TVQSX8XP9J19CH8KWGCW"
-        // "perusahaan_sewa" => null
-        // "status_sewa" => "PRIBADI"
-        // "tanggal_sewa" => "2026-01-23"
-        // "kode_gh" => "01KFJ9TVQV7GN3K9VJV0XGQ2JC"
-        // "kode_gse" => "01KFJ9TVR3DZCNSRAC1EP5PN9H"
-        // "status" => 1
-        // "created_at" => "2026-01-22 15:36:42"
-        // "updated_at" => "2026-01-22 15:36:42"
-
         // dd($data['dataGSE']);
         return view('admin-panel.gse-master.index', $data);
     }
@@ -84,27 +61,6 @@ class GSEController extends Controller
     public function store(Request $request)
     {
 
-        // "sticker_gse" => "234234"
-        //   "nomor_asset" => "2345324"
-        //   "nopol_kendaraan" => "23234"
-        //   "perusahaan_id" => "01kfe244g3ezsgpavapmrq3n9g"
-        //   "type_peralatan_gse" => "01kfe244wkvbbnpk52kqd9e8f4"
-        //   "merk" => "ferger"
-        //   "kategori" => "01kfe245rg4qz9bnq5k96pemtb"
-        //   "bahan_bakar" => "01kfe245sh4wb4qgphjzgqdqa2"
-        //   "panjang" => "23"
-        //   "lebar" => "3214"
-        //   "luas" => "4213"
-        //   "manufacture_year" => "2312"
-        //   "status_kepemilikan" => "01kfe245vw9jca7b7233ekpx78"
-        //   "perusahaan_sewa" => "2344f"
-        //   "status_sewa" => "1234"
-        //   "tanggal_sewa" => "2026-01-19"
-        //   "kode_gh" => "01kfe245xd23ygv28txpasa50r"
-        //   "kode_gse" => "01kfe246dazskp0paepf9w9zy4"
-        //   "status" => "0"
-
-
         $validated = $request->validate([
             'gse_serial' => 'required|unique:gse_master',
             'status' => 'required',
@@ -124,9 +80,9 @@ class GSEController extends Controller
             'merk' => $request->merk,
             'kategori' => $request->kategori,
             'bahan_bakar' => $request->bahan_bakar,
-            'panjang' => $request->panjang,
-            'lebar' => $request->lebar,
-            'luas' => $request->luas,
+            'panjang' => $this->floatNumbering($request->panjang),
+            'lebar' => $this->floatNumbering($request->lebar),
+            'luas' => $this->floatNumbering($request->luas),
             'manufacture_year' => $request->manufacture_year,
             'status_kepemilikan' => $request->status_kepemilikan,
             'perusahaan_sewa' => $request->perusahaan_sewa,
@@ -214,9 +170,27 @@ class GSEController extends Controller
     public function getSearchData(Request $request)
     {
         // dd($request->all());
-        $data['dataGse'] = GseMasterModel::where('gse_master.gse_serial', $request->gse_serial)->first();
+        // $data['dataGse'] = GseMasterModel::where('gse_master.gse_serial', $request->gse_serial)->first();
 
-        $data['dataViolations'] = GSEViolationModel::where('gse_serial', $request->gse_serial)
+        $keyword = $request->keyword_search;
+        $data['dataGse'] = GseMasterModel::where(function ($q) use ($keyword) {
+            $q->where('gse_serial', 'like', "%{$keyword}%")
+                ->orWhere('nomor_asset', 'like', "%{$keyword}%")
+                ->orWhere('nopol_kendaraan', 'like', "%{$keyword}%");
+        })->with(
+            'perusahaan',
+            'typePeralatan',
+            'kategori_gse',
+            'bahanBakar',
+            'statusKepemilikan',
+            'kodeGH',
+            'kodeGSE',
+        )
+            ->first();
+
+        // dd($data['dataGse']);
+
+        $data['dataViolations'] = GSEViolationModel::where('gse_id', $request->keyword_search)
             ->select(
                 'violation_name',
                 'violation_type',
@@ -228,7 +202,30 @@ class GSEController extends Controller
             )->orderBy('examination_date', 'DESC')->get();
 
         // dd($data['dataViolations']);
-        $data['inputSerial'] = $request->gse_serial;
+        $data['inputSerial'] = $request->keyword_search;
+
         return view('admin-panel.gse-master.search', $data);
+    }
+
+    private function floatNumbering($number)
+    {
+        $number = trim($number);
+
+        // Hapus semua spasi
+        $number = str_replace(' ', '', $number);
+
+        // EU format: ada koma (,) sebagai desimal
+        if (preg_match('/\d+\.\d+,\d+/', $number) || preg_match('/\d+,\d+/', $number)) {
+            // Hapus titik sebagai ribuan, ganti koma jadi titik
+            $number = str_replace('.', '', $number);
+            $number = str_replace(',', '.', $number);
+        }
+
+        // US format: koma sebagai ribuan, titik sebagai desimal
+        elseif (preg_match('/\d+,\d+\.\d+/', $number) || preg_match('/\d+,\d{3}/', $number)) {
+            $number = str_replace(',', '', $number);
+        }
+
+        return floatval($number);
     }
 }

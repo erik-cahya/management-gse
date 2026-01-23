@@ -11,22 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('gse_violations', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('gse_serial')->comment('FK to gse_master | gse_serial');
+        Schema::create('gse_violations', function (Blueprint $table) {
+            $table->ulid('violation_id')->primary()->unique();
+            $table->foreignUlid('gse_id')->references('gse_id')->on('gse_master')->cascadeOnDelete();
+            $table->string('employee');
+            $table->string('location');
+            $table->string('examination_date')->comment('tanggal_pengecekan');
 
-        //     $table->string('employee');
-        //     $table->string('location');
-        //     $table->string('examination_date')->comment('tanggal_pengecekan');
-
-        //     $table->string('violation_name');
-        //     $table->string('violation_type');
-        //     $table->string('violation_level');
-        //     $table->text('description');
-        //     $table->timestamps();
-
-        //     $table->foreign('gse_serial')->references('gse_serial')->on('gse_master')->onDelete('cascade');
-        // });
+            $table->string('violation_name');
+            $table->string('violation_type');
+            $table->string('violation_level');
+            $table->text('description');
+            $table->timestamps();
+        });
     }
 
     /**

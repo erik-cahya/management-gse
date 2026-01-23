@@ -18,11 +18,11 @@
                     <h4 class=".card-title">All Data GSE</h4>
                 </div>
                 <div class="card-body">
-                    <table id="scroll-horizontal-datatable" class="table-striped w-100 nowrap table">
+                    <table id="scroll-horizontal-datatable" class="table-striped w-100 nowrap table table-bordered text-center">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nomor Seriar</th>
+                                <th>Nomor Serial</th>
                                 <th>Nomor Asset/Inventory</th>
                                 <th>Nopol Kendaraan</th>
                                 <th>Perusahaan</th>
@@ -44,65 +44,68 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-capitalize">
                             @foreach ($dataGSE as $gse)
                                 <tr>
-                                    <td> <span class="bg-primary rounded-4 px-2 text-white">{{ $loop->iteration }}</span></td>
+                                    <td>
+                                        <span class="bg-primary rounded-4 px-2 text-white">{{ $loop->iteration }}</span>
+                                    </td>
 
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->gse_serial }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->nomor_asset }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->nopol_kendaraan }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->perusahaan->nama_perusahaan }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->typePeralatan->nama_peralatan }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->merk }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->kategori_gse->nama_kategori }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->bahanBakar->nama_bahan_bakar }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->panjang }} m²</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->lebar }} m²</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->luas }} m²</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->manufacture_year }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->statusKepemilikan->nama_kepemilikan }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->perusahaan_sewa }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->status_sewa }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->tanggal_sewa }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->kodeGH->kode_gh }}</div>
                                     </td>
                                     <td>
-                                        <div class="fst-italic fs-12">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->kodeGSE->kode_gse }}</div>
                                     </td>
+
 
                                     <td>
                                         <span class="badge {{ $gse->status == 1 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' }}">{{ $gse->status == 1 ? 'Active' : 'Not Active' }}</span>

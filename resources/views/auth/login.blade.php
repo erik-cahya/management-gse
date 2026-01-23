@@ -50,8 +50,8 @@
                                         <form action="{{ route('login') }}" method="POST" class="text-start">
                                             @csrf
                                             <div class="mb-3">
-                                                <label for="emailaddress" class="form-label">Email address</label>
-                                                <input class="form-control" type="email" name="email" autofocus id="emailaddress" value="{{ old('email') }}" required placeholder="Enter your email">
+                                                <label for="email" class="form-label">Email address</label>
+                                                <input class="form-control" type="text" name="login" autofocus id="email" value="{{ old('email') }}" required placeholder="Enter your email">
                                             </div>
                                             <div class="mb-3">
 

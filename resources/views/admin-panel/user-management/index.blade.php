@@ -43,6 +43,20 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" id="username" placeholder="Input Username" name="username">
+                                        @error('username')
+                                            <style>
+                                                #email {
+                                                    border-color: #d03f3f
+                                                }
+                                            </style>
+                                            <div class="invalid-tooltip d-block position-static">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-4 mb-3">
                                         <label for="roles" class="form-label">Role User</label>
                                         <select class="text-capitalize form-select" id="roles" name="roles">
                                             <option value="#" disabled selected hidden>Pilih Role User</option>
@@ -61,9 +75,8 @@
                                             </div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="row g-2">
-                                    <div class="col-md-6 mb-3">
+
+                                    <div class="col-md-4 mb-3">
                                         <label for="password" class="form-label">Password</label>
                                         <input type="password" class="form-control" id="password" placeholder="Email" name="password">
                                         @error('password')
@@ -77,11 +90,12 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label for="password_confirmation" class="form-label">Password Confirmation</label>
                                         <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Password">
                                     </div>
                                 </div>
+
                             </div>
 
                             <div class="mb-3">
@@ -110,6 +124,7 @@
                             <tr class="table-light text-capitalize">
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Username</th>
                                 <th>Roles</th>
                                 <th>Password</th>
                                 <th>Action</th>
@@ -132,6 +147,9 @@
                                     </td>
                                     <td>
                                         <span class="fw-semibold">{{ $user->email }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="fw-semibold ">{{ $user->username }}</span>
                                     </td>
                                     <td>
                                         <span class="badge {{ $user->roles === 'master' ? 'bg-danger-subtle text-danger' : 'bg-success-subtle text-success' }} text-uppercase">{{ $user->roles }}</span>
