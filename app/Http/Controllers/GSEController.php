@@ -111,6 +111,8 @@ class GSEController extends Controller
         $data['dataViolations'] = GSEViolationModel::where('gse_serial', $id)
             ->orderBy('examination_date', 'DESC')->get();
 
+
+
         // dd($data['dataViolations']);
         $data['inputSerial'] = $id;
         return view('admin-panel.gse-master.show', $data);
@@ -121,7 +123,17 @@ class GSEController extends Controller
      */
     public function edit(string $id)
     {
-        $data['dataGse'] = GseMasterModel::where('gse_serial', $id)->first();
+        $data['dataGse'] = GseMasterModel::where('gse_serial', $id)->select('gse_master.*', 'kategori as id_kategori')->first();
+
+        $data['dataPerusahaan'] = PerusahaanModel::get();
+        $data['typePeralatan'] = PeralatanModel::get();
+        $data['dataKategori'] = KategoriModel::get();
+        $data['dataBahanBakar'] = BahanBakarModel::get();
+        $data['dataStatusKepemilikan'] = KepemilikanModel::get();
+        $data['dataKodeGH'] = KodeGhModel::get();
+        $data['dataKodeGSE'] = KodeGseModel::get();
+
+        // dd($data['dataGse']);
         return view('admin-panel.gse-master.edit', $data);
     }
 
@@ -130,12 +142,35 @@ class GSEController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validated = $request->validate([
+            'gse_serial' => 'required|unique:gse_master,gse_serial,' . $id . ',gse_id',
+            'nomor_asset' => 'required|unique:gse_master,nomor_asset,' . $id . ',gse_id',
+            'nopol_kendaraan' => 'required|unique:gse_master,nopol_kendaraan,' . $id . ',gse_id',
+            'status' => 'required',
+        ], [
+            'gse_serial.required' => 'Silahkan inputkan nomor serial',
+            'gse_serial.unique' => 'Nomor Serial Ini Sudah Terdaftar Di Sistem',
+        ]);
 
-        GseMasterModel::where('id', $id)->update([
+        GseMasterModel::where('gse_id', $id)->update([
             'gse_serial' => $request->gse_serial,
-            'gse_type' => $request->gse_type,
-            'operator' => $request->operator,
-            'operation_area' => $request->operation_area,
+            'nomor_asset' => $request->nomor_asset,
+            'nopol_kendaraan' => $request->nopol_kendaraan,
+            'perusahaan_id' => $request->perusahaan_id,
+            'type_peralatan_gse' => $request->type_peralatan_gse,
+            'merk' => $request->merk,
+            'kategori' => $request->kategori,
+            'bahan_bakar' => $request->bahan_bakar,
+            'panjang' => $this->floatNumbering($request->panjang),
+            'lebar' => $this->floatNumbering($request->lebar),
+            'luas' => $this->floatNumbering($request->luas),
+            'manufacture_year' => $request->manufacture_year,
+            'status_kepemilikan' => $request->status_kepemilikan,
+            'perusahaan_sewa' => $request->perusahaan_sewa,
+            'status_sewa' => $request->status_sewa,
+            'tanggal_sewa' => $request->tanggal_sewa,
+            'kode_gh' => $request->kode_gh,
+            'kode_gse' => $request->kode_gse,
             'status' => $request->status,
         ]);
 

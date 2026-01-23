@@ -18,7 +18,7 @@
                     <h4 class=".card-title">All Data GSE</h4>
                 </div>
                 <div class="card-body">
-                    <table id="scroll-horizontal-datatable" class="table-striped w-100 nowrap table table-bordered text-center">
+                    <table id="scroll-horizontal-datatable" class=" w-100 nowrap table table-bordered text-center">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -47,10 +47,7 @@
                         <tbody class="text-capitalize">
                             @foreach ($dataGSE as $gse)
                                 <tr>
-                                    <td>
-                                        <span class="bg-primary rounded-4 px-2 text-white">{{ $loop->iteration }}</span>
-                                    </td>
-
+                                    <td><span class="bg-primary rounded-4 px-2 text-white">{{ $loop->iteration }}</span></td>
                                     <td>
                                         <div class="">{{ $gse->gse_serial }}</div>
                                     </td>

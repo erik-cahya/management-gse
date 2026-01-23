@@ -139,7 +139,7 @@
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label for="panjang" class="form-label">Panjang</label>
-                                            <input type="number" id="panjang" class="form-control @error('panjang') is-invalid @enderror" name="panjang" placeholder="Masukkan Ukuran Panjang Kendaraan" value="{{ old('panjang') }}">
+                                            <input type="text" id="panjang" class="form-control @error('panjang') is-invalid @enderror" name="panjang" placeholder="Masukkan Ukuran Panjang Kendaraan" value="{{ old('panjang') }}">
                                             @error('panjang')
                                                 <div class="invalid-feedback" bis_skin_checked="1">
                                                     {{ $message }}
@@ -151,7 +151,7 @@
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label for="lebar" class="form-label">Lebar</label>
-                                            <input type="number" id="lebar" class="form-control @error('lebar') is-invalid @enderror" name="lebar" placeholder="Masukkan Ukuran Lebar Kendaraan" value="{{ old('lebar') }}">
+                                            <input type="text" id="lebar" class="form-control @error('lebar') is-invalid @enderror" name="lebar" placeholder="Masukkan Ukuran Lebar Kendaraan" value="{{ old('lebar') }}">
                                             @error('lebar')
                                                 <div class="invalid-feedback" bis_skin_checked="1">
                                                     {{ $message }}
@@ -163,7 +163,7 @@
                                     <div class="col-lg-4">
                                         <div class="mb-3">
                                             <label for="luas" class="form-label">Luas</label>
-                                            <input type="number" id="luas" class="form-control @error('luas') is-invalid @enderror" name="luas" placeholder="Masukkan Ukuran Luas Kendaraan" value="{{ old('luas') }}">
+                                            <input type="text" id="luas" class="form-control @error('luas') is-invalid @enderror" name="luas" placeholder="Masukkan Ukuran Luas Kendaraan" value="{{ old('luas') }}">
                                             @error('luas')
                                                 <div class="invalid-feedback" bis_skin_checked="1">
                                                     {{ $message }}
