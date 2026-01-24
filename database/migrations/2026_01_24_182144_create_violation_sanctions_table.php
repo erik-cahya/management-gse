@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('violation_sanctions', function (Blueprint $table) {
             $table->ulid('violation_sanction_id')->primary()->unique();
             $table->foreignUlid('violation_report_id')->references('violation_report_id')->on('violation_reports')->cascadeOnDelete();
-            $table->foreignUlid('sanction_id')->references('sanction_id')->on('sanctions')->cascadeOnDelete();
+            $table->text('sanction_id')->nullable();
+            $table->text('additional_information')->nullable();
             $table->timestamps();
         });
     }

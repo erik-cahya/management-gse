@@ -15,6 +15,7 @@ return new class extends Migration
             $table->ulid('violation_type_id')->primary()->unique();
             $table->text('name');
             $table->text('description')->nullable();
+            $table->boolean('additional_form');
             $table->timestamps();
         });
     }

@@ -9,6 +9,7 @@ use App\Models\KodeGhModel;
 use App\Models\KodeGseModel;
 use App\Models\PeralatanModel;
 use App\Models\PerusahaanModel;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,6 +20,14 @@ class DataSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->create([
+            'name' => 'Master Admin',
+            'email' => 'master@gmail.com',
+            'username' => 'master',
+            'password' => bcrypt('master123'),
+            'roles' => 'master'
+        ]);
+
         // ################################################ Perusahaan Seeder
         $perusahaan = [
             ['nama_perusahaan' => 'PT. AEROFOOD CATERING SERVICE'],

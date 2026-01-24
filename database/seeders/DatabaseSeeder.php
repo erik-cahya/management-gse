@@ -17,14 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Master Admin',
-            'email' => 'master@gmail.com',
-            'username' => 'master',
-            'password' => bcrypt('master123'),
-            'roles' => 'master'
-        ]);
-
         $this->call(DataSeeder::class);
+        $this->call(ViolationTypeSeeder::class);
+        $this->call(SanctionSeeder::class);
     }
 }

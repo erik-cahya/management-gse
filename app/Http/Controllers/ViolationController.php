@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\GSEInspectionModel;
 use App\Models\GseMasterModel;
 use App\Models\GSEViolationModel;
+use App\Models\SanctionModel;
+use App\Models\ViolationTypesModel;
+use Database\Seeders\ViolationTypeSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,7 +42,9 @@ class ViolationController extends Controller
     public function create()
     {
         // $data['gseData'] = GseMasterModel::select('id', 'gse_serial', 'gse_type', 'status')->get();
-        return view('admin-panel.violations.create');
+        $data['violationType'] = ViolationTypesModel::get();
+        $data['dataSanction'] = SanctionModel::get();
+        return view('admin-panel.violations.create', $data);
     }
 
     /**
