@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class GSEViolationModel extends Model
 {
-    // protected $table = 'gse_violations';
-    // protected $guarded = ['id'];
-    // protected $primaryKey = 'id';
+
 
     use HasFactory, HasUlids;
 

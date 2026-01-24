@@ -16,8 +16,8 @@ class ViolationController extends Controller
     public function index()
     {
         $data['dataViolation'] = GSEViolationModel::select(
-            'gse_violations.id as inspectionID',
-            'gse_violations.gse_serial',
+            'gse_violations.violation_id as inspectionID',
+            'gse_violations.gse_id',
             'gse_violations.employee',
             'gse_violations.examination_date',
             'gse_violations.location',
@@ -38,8 +38,8 @@ class ViolationController extends Controller
      */
     public function create()
     {
-        $data['gseData'] = GseMasterModel::select('id', 'gse_serial', 'gse_type', 'status')->get();
-        return view('admin-panel.violations.create', $data);
+        // $data['gseData'] = GseMasterModel::select('id', 'gse_serial', 'gse_type', 'status')->get();
+        return view('admin-panel.violations.create');
     }
 
     /**

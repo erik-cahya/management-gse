@@ -123,7 +123,7 @@
                                         <div class="mb-3">
                                             <label for="bahan_bakar" class="form-label">Bahan Bakar</label>
                                             <select class="select2 @error('bahan_bakar') is-invalid @enderror form-select" data-toggle="select2" id="bahan_bakar" name="bahan_bakar">
-                                                <option value="#" hidden disabled selected>Pilih bahan_bakar</option>
+                                                <option value="#" hidden disabled selected>Pilih bahan bakar</option>
                                                 @foreach ($dataBahanBakar as $bahan_bakar)
                                                     <option value="{{ $bahan_bakar->bahan_bakar_id }}" {{ old('bahan_bakar') == $bahan_bakar->bahan_bakar_id ? 'selected' : '' }}>{{ $bahan_bakar->nama_bahan_bakar }}</option>
                                                 @endforeach

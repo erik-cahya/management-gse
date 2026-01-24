@@ -110,8 +110,8 @@ class DataSeeder extends Seeder
         }
 
         $kategori = [
-            ['nama_kategori' => 'motorized'],
-            ['nama_kategori' => 'non-motorized'],
+            ['nama_kategori' => 'MOTORIZED'],
+            ['nama_kategori' => 'NON-MOTORIZED'],
         ];
         foreach ($kategori as $data) {
             KategoriModel::create($data);
