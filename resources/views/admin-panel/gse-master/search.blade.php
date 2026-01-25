@@ -136,7 +136,6 @@
                                                     </div>
                                                 </div>
 
-
                                                 <div class="col-xl-6">
                                                     <div class="row mb-3">
                                                         <label class="col-md-5 col-form-label" for="operation_area">Luas GSE</label>
@@ -238,11 +237,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
-
-
 
                                         </div>
                                     </div>

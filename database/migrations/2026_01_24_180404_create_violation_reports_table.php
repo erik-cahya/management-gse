@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('violation_reports', function (Blueprint $table) {
             $table->ulid('violation_report_id')->primary()->unique();
+            $table->foreignUlid('violator_id')->references('violator_id')->on('violators')->cascadeOnDelete();
             $table->date('incident_date');
             $table->time('incident_time');
             $table->string('incident_location');

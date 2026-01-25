@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('violators', function (Blueprint $table) {
             $table->ulid('violator_id')->primary()->unique();
-            $table->string('full_name');
-            $table->string('company_name');
-            $table->string('airport_pass_number');
-            $table->string('airport_pass_type');
-            $table->string('tim_number');
-            $table->string('tim_type');
-            $table->string('license_type');
-            $table->string('license_number');
-            $table->string('vehicle_plate_number');
-
+            $table->foreignUlid('gse_id')->references('gse_id')->on('gse_master')->cascadeOnDelete();
+            $table->string('full_name')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('airport_pass_number')->nullable();
+            $table->string('airport_pass_type')->nullable();
+            $table->string('tim_number')->nullable();
+            $table->string('tim_type')->nullable();
+            $table->string('license_type')->nullable();
+            $table->string('license_number')->nullable();
+            $table->string('vehicle_plate_number')->nullable();
             $table->timestamps();
         });
     }
