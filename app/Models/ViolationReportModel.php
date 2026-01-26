@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ViolationReportModel extends Model
 {
@@ -12,6 +13,9 @@ class ViolationReportModel extends Model
 
     protected $table = 'violation_reports';
     protected $guarded = ['violation_report_id'];
+    protected $primaryKey = 'violation_report_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     public function uniqueIds()
     {
@@ -23,5 +27,14 @@ class ViolationReportModel extends Model
         if ($value !== null) {
             $this->attributes['violation_report_id'] = strtoupper($value);
         }
+    }
+
+    public function violator(): BelongsTo
+    {
+        return $this->belongsTo(
+            ViolatorModel::class,
+            'violator_id',      // FK di violation_reports
+            'violator_id'       // PK di violators
+        );
     }
 }

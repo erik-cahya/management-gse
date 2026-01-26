@@ -24,19 +24,22 @@ class ViolationController extends Controller
      */
     public function index()
     {
-        $data['dataViolation'] = GSEViolationModel::select(
-            'gse_violations.violation_id as inspectionID',
-            'gse_violations.gse_id',
-            'gse_violations.employee',
-            'gse_violations.examination_date',
-            'gse_violations.location',
+        // $data['dataViolation'] = GSEViolationModel::select(
+        //     'gse_violations.violation_id as inspectionID',
+        //     'gse_violations.gse_id',
+        //     'gse_violations.employee',
+        //     'gse_violations.examination_date',
+        //     'gse_violations.location',
 
-            // 'gse_violations.id as violationID',
-            'gse_violations.violation_name',
-            'gse_violations.violation_level',
-            'gse_violations.violation_type',
-        )
-            ->get();
+        //     // 'gse_violations.id as violationID',
+        //     'gse_violations.violation_name',
+        //     'gse_violations.violation_level',
+        //     'gse_violations.violation_type',
+        // )
+        //     ->get();
+        // dd($data['dataViolation']);
+
+        $data['dataViolation'] = ViolatorModel::with('gseData', 'violationReports')->get();
         // dd($data['dataViolation']);
 
         return view('admin-panel.violations.index', $data);

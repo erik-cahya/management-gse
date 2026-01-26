@@ -14,43 +14,50 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <table id="scroll-horizontal-datatable" class="table-striped table-bordered table-sm fs-12 w-100 nowrap table">
+                                <table id="scroll-horizontal-datatable" class="table-striped w-100 nowrap table">
                                     <thead>
-                                        <tr class="text-center align-middle">
+                                        <tr>
                                             <th>No</th>
-                                            <th>Nama Pelanggar</th>
-                                            <th>Instansi/Perusahaan<br>Pelanggar</th>
-                                            <th>Tanggal & Waktu Kejadian</th>
-                                            <th>Lokasi Kejadian</th>
-                                            <th>No. Lisensi/Validitas/<br>No. Polisi</th>
-                                            <th>No. Pas Bandara/Area/<br>Valid</th>
-                                            <th>GSE</th>
+                                            <th>Kode GSE</th>
+                                            <th>Nama Pelanggaran</th>
+                                            <th>Jenis Pelanggaran</th>
+                                            <th>Level Pelanggaran</th>
+                                            <th>Tanggal Pengecekan</th>
+                                            <th>Pelapor</th>
+                                            <th>Lokasi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="fs-12">
-
-                                        @foreach ($dataViolation as $violation)
-                                            <tr class="text-capitalize align-middle">
+                                    <tbody>
+                                        @foreach ($dataViolation as $pelanggaran)
+                                            @php
+                                                if ($pelanggaran->violation_level === 'berat') {
+                                                    $textClass = 'text-danger';
+                                                    $bgClass = 'bg-danger-subtle';
+                                                } elseif ($pelanggaran->violation_level === 'sedang') {
+                                                    $textClass = 'text-primary';
+                                                    $bgClass = 'bg-primary-subtle';
+                                                } else {
+                                                    $textClass = 'text-success';
+                                                    $bgClass = 'bg-success-subtle';
+                                                }
+                                            @endphp
+                                            <tr class="text-capitalize">
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $violation->full_name }}</td>
-                                                <td>{{ $violation->company_name }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($violation->violationReports->incident_date)->locale('id')->translatedFormat('l, d F Y') . ' | ' . $violation->violationReports->incident_time }}</td>
-                                                <td>{{ $violation->violationReports->incident_location ?? 'Tidak ada data' }}</td>
-                                                <td>{{ $violation->vehicle_plate_number }}</td>
-                                                <td>{{ $violation->airport_pass_number }}</td>
-                                                <td class="d-flex flex-column">
-                                                    <span>
-                                                        GSE Serial : {{ $violation->gseData->gse_serial }}
-                                                    </span>
-                                                    <hr class="m-1">
-                                                    <span>
-                                                        WH ID : {{ $violation->gseData->nomor_asset }}
-                                                    </span>
+                                                <td>
+                                                    <span class="badge bg-primary">{{ $pelanggaran->gse_serial }}</span>
                                                 </td>
+                                                <td>{{ $pelanggaran->violation_name }}</td>
+                                                <td>{{ $pelanggaran->violation_type }}</td>
+                                                <td>
+                                                    <span class="badge {{ $bgClass . ' ' . $textClass }}">{{ $pelanggaran->violation_level }}</span>
+                                                </td>
+                                                <td>{{ \Carbon\Carbon::parse($pelanggaran->examination_date)->format('d M Y') }}</td>
+                                                <td>{{ $pelanggaran->employee }}</td>
+                                                <td>{{ $pelanggaran->location }}</td>
                                                 <td class="text-center">
-                                                    <input type="hidden" class="gseID" value="#">
-                                                    <a href="javascript:void(0)" class="text-reset fs-16 deleteButton px-1" data-nama="#"> <i class="ri-delete-bin-2-line"></i></a>
+                                                    <input type="hidden" class="gseID" value="{{ $pelanggaran->inspectionID }}">
+                                                    <a href="javascript:void(0)" class="text-reset fs-16 deleteButton px-1" data-nama="{{ $pelanggaran->gse_serial }}"> <i class="ri-delete-bin-2-line"></i></a>
                                                 </td>
 
                                             </tr>
