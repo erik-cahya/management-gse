@@ -8,6 +8,7 @@ use App\Models\GSEViolationModel;
 use App\Models\SanctionModel;
 use App\Models\ViolationReportDetailModel;
 use App\Models\ViolationReportModel;
+use App\Models\ViolationSanctionModel;
 use App\Models\ViolationTypesModel;
 use App\Models\ViolatorModel;
 use Carbon\Carbon;
@@ -45,12 +46,19 @@ class ViolationController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         foreach ($request->violation_type_id_additional_checkbox ?? [] as $id => $on) {
             if (empty($request->violation_type_id_additional_text[$id])) {
                 throw ValidationException::withMessages([
                     "violation_type_id_additional_text.$id" =>
                     'Informasi tambahan wajib diisi',
+                ]);
+            }
+        }
+        foreach ($request->additional_sanction_checkbox ?? [] as $id => $on) {
+            if (empty($request->additional_sanction_text[$id])) {
+                throw ValidationException::withMessages([
+                    "additional_sanction_text.$id" =>
+                    'Informasi tambahan sanksi wajib diisi',
                 ]);
             }
         }
@@ -113,6 +121,41 @@ class ViolationController extends Controller
                     ]);
                 }
             });
+
+
+            // Sanction Data
+            $sanctionIds = array_keys($request->sanction ?? []);
+
+            $additionalSanctionIds = array_keys(
+                $request->additional_sanction_checkbox ?? []
+            );
+
+            $additionalSanctionTexts = $request->additional_sanction_text ?? [];
+            DB::transaction(function () use (
+                $violationReport,
+                $sanctionIds,
+                $additionalSanctionIds,
+                $additionalSanctionTexts
+            ) {
+
+                // 1. Sanction tanpa additional info
+                foreach ($sanctionIds as $sanctionId) {
+                    ViolationSanctionModel::create([
+                        'violation_report_id'   => $violationReport->violation_report_id,
+                        'sanction_id'           => $sanctionId,
+                        'additional_information' => null,
+                    ]);
+                }
+
+                // 2. Sanction dengan additional info
+                foreach ($additionalSanctionIds as $sanctionId) {
+                    ViolationSanctionModel::create([
+                        'violation_report_id'   => $violationReport->violation_report_id,
+                        'sanction_id'           => $sanctionId,
+                        'additional_information' => $additionalSanctionTexts[$sanctionId] ?? null,
+                    ]);
+                }
+            });
         });
 
         $flashData = [
@@ -126,9 +169,92 @@ class ViolationController extends Controller
     /**
      * Display the specified resource.
      */
+    // public function show(string $id)
+    // {
+    //     // $data['violator'] = ViolatorModel::where('violator_id', $id)
+    //     //     ->with(
+    //     //         'gseData',
+    //     //         'violationReports.violatorReportDetails',
+    //     //     )->first();
+
+    //     $violator = ViolatorModel::where('violator_id', $id)
+    //         ->with([
+    //             'gseData',
+    //             'violationReports.violationReportDetails',
+    //             'violationReports.violationSanctions',
+    //         ])
+    //         ->firstOrFail();
+
+    //     $report = $violator->violationReports->first(); // atau last()
+
+    //     $data['violationType'] = ViolationTypesModel::get();
+    //     $data['dataSanction'] = SanctionModel::get();
+
+    //     dd($data['violator']);
+    //     return view('admin-panel.violations.show', $data);
+    // }
+
     public function show(string $id)
     {
-        //
+        // 1. Ambil violator + semua relasi yang dibutuhkan
+        $violator = ViolatorModel::where('violator_id', $id)
+            ->with([
+                'gseData',
+                'violationReports.violatorReportDetails',
+                'violationReports.violationSanctions',
+            ])
+            ->firstOrFail();
+
+
+
+
+        $violationChecked = $violator->violationReports
+            ? $violator->violationReports->violatorReportDetails
+            ->keyBy('violation_type_id')
+            : collect();
+
+
+        $sanctionChecked = $violator->violationReports
+            ? $violator->violationReports->violationSanctions
+            ->keyBy('sanction_id')
+            : collect();
+
+
+
+
+
+        // /**
+        //  * Asumsi:
+        //  * - 1 violator = 1 violation report aktif
+        //  * - kalau lebih dari 1, pakai ->last() / filter by status
+        //  */
+        // $violationReport = $violator->violationReports->violatorReportDetails->first();
+
+        // dd($violationReport->violation_report_id);
+
+        // // 2. Lookup violation (keyBy violation_type_id)
+        // $violationChecked = $violationReport
+        //     ? $violationReport
+        //     ->keyBy('violation_type_id')
+        //     : collect();
+
+        // dd($violationChecked);
+
+        // // 3. Lookup sanction (keyBy sanction_id)
+        // $sanctionChecked = $violationReport
+        //     ? $violationReport->violationSanctions
+        //     ->keyBy('sanction_id')
+        //     : collect();
+
+        // 4. Kirim ke Blade
+        return view('admin-panel.violations.show', [
+            'violator'         => $violator,
+            'violationType'    => ViolationTypesModel::all(),
+            'dataSanction'     => SanctionModel::all(),
+            'violationChecked' => $violationChecked,
+            'sanctionChecked'  => $sanctionChecked,
+            // 'violationReport'  => $violationReport,
+        ]);
     }
 
     /**

@@ -190,20 +190,12 @@
                                                             <div class="col-12 form-check form-check-inline mb-2" bis_skin_checked="1">
                                                                 <input type="checkbox" class="form-check-input" id="additional_sanction_checbox[{{ $sanction->sanction_id }}]" name="additional_sanction_checkbox[{{ $sanction->sanction_id }}]">
                                                                 <label class="form-check-label" for="additional_sanction_checbox[{{ $sanction->sanction_id }}]">{{ $sanction->name }}</label>
-                                                                <input type="text" id="additional_sanction" class="form-control mt-1" name="additional_sanction_text[{{ $sanction->sanction_id }}]" placeholder="Masukkan Informasi Tambahan" value="{{ old('gse_serial') }}">
+                                                                <input type="text" class="form-control mt-1" id="additional_sanction_{{ $sanction->sanction_id }}" name="additional_sanction_text[{{ $sanction->sanction_id }}]" placeholder="Masukkan Informasi Tambahan">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 @endif
                                             @endforeach
-
-                                            {{-- <div class="col-12">
-                                                <div class="col-12 form-check form-check-inline mb-2" bis_skin_checked="1">
-                                                    <input type="checkbox" class="form-check-input" id="additional_sanction" name="additional_sanction">
-                                                    <label class="form-check-label" for="additional_sanction">Lainnya</label>
-                                                    <input type="text" id="additional_sanction" class="form-control mt-1" name="additional_sanction_text" placeholder="Masukkan Informasi Tambahan" value="{{ old('gse_serial') }}">
-                                                </div>
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

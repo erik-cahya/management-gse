@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ViolationReportModel extends Model
 {
@@ -35,6 +36,24 @@ class ViolationReportModel extends Model
             ViolatorModel::class,
             'violator_id',      // FK di violation_reports
             'violator_id'       // PK di violators
+        );
+    }
+
+    public function violatorReportDetails(): HasMany
+    {
+        return $this->hasMany(
+            ViolationReportDetailModel::class,
+            'violation_report_id',
+            'violation_report_id'
+        );
+    }
+
+    public function violationSanctions(): HasMany
+    {
+        return $this->hasMany(
+            ViolationSanctionModel::class,
+            'violation_report_id',
+            'violation_report_id'
         );
     }
 }

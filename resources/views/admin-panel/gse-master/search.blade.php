@@ -48,194 +48,36 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="row">
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="serial_gse">Serial GSE</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="serial_gse" name="serial_gse" value="{{ $dataGse->gse_serial }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="type_gse">Nomor Asset/Inventory</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="type_gse" name="type_gse" value="{{ $dataGse->nomor_asset }}">
-                                                        </div>
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Nomor Serial GSE" value="{{ $dataGse->gse_serial ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Nomor Asset/Inventory" value="{{ $dataGse->asset_number ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Nomor Kendaraan" value="{{ $dataGse->vehicle_number ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Perusahaan" value="{{ $dataGse->companies->company_name ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Type Peralatan" value="{{ $dataGse->types->type_name ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Merk GSE" value="{{ $dataGse->brand ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Kategori GSE" value="{{ $dataGse->categories->category_name ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Bahan Bakar" value="{{ $dataGse->fuels->fuel_type_name ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Panjang GSE" value="{{ $dataGse->length ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Lebar GSE" value="{{ $dataGse->width ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Luas GSE" value="{{ $dataGse->area ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Tahun Manufaktur" value="{{ $dataGse->manufacture_year ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Status Kepemilikan GSE" value="{{ $dataGse->ownerships->ownership_name ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Perusahaan Sewa" value="{{ $dataGse->rental_company ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Status Sewa" value="{{ $dataGse->rental_status ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Tanggal Sewa" value="{{ $dataGse->rental_date ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Kode GH" value="{{ $dataGse->codeGH->code_gh ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Kode GSE" value="{{ $dataGse->codeGSE->code_gse ?? '-' }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Status GSE" value="{{ $dataGse->status == 1 ? 'Active' : 'Deactive' }}" disabled />
+
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Diubah" value="{{ $dataGse->updated_at->format('d M Y | H:i:s') }}" disabled />
+                                                <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Ditambahkan" value="{{ $dataGse->created_at->format('d M Y | H:i:s') }}" disabled />
+
+                                                <div class="col-md-12">
+                                                    <div class="alert {{ $dataGse->status === 1 ? 'alert-success' : 'alert-danger' }} d-flex align-items-center" role="alert">
+                                                        <i class="{{ $dataGse->status === 1 ? 'mdi mdi-check' : 'mdi mdi-alert' }} fs-16 me-1"></i>
+                                                        <div>{{ $dataGse->status === 1 ? 'GSE Active' : 'GSE Not Active' }}</div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operator">Nopol Kendaraan</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operator" name="operator" value="{{ $dataGse->nopol_kendaraan }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Perusahaan</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->perusahaan->nama_perusahaan }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Type Peralatan</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->typePeralatan->nama_peralatan }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Merk GSE</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->merk }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Kategori GSE</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->kategori_gse->nama_kategori }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Bahan Bakar</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->bahanBakar->nama_bahan_bakar }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Panjang GSE</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->panjang }} m²">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Lebar GSE</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->lebar }} m²">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Luas GSE</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->luas }} m²">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Tahun Manufaktur</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->manufacture_year }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Status Kepemilikan</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->statusKepemilikan->nama_kepemilikan }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Perusahaan Sewa</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->perusahaan_sewa }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Status Sewa</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->status_sewa }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Tanggal Sewa</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ \Carbon\Carbon::parse($dataGse->tanggal_sewa)->locale('id')->translatedFormat('l, d F Y') }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Kode GH</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->kodeGH->kode_gh }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="operation_area">Kode GSE</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="operation_area" name="operation_area" value="{{ $dataGse->kodeGSE->kode_gse }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="created_at">Ditambahkan</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="created_at" name="created_at" value="{{ $dataGse->created_at->format('d M Y | H:i:s') }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-6">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-5 col-form-label" for="updated_at">Diubah</label>
-                                                        <div class="col-md-7">
-                                                            <input disabled type="text" class="form-control" id="updated_at" name="updated_at" value="{{ $dataGse->updated_at->format('d M Y | H:i:s') }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <div class="row mb-3">
-                                                        <label class="col-md-3 col-form-label" for="status">Status</label>
-                                                        <div class="col-md-9">
-                                                            <div class="alert {{ $dataGse->status === 1 ? 'alert-success' : 'alert-danger' }} d-flex align-items-center" role="alert">
-                                                                <i class="{{ $dataGse->status === 1 ? 'mdi mdi-check' : 'mdi mdi-alert' }} fs-16 me-1"></i>
-                                                                <div>{{ $dataGse->status === 1 ? 'Active' : 'Not Active' }}</div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
                                             </div>
 
                                         </div>
@@ -257,7 +99,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="timeline timeline-left">
-                                                    @foreach ($dataViolations as $pelanggaran)
+                                                    {{-- @foreach ($dataViolations as $pelanggaran)
                                                         @php
                                                             if ($pelanggaran->violation_level === 'berat') {
                                                                 $textClass = 'text-danger';
@@ -292,7 +134,7 @@
                                                                 </div>
                                                             </div>
                                                         </article>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </div>
                                             </div>
                                         </div>

@@ -10,18 +10,18 @@ class ViolationSanctionModel extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $table = 'sanctions';
-    protected $guarded = ['sanction_id'];
+    protected $table = 'violation_sanctions';
+    protected $guarded = ['violation_sanction_id'];
 
     public function uniqueIds()
     {
-        return ['sanction_id'];
+        return ['violation_sanction_id'];
     }
 
-    public function setSanctionIdAttribute($value)
+    public function setViolationSanctionIdAttribute($value)
     {
         if ($value !== null) {
-            $this->attributes['sanction_id'] = strtoupper($value);
+            $this->attributes['violation_sanction_id'] = strtoupper($value);
         }
     }
 }

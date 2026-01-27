@@ -88,7 +88,9 @@
                                                 <td>{{ $violation->company_name }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($violation->violationReports->incident_date)->locale('id')->translatedFormat('l, d F Y') }}</td>
                                                 <td>{{ $violation->violationReports->incident_location }}</td>
-                                                <td>1</td>
+                                                <td>
+                                                    <a href="{{ route('violation.show', $violation->violator_id) }}">Details</a>
+                                                </td>
                                             </tr>
                                         @endforeach
 

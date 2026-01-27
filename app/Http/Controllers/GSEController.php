@@ -208,31 +208,31 @@ class GSEController extends Controller
         $keyword = $request->keyword_search;
         $data['dataGse'] = GseMasterModel::where(function ($q) use ($keyword) {
             $q->where('gse_serial', 'like', "%{$keyword}%")
-                ->orWhere('nomor_asset', 'like', "%{$keyword}%")
-                ->orWhere('nopol_kendaraan', 'like', "%{$keyword}%");
+                ->orWhere('asset_number', 'like', "%{$keyword}%")
+                ->orWhere('vehicle_number', 'like', "%{$keyword}%");
         })->with(
-            'perusahaan',
-            'typePeralatan',
-            'kategori_gse',
-            'bahanBakar',
-            'statusKepemilikan',
-            'kodeGH',
-            'kodeGSE',
+            'companies',
+            'types',
+            'categories',
+            'fuels',
+            'ownerships',
+            'codeGH',
+            'codeGSE',
         )
             ->first();
 
         // dd($data['dataGse']);
 
-        $data['dataViolations'] = GSEViolationModel::where('gse_id', $request->keyword_search)
-            ->select(
-                'violation_name',
-                'violation_type',
-                'violation_level',
-                'description',
-                'examination_date',
-                'employee',
-                'location',
-            )->orderBy('examination_date', 'DESC')->get();
+        // $data['dataViolations'] = GSEViolationModel::where('gse_id', $request->keyword_search)
+        //     ->select(
+        //         'violation_name',
+        //         'violation_type',
+        //         'violation_level',
+        //         'description',
+        //         'examination_date',
+        //         'employee',
+        //         'location',
+        //     )->orderBy('examination_date', 'DESC')->get();
 
         // dd($data['dataViolations']);
         $data['inputSerial'] = $request->keyword_search;

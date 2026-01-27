@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ViolationReportDetailModel extends Model
 {
@@ -23,5 +24,14 @@ class ViolationReportDetailModel extends Model
         if ($value !== null) {
             $this->attributes['violation_report_detail_id'] = strtoupper($value);
         }
+    }
+
+    public function violationReport(): BelongsTo
+    {
+        return $this->belongsTo(
+            ViolationReportModel::class,
+            'violation_report_id',
+            'violation_report_id'
+        );
     }
 }

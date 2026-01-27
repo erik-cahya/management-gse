@@ -18,7 +18,7 @@ class SanctionModel extends Model
         return ['sanction_id'];
     }
 
-    public function setSanctionsIdAttribute($value)
+    public function setSanctionIdAttribute($value)
     {
         if ($value !== null) {
             $this->attributes['sanction_id'] = strtoupper($value);
