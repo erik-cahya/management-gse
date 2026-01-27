@@ -16,41 +16,28 @@
                             <div class="col-12">
 
                                 <div class="row">
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Nomor Serial GSE" value="{{ $dataGse->gse_serial }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Nomor Asset/Inventory" value="{{ $dataGse->nomor_asset }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Nomor Kendaraan" value="{{ $dataGse->nopol_kendaraan }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Perusahaan" value="{{ $dataGse->perusahaan->nama_perusahaan }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Type Peralatan" value="{{ $dataGse->typePeralatan->nama_peralatan }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Merk GSE" value="{{ $dataGse->merk }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Kategori GSE" value="{{ $dataGse->kategori_gse->nama_kategori }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Bahan Bakar" value="{{ $dataGse->bahanBakar->nama_bahan_bakar }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Panjang GSE" value="{{ $dataGse->panjang }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Lebar GSE" value="{{ $dataGse->lebar }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Luas GSE" value="{{ $dataGse->luas }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Tahun Manufaktur" value="{{ $dataGse->manufacture_year }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Status Kepemilikan GSE" value="{{ $dataGse->statusKepemilikan->nama_kepemilikan }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Perusahaan Sewa" value="{{ $dataGse->perusahaan_sewa }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Status Sewa" value="{{ $dataGse->status_sewa }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Tanggal Sewa" value="{{ $dataGse->tanggal_sewa }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Kode GH" value="{{ $dataGse->kodeGH->kode_gh }}" disabled />
-                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Kode GSE" value="{{ $dataGse->kodeGSE->kode_gse }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Nomor Serial GSE" value="{{ $dataGse->gse_serial ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Nomor Asset/Inventory" value="{{ $dataGse->asset_number ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Nomor Kendaraan" value="{{ $dataGse->vehicle_number ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Perusahaan" value="{{ $dataGse->companies->company_name ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Type Peralatan" value="{{ $dataGse->types->type_name ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Merk GSE" value="{{ $dataGse->brand ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Kategori GSE" value="{{ $dataGse->categories->category_name ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Bahan Bakar" value="{{ $dataGse->fuels->fuel_type_name ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Panjang GSE" value="{{ $dataGse->length ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Lebar GSE" value="{{ $dataGse->width ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Luas GSE" value="{{ $dataGse->area ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Tahun Manufaktur" value="{{ $dataGse->manufacture_year ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Status Kepemilikan GSE" value="{{ $dataGse->ownerships->ownership_name ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Perusahaan Sewa" value="{{ $dataGse->rental_company ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Status Sewa" value="{{ $dataGse->rental_status ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Tanggal Sewa" value="{{ $dataGse->rental_date ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Kode GH" value="{{ $dataGse->codeGH->code_gh ?? '-' }}" disabled />
+                                    <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Kode GSE" value="{{ $dataGse->codeGSE->code_gse ?? '-' }}" disabled />
                                     <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Status GSE" value="{{ $dataGse->status == 1 ? 'Active' : 'Deactive' }}" disabled />
 
                                     <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Diubah" value="{{ $dataGse->updated_at->format('d M Y | H:i:s') }}" disabled />
                                     <x-form.input className="col-md-4 mb-3" type="text" name="serial_gse" label="Ditambahkan" value="{{ $dataGse->created_at->format('d M Y | H:i:s') }}" disabled />
-
-                                    {{-- <div class="col-md-6 mb-2">
-                                        <label class="col-form-label" for="serial_gse">Serial GSE</label>
-                                        <input disabled type="text" class="form-control" id="serial_gse" name="serial_gse" value="{{ $dataGse->gse_serial }}">
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label class="col-form-label" for="serial_gse">Ditambahkan</label>
-                                        <input disabled type="text" class="form-control" id="created_at" name="created_at" value="{{ $dataGse->created_at->format('d M Y | H:i:s') }}">
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label class="col-form-label" for="serial_gse">Diubah</label>
-                                        <input disabled type="text" class="form-control" id="created_at" name="created_at" value="{{ $dataGse->updated_at->format('d M Y | H:i:s') }}">
-                                    </div> --}}
 
                                     <div class="col-md-12">
                                         <div class="alert {{ $dataGse->status === 1 ? 'alert-success' : 'alert-danger' }} d-flex align-items-center" role="alert">
@@ -93,14 +80,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                        </tr>
+                                        @foreach ($dataViolations as $violation)
+                                            {{-- {{ dd($violation) }} --}}
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $violation->full_name }}</td>
+                                                <td>{{ $violation->company_name }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($violation->violationReports->incident_date)->locale('id')->translatedFormat('l, d F Y') }}</td>
+                                                <td>{{ $violation->violationReports->incident_location }}</td>
+                                                <td>1</td>
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
                             </div>

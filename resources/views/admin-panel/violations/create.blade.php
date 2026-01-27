@@ -31,7 +31,7 @@
                                                 <select class="select2 @error('gse_id') is-invalid @enderror form-select" data-toggle="select2" id="gse_id" name="gse_id">
                                                     <option value="#" hidden disabled selected>Pilih GSE yang melakukan pelanggaran</option>
                                                     @foreach ($dataGSE as $gse)
-                                                        <option value="{{ $gse->gse_id }}">{{ $gse->nopol_kendaraan . ' | ' . $gse->gse_serial . ' | ' . $gse->typePeralatan->nama_peralatan }}</option>
+                                                        <option value="{{ $gse->gse_id }}">{{ $gse->vehicle_number . ' | ' . $gse->gse_serial . ' | ' . $gse->types->type_name }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('gse_id')
@@ -173,21 +173,37 @@
                                                 Selanjutnya kepada Pelanggar diberikan sanksi berupa :
                                             </span>
                                             @foreach ($dataSanction as $sanction)
-                                                <div class="col-lg-6">
-                                                    <div class="form-check form-check-inline mb-2" bis_skin_checked="1">
-                                                        <input type="checkbox" class="form-check-input" id="sanction[{{ $sanction->sanction_id }}]" name="sanction[{{ $sanction->sanction_id }}]">
-                                                        <label class="form-check-label" for="sanction[{{ $sanction->sanction_id }}]">{{ $sanction->name }}</label>
+                                                @if ($sanction->additional_form === 0)
+                                                    <div class="col-lg-6">
+                                                        <div class="form-check form-check-inline mb-2" bis_skin_checked="1">
+                                                            <input type="checkbox" class="form-check-input" id="sanction[{{ $sanction->sanction_id }}]" name="sanction[{{ $sanction->sanction_id }}]">
+                                                            <label class="form-check-label" for="sanction[{{ $sanction->sanction_id }}]">{{ $sanction->name }}</label>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                @endif
                                             @endforeach
 
-                                            <div class="col-12">
+                                            @foreach ($dataSanction as $sanction)
+                                                @if ($sanction->additional_form === 1)
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="col-12 form-check form-check-inline mb-2" bis_skin_checked="1">
+                                                                <input type="checkbox" class="form-check-input" id="additional_sanction_checbox[{{ $sanction->sanction_id }}]" name="additional_sanction_checkbox[{{ $sanction->sanction_id }}]">
+                                                                <label class="form-check-label" for="additional_sanction_checbox[{{ $sanction->sanction_id }}]">{{ $sanction->name }}</label>
+                                                                <input type="text" id="additional_sanction" class="form-control mt-1" name="additional_sanction_text[{{ $sanction->sanction_id }}]" placeholder="Masukkan Informasi Tambahan" value="{{ old('gse_serial') }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+
+                                            {{-- <div class="col-12">
                                                 <div class="col-12 form-check form-check-inline mb-2" bis_skin_checked="1">
                                                     <input type="checkbox" class="form-check-input" id="additional_sanction" name="additional_sanction">
                                                     <label class="form-check-label" for="additional_sanction">Lainnya</label>
                                                     <input type="text" id="additional_sanction" class="form-control mt-1" name="additional_sanction_text" placeholder="Masukkan Informasi Tambahan" value="{{ old('gse_serial') }}">
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

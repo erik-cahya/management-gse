@@ -12,6 +12,7 @@ use App\Models\GSEViolationModel;
 use App\Models\FuelTypeModel;
 use App\Models\OwnershipTypeGseModel;
 use App\Models\TypeGseModel;
+use App\Models\ViolatorModel;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -27,13 +28,13 @@ class GSEController extends Controller
     public function index()
     {
         $data['dataGSE'] = GseMasterModel::with(
-            'perusahaan',
-            'typePeralatan',
-            'kategori_gse',
-            'bahanBakar',
-            'statusKepemilikan',
-            'kodeGH',
-            'kodeGSE',
+            'companies',
+            'types',
+            'categories',
+            'fuels',
+            'ownerships',
+            'codeGH',
+            'codeGSE',
         )->get();
 
         // dd($data['dataGSE']);
@@ -73,23 +74,23 @@ class GSEController extends Controller
 
         GseMasterModel::create([
             'gse_serial' => $request->gse_serial,
-            'nomor_asset' => $request->nomor_asset,
-            'nopol_kendaraan' => $request->nopol_kendaraan,
-            'perusahaan_id' => $request->perusahaan_id,
-            'type_peralatan_gse' => $request->type_peralatan_gse,
-            'merk' => $request->merk,
-            'kategori' => $request->kategori,
-            'bahan_bakar' => $request->bahan_bakar,
-            'panjang' => $this->floatNumbering($request->panjang),
-            'lebar' => $this->floatNumbering($request->lebar),
-            'luas' => $this->floatNumbering($request->luas),
+            'asset_number' => $request->nomor_asset,
+            'vehicle_number' => $request->nopol_kendaraan,
+            'company_id' => $request->perusahaan_id,
+            'type_id' => $request->type_peralatan_gse,
+            'brand' => $request->merk,
+            'category_id' => $request->kategori,
+            'fuel_type' => $request->bahan_bakar,
+            'length' => $this->floatNumbering($request->panjang),
+            'width' => $this->floatNumbering($request->lebar),
+            'area' => $this->floatNumbering($request->luas),
             'manufacture_year' => $request->manufacture_year,
-            'status_kepemilikan' => $request->status_kepemilikan,
-            'perusahaan_sewa' => $request->perusahaan_sewa,
-            'status_sewa' => $request->status_sewa,
-            'tanggal_sewa' => $request->tanggal_sewa,
-            'kode_gh' => $request->kode_gh,
-            'kode_gse' => $request->kode_gse,
+            'owneship_type' => $request->status_kepemilikan,
+            'rental_company' => $request->perusahaan_sewa,
+            'rental_status' => $request->status_sewa,
+            'rental_date' => $request->tanggal_sewa,
+            'code_gh' => $request->kode_gh,
+            'code_gse' => $request->kode_gse,
             'status' => $request->status,
         ]);
 
@@ -105,14 +106,13 @@ class GSEController extends Controller
      */
     public function show(string $id)
     {
-        // dd($id);
-        $data['dataGse'] = GseMasterModel::where('gse_master.gse_serial', $id)->first();
+        $data['dataGse'] = GseMasterModel::where('gse_master.gse_id', $id)->first();
         // $data['dataViolations'] = GSEViolationModel::where('gse_serial', $id)->orderBy('examination_date', 'DESC')->get();
 
-
+        $data['dataViolations'] = ViolatorModel::where('gse_id', $id)->with('violationReports')->get();
+        $data['inputSerial'] = $id;
 
         // dd($data['dataViolations']);
-        $data['inputSerial'] = $id;
         return view('admin-panel.gse-master.show', $data);
     }
 
@@ -152,23 +152,23 @@ class GSEController extends Controller
 
         GseMasterModel::where('gse_id', $id)->update([
             'gse_serial' => $request->gse_serial,
-            'nomor_asset' => $request->nomor_asset,
-            'nopol_kendaraan' => $request->nopol_kendaraan,
-            'perusahaan_id' => $request->perusahaan_id,
-            'type_peralatan_gse' => $request->type_peralatan_gse,
-            'merk' => $request->merk,
-            'kategori' => $request->kategori,
-            'bahan_bakar' => $request->bahan_bakar,
-            'panjang' => $this->floatNumbering($request->panjang),
-            'lebar' => $this->floatNumbering($request->lebar),
-            'luas' => $this->floatNumbering($request->luas),
+            'asset_number' => $request->nomor_asset,
+            'vehicle_number' => $request->nopol_kendaraan,
+            'company_id' => $request->perusahaan_id,
+            'type_id' => $request->type_peralatan_gse,
+            'brand' => $request->merk,
+            'category_id' => $request->kategori,
+            'fuel_type' => $request->bahan_bakar,
+            'length' => $this->floatNumbering($request->panjang),
+            'width' => $this->floatNumbering($request->lebar),
+            'area' => $this->floatNumbering($request->luas),
             'manufacture_year' => $request->manufacture_year,
-            'status_kepemilikan' => $request->status_kepemilikan,
-            'perusahaan_sewa' => $request->perusahaan_sewa,
-            'status_sewa' => $request->status_sewa,
-            'tanggal_sewa' => $request->tanggal_sewa,
-            'kode_gh' => $request->kode_gh,
-            'kode_gse' => $request->kode_gse,
+            'owneship_type' => $request->status_kepemilikan,
+            'rental_company' => $request->perusahaan_sewa,
+            'rental_status' => $request->status_sewa,
+            'rental_date' => $request->tanggal_sewa,
+            'code_gh' => $request->kode_gh,
+            'code_gse' => $request->kode_gse,
             'status' => $request->status,
         ]);
 

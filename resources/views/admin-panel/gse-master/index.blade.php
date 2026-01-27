@@ -18,7 +18,7 @@
                     <h4 class=".card-title">All Data GSE</h4>
                 </div>
                 <div class="card-body">
-                    <table id="scroll-horizontal-datatable" class=" w-100 nowrap table table-bordered text-center">
+                    <table id="scroll-horizontal-datatable" class="w-100 nowrap table-bordered table text-center">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -49,67 +49,66 @@
                                 <tr>
                                     <td><span class="bg-primary rounded-4 px-2 text-white">{{ $loop->iteration }}</span></td>
                                     <td>
-                                        <div class="">{{ $gse->gse_serial }}</div>
+                                        <div class="">{{ $gse->gse_serial ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->nomor_asset }}</div>
+                                        <div class="">{{ $gse->asset_number ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->nopol_kendaraan }}</div>
+                                        <div class="">{{ $gse->vehicle_number ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->perusahaan->nama_perusahaan }}</div>
+                                        <div class="">{{ $gse->companies->company_name ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->typePeralatan->nama_peralatan }}</div>
+                                        <div class="">{{ $gse->types->type_name ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->merk }}</div>
+                                        <div class="">{{ $gse->brand ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->kategori_gse->nama_kategori }}</div>
+                                        <div class="">{{ $gse->categories->category_name ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->bahanBakar->nama_bahan_bakar }}</div>
+                                        <div class="">{{ $gse->fuels->fuel_type_name ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->panjang }} m²</div>
+                                        <div class="">{{ $gse->length ?? '-' }} m²</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->lebar }} m²</div>
+                                        <div class="">{{ $gse->width ?? '-' }} m²</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->luas }} m²</div>
+                                        <div class="">{{ $gse->area ?? '-' }} m²</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->manufacture_year }}</div>
+                                        <div class="">{{ $gse->manufacture_year ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->statusKepemilikan->nama_kepemilikan }}</div>
+                                        <div class="">{{ $gse->ownerships->ownership_name ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->perusahaan_sewa }}</div>
+                                        <div class="">{{ $gse->rental_company ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->status_sewa }}</div>
+                                        <div class="">{{ $gse->rental_status ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->tanggal_sewa }}</div>
+                                        <div class="">{{ $gse->rental_date ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->kodeGH->kode_gh }}</div>
+                                        <div class="">{{ $gse->codeGH->code_gh ?? '-' }}</div>
                                     </td>
                                     <td>
-                                        <div class="">{{ $gse->kodeGSE->kode_gse }}</div>
+                                        <div class="">{{ $gse->codeGSE->code_gse ?? '-' }}</div>
                                     </td>
-
 
                                     <td>
                                         <span class="badge {{ $gse->status == 1 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' }}">{{ $gse->status == 1 ? 'Active' : 'Not Active' }}</span>
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                            <a href="{{ route('gse.show', $gse->gse_serial) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="See Details" data-bs-custom-class="success-tooltip"><i class="mdi mdi-eye"></i> </a>
+                                            <a href="{{ route('gse.show', $gse->gse_id) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="See Details" data-bs-custom-class="success-tooltip"><i class="mdi mdi-eye"></i> </a>
 
                                             <a href="{{ route('gse.edit', $gse->gse_serial) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Data" data-bs-custom-class="warning-tooltip"><i class="mdi mdi-lead-pencil"></i> </a>
 

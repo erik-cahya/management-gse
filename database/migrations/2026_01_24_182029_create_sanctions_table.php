@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('sanctions', function (Blueprint $table) {
             $table->ulid('sanction_id')->primary()->unique();
-            $table->string('code')->unique();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->boolean('additional_form');
 
             $table->timestamps();
         });

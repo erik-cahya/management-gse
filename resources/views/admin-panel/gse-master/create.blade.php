@@ -62,7 +62,7 @@
                                             <select class="select2 @error('perusahaan_id') is-invalid @enderror form-select" data-toggle="select2" id="perusahaan_id" name="perusahaan_id">
                                                 <option value="#" hidden disabled selected>Pilih Nama Perusahaan</option>
                                                 @foreach ($dataPerusahaan as $perusahaan)
-                                                    <option value="{{ $perusahaan->perusahaan_id }}" {{ old('perusahaan_id') == $perusahaan->perusahaan_id ? 'selected' : '' }}>{{ $perusahaan->nama_perusahaan }}</option>
+                                                    <option value="{{ $perusahaan->company_id }}" {{ old('perusahaan_id') == $perusahaan->company_id ? 'selected' : '' }}>{{ $perusahaan->company_name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('perusahaan_id')
@@ -79,7 +79,7 @@
                                             <select class="select2 @error('type_peralatan_gse') is-invalid @enderror form-select" data-toggle="select2" id="type_peralatan_gse" name="type_peralatan_gse">
                                                 <option value="#" hidden disabled selected>Pilih Peralatan GSE</option>
                                                 @foreach ($typePeralatan as $peralatan)
-                                                    <option value="{{ $peralatan->peralatan_id }}" {{ old('type_peralatan_gse') == $peralatan->peralatan_id ? 'selected' : '' }}>{{ $peralatan->nama_peralatan }}</option>
+                                                    <option value="{{ $peralatan->type_id }}" {{ old('type_peralatan_gse') == $peralatan->type_id ? 'selected' : '' }}>{{ $peralatan->type_name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('type_peralatan_gse')
@@ -108,7 +108,7 @@
                                             <select class="select2 @error('kategori') is-invalid @enderror form-select" data-toggle="select2" id="kategori" name="kategori">
                                                 <option value="#" hidden disabled selected>Pilih Kategori</option>
                                                 @foreach ($dataKategori as $kategori)
-                                                    <option value="{{ $kategori->kategori_id }}" {{ old('kategori') == $kategori->kategori_id ? 'selected' : '' }}>{{ $kategori->nama_kategori }}</option>
+                                                    <option value="{{ $kategori->category_id }}" {{ old('kategori') == $kategori->category_id ? 'selected' : '' }}>{{ $kategori->category_name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('kategori')
@@ -125,7 +125,7 @@
                                             <select class="select2 @error('bahan_bakar') is-invalid @enderror form-select" data-toggle="select2" id="bahan_bakar" name="bahan_bakar">
                                                 <option value="#" hidden disabled selected>Pilih bahan bakar</option>
                                                 @foreach ($dataBahanBakar as $bahan_bakar)
-                                                    <option value="{{ $bahan_bakar->bahan_bakar_id }}" {{ old('bahan_bakar') == $bahan_bakar->bahan_bakar_id ? 'selected' : '' }}>{{ $bahan_bakar->nama_bahan_bakar }}</option>
+                                                    <option value="{{ $bahan_bakar->fuel_id }}" {{ old('bahan_bakar') == $bahan_bakar->fuel_id ? 'selected' : '' }}>{{ $bahan_bakar->fuel_type_name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('bahan_bakar')
@@ -190,7 +190,7 @@
                                             <select class="select2 @error('status_kepemilikan') is-invalid @enderror form-select" data-toggle="select2" id="status_kepemilikan" name="status_kepemilikan">
                                                 <option value="#" hidden disabled selected>Pilih status kepemilikan</option>
                                                 @foreach ($dataStatusKepemilikan as $status_kepemilikan)
-                                                    <option value="{{ $status_kepemilikan->kepemilikan_id }}" {{ old('status_kepemilikan') == $status_kepemilikan->kepemilikan_id ? 'selected' : '' }}>{{ $status_kepemilikan->nama_kepemilikan }}</option>
+                                                    <option value="{{ $status_kepemilikan->ownership_type_id }}" {{ old('status_kepemilikan') == $status_kepemilikan->ownership_type_id ? 'selected' : '' }}>{{ $status_kepemilikan->ownership_name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('status_kepemilikan')
@@ -243,7 +243,7 @@
                                             <select class="select2 @error('kode_gh') is-invalid @enderror form-select" data-toggle="select2" id="kode_gh" name="kode_gh">
                                                 <option value="#" hidden disabled selected>Pilih Kode GH</option>
                                                 @foreach ($dataKodeGH as $kode_gh)
-                                                    <option value="{{ $kode_gh->kode_gh_id }}" {{ old('kode_gh') == $kode_gh->kode_gh_id ? 'selected' : '' }}>{{ $kode_gh->kode_gh }}</option>
+                                                    <option value="{{ $kode_gh->code_gh_id }}" {{ old('kode_gh') == $kode_gh->code_gh_id ? 'selected' : '' }}>{{ $kode_gh->code_gh }}</option>
                                                 @endforeach
                                             </select>
                                             @error('kode_gh')
@@ -260,7 +260,7 @@
                                             <select class="select2 @error('kode_gse') is-invalid @enderror form-select" data-toggle="select2" id="kode_gse" name="kode_gse">
                                                 <option value="#" hidden disabled selected>Pilih Kode GSE</option>
                                                 @foreach ($dataKodeGSE as $kode_gse)
-                                                    <option value="{{ $kode_gse->kode_gse_id }}" {{ old('kode_gse') == $kode_gse->kode_gse_id ? 'selected' : '' }}>{{ $kode_gse->kode_gse }}</option>
+                                                    <option value="{{ $kode_gse->code_gse_id }}" {{ old('kode_gse') == $kode_gse->code_gse_id ? 'selected' : '' }}>{{ $kode_gse->code_gse }}</option>
                                                 @endforeach
                                             </select>
                                             @error('kode_gse')

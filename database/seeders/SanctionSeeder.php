@@ -15,24 +15,30 @@ class SanctionSeeder extends Seeder
     {
         $data = [
             [
-                'code' => 'SANC-01',
                 'name' => 'Peringatan/Teguran Lisan',
-                'description' => NULL
+                'description' => NULL,
+                'additional_form' => 0
             ],
             [
-                'code' => 'SANC-02',
                 'name' => 'Peringatan/Teguran Tertulis',
-                'description' => NULL
+                'description' => NULL,
+                'additional_form' => 0
             ],
             [
-                'code' => 'SANC-03',
                 'name' => 'Pencabutan Pas Sementara',
-                'description' => NULL
+                'description' => NULL,
+                'additional_form' => 0
             ],
             [
-                'code' => 'SANC-04',
                 'name' => 'Pencabutan TIM Sementara',
-                'description' => NULL
+                'description' => NULL,
+                'additional_form' => 0
+            ],
+
+            [
+                'name' => 'Lain Lain',
+                'description' => NULL,
+                'additional_form' => 1
             ],
         ];
 
