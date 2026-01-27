@@ -13,26 +13,26 @@ return new class extends Migration
     {
         Schema::create('gse_master', function (Blueprint $table) {
             $table->ulid('gse_id')->primary()->unique();
-            $table->string('gse_serial')->nullable();
-            $table->string('nomor_asset')->nullable();
-            $table->string('nopol_kendaraan')->nullable();
+            $table->string('gse_serial')->nullable()->unique();
+            $table->string('asset_number')->nullable();
+            $table->string('vehicle_number')->nullable();
 
-            $table->foreignUlid('perusahaan_id')->references('perusahaan_id')->on('perusahaan')->cascadeOnDelete();
-            $table->foreignUlid('type_peralatan_gse')->references('peralatan_id')->on('peralatan')->cascadeOnDelete();
-            $table->string('merk')->nullable();
-            $table->foreignUlid('kategori')->references('kategori_id')->on('kategori')->cascadeOnDelete();
-            $table->foreignUlid('bahan_bakar')->references('bahan_bakar_id')->on('bahan_bakar')->cascadeOnDelete();
-            $table->float('panjang')->nullable();
-            $table->float('lebar')->nullable();
-            $table->float('luas')->nullable();
+            $table->foreignUlid('company_id')->nullable()->references('company_id')->on('company_gse')->nullOnDelete();
+            $table->foreignUlid('type_id')->nullable()->references('type_id')->on('type_gse')->nullOnDelete();
+            $table->string('brand')->nullable();
+            $table->foreignUlid('category_id')->nullable()->references('category_id')->on('category_gse')->nullOnDelete();
+            $table->foreignUlid('fuel_type')->nullable()->references('fuel_id')->on('fuel_type_gse')->nullOnDelete();
+            $table->float('length')->nullable();
+            $table->float('width')->nullable();
+            $table->float('area')->nullable();
             $table->integer('manufacture_year')->nullable();
-            $table->foreignUlid('status_kepemilikan')->references('kepemilikan_id')->on('kepemilikan')->cascadeOnDelete();
-            $table->text('perusahaan_sewa')->nullable();
-            $table->string('status_sewa')->nullable();
-            $table->date('tanggal_sewa')->nullable();
+            $table->foreignUlid('ownership_type')->nullable()->references('ownership_type_id')->on('ownership_type_gse')->nullOnDelete();
+            $table->text('rental_company')->nullable();
+            $table->string('rental_status')->nullable();
+            $table->date('rental_date')->nullable();
 
-            $table->foreignUlid('kode_gh')->references('kode_gh_id')->on('kode_gh')->cascadeOnDelete();
-            $table->foreignUlid('kode_gse')->references('kode_gse_id')->on('kode_gse')->cascadeOnDelete();
+            $table->foreignUlid('code_gh')->nullable()->references('code_gh_id')->on('code_gh')->nullOnDelete();
+            $table->foreignUlid('code_gse')->nullable()->references('code_gse_id')->on('code_gse')->nullOnDelete();
 
             $table->boolean('status')->comment('1:active | 0:not active');
             $table->timestamps();

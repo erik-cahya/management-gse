@@ -6,22 +6,22 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BahanBakarModel extends Model
+class CategoryGseModel extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $table = 'bahan_bakar';
-    protected $guarded = ['bahan_bakar_id'];
+    protected $table = 'category_gse';
+    protected $guarded = ['category_id'];
 
     public function uniqueIds()
     {
-        return ['bahan_bakar_id'];
+        return ['category_id'];
     }
 
-    public function setBahanBakarIdAttribute($value)
+    public function setCategoryIdAttribute($value)
     {
         if ($value !== null) {
-            $this->attributes['bahan_bakar_id'] = strtoupper($value);
+            $this->attributes['category_id'] = strtoupper($value);
         }
     }
 }

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kode_gh', function (Blueprint $table) {
-            $table->ulid('kode_gh_id')->primary()->unique();
-            $table->string('kode_gh');
+        Schema::create('ownership_type_gse', function (Blueprint $table) {
+            $table->ulid('ownership_type_id')->primary()->unique();
+            $table->string('ownership_name');
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kode_gh');
+        Schema::dropIfExists('kepemilikan');
     }
 };

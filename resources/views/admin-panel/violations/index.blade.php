@@ -31,7 +31,7 @@
                                     <tbody class="fs-12">
 
                                         @foreach ($dataViolation as $violation)
-                                            <tr class="text-capitalize align-middle">
+                                            <tr class="text-uppercase align-middle">
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $violation->full_name }}</td>
                                                 <td>{{ $violation->company_name }}</td>
@@ -49,6 +49,8 @@
                                                     </span>
                                                 </td>
                                                 <td class="text-center">
+                                                    <a href="javascript:void(0)" class="text-reset fs-16 deleteButton px-1" data-nama="#"> <i class="ri-eye-line"></i></a>
+
                                                     <input type="hidden" class="gseID" value="#">
                                                     <a href="javascript:void(0)" class="text-reset fs-16 deleteButton px-1" data-nama="#"> <i class="ri-delete-bin-2-line"></i></a>
                                                 </td>

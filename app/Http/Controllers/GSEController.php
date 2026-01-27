@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BahanBakarModel;
+use App\Models\CategoryGseModel;
+use App\Models\CodeGhModel;
+use App\Models\CodeGseModel;
+use App\Models\CompanyGseModel;
 use App\Models\GSEInspectionModel;
 use App\Models\GseMasterModel;
 use App\Models\GSEViolationModel;
-use App\Models\KategoriModel;
-use App\Models\KepemilikanModel;
-use App\Models\KodeGhModel;
-use App\Models\KodeGseModel;
-use App\Models\PeralatanModel;
-use App\Models\PerusahaanModel;
+use App\Models\FuelTypeModel;
+use App\Models\OwnershipTypeGseModel;
+use App\Models\TypeGseModel;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -45,13 +45,13 @@ class GSEController extends Controller
      */
     public function create()
     {
-        $data['dataPerusahaan'] = PerusahaanModel::get();
-        $data['typePeralatan'] = PeralatanModel::get();
-        $data['dataKategori'] = KategoriModel::get();
-        $data['dataBahanBakar'] = BahanBakarModel::get();
-        $data['dataStatusKepemilikan'] = KepemilikanModel::get();
-        $data['dataKodeGH'] = KodeGhModel::get();
-        $data['dataKodeGSE'] = KodeGseModel::get();
+        $data['dataPerusahaan'] = CompanyGseModel::get();
+        $data['typePeralatan'] = TypeGseModel::get();
+        $data['dataKategori'] = CategoryGseModel::get();
+        $data['dataBahanBakar'] = FuelTypeModel::get();
+        $data['dataStatusKepemilikan'] = OwnershipTypeGseModel::get();
+        $data['dataKodeGH'] = CodeGhModel::get();
+        $data['dataKodeGSE'] = CodeGseModel::get();
         return view('admin-panel.gse-master.create', $data);
     }
 
@@ -105,11 +105,9 @@ class GSEController extends Controller
      */
     public function show(string $id)
     {
-        // dd($request->all());
-        $data['dataGse'] = GseMasterModel::where('gse_master.gse_serial', $id)
-            ->first();
-        $data['dataViolations'] = GSEViolationModel::where('gse_serial', $id)
-            ->orderBy('examination_date', 'DESC')->get();
+        // dd($id);
+        $data['dataGse'] = GseMasterModel::where('gse_master.gse_serial', $id)->first();
+        // $data['dataViolations'] = GSEViolationModel::where('gse_serial', $id)->orderBy('examination_date', 'DESC')->get();
 
 
 
@@ -125,13 +123,13 @@ class GSEController extends Controller
     {
         $data['dataGse'] = GseMasterModel::where('gse_serial', $id)->select('gse_master.*', 'kategori as id_kategori')->first();
 
-        $data['dataPerusahaan'] = PerusahaanModel::get();
-        $data['typePeralatan'] = PeralatanModel::get();
-        $data['dataKategori'] = KategoriModel::get();
-        $data['dataBahanBakar'] = BahanBakarModel::get();
-        $data['dataStatusKepemilikan'] = KepemilikanModel::get();
-        $data['dataKodeGH'] = KodeGhModel::get();
-        $data['dataKodeGSE'] = KodeGseModel::get();
+        $data['dataPerusahaan'] = CompanyGseModel::get();
+        $data['typePeralatan'] = TypeGseModel::get();
+        $data['dataKategori'] = CategoryGseModel::get();
+        $data['dataBahanBakar'] = FuelTypeModel::get();
+        $data['dataStatusKepemilikan'] = OwnershipTypeGseModel::get();
+        $data['dataKodeGH'] = CodeGhModel::get();
+        $data['dataKodeGSE'] = CodeGseModel::get();
 
         // dd($data['dataGse']);
         return view('admin-panel.gse-master.edit', $data);

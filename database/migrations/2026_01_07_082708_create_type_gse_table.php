@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('peralatan', function (Blueprint $table) {
-            $table->ulid('peralatan_id')->primary()->unique();
-            $table->string('nama_peralatan');
+        Schema::create('type_gse', function (Blueprint $table) {
+            $table->ulid('type_id')->primary()->unique();
+            $table->string('type_name');
             $table->timestamps();
         });
     }

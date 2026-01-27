@@ -3,12 +3,19 @@
 namespace Database\Seeders;
 
 use App\Models\BahanBakarModel;
+use App\Models\CategoryGseModel;
+use App\Models\CodeGhModel;
+use App\Models\CodeGseModel;
+use App\Models\CompanyGseModel;
+use App\Models\FuelTypeModel;
 use App\Models\KategoriModel;
 use App\Models\KepemilikanModel;
 use App\Models\KodeGhModel;
 use App\Models\KodeGseModel;
+use App\Models\OwnershipTypeGseModel;
 use App\Models\PeralatanModel;
 use App\Models\PerusahaanModel;
+use App\Models\TypeGseModel;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -30,191 +37,191 @@ class DataSeeder extends Seeder
 
         // ################################################ Perusahaan Seeder
         $perusahaan = [
-            ['nama_perusahaan' => 'PT. AEROFOOD CATERING SERVICE'],
-            ['nama_perusahaan' => 'PT. AFM AVIASI INDONESIA'],
-            ['nama_perusahaan' => 'PT. ANGKASA PURA SUPPORTS'],
-            ['nama_perusahaan' => 'PT. ASIA DIGITAL ENGINEERING INDONESIA'],
-            ['nama_perusahaan' => 'PT. AVIA TECHNICS DIRGANTARA'],
-            ['nama_perusahaan' => 'PT. CATHAY PACIFIC AIRLINES'],
-            ['nama_perusahaan' => 'PT. CELEBI AVIATION INDONESIA'],
-            ['nama_perusahaan' => 'PT. CITILINK INDONESIA'],
-            ['nama_perusahaan' => 'PT. ENGGANG ANGKASA SARANA'],
-            ['nama_perusahaan' => 'PT. GAPURA ANGKASA'],
-            ['nama_perusahaan' => 'PT. GARDA TAWANG REKSA INDONESIA'],
-            ['nama_perusahaan' => 'PT. GMF AERO ASIA'],
-            ['nama_perusahaan' => 'PT. IAS CARGO & LOGISTICS'],
-            ['nama_perusahaan' => 'PT. IAS FOOD SERVICES'],
-            ['nama_perusahaan' => 'PT. JAS AERO ENGINEERING SERVICES'],
-            ['nama_perusahaan' => 'PT. JASA ANGKASA SEMESTA'],
-            ['nama_perusahaan' => 'PT. KARISMA BAHANA AVIASI'],
-            ['nama_perusahaan' => 'PT. LION AIR'],
-            ['nama_perusahaan' => 'PT. NATRA ABADINUGRAHA UTAMA PUTRA'],
-            ['nama_perusahaan' => 'PT. PAREWA KATERING'],
-            ['nama_perusahaan' => 'PT. PERTAMINA (PERSERO)'],
-            ['nama_perusahaan' => 'PT. SARI RAHAYU BIOMANTARA'],
-            ['nama_perusahaan' => 'PT. SRIWIJAYA AIR'],
-            ['nama_perusahaan' => 'PT. TRANSNUSA AVIATION MANDIRI'],
+            ['company_name' => 'PT. AEROFOOD CATERING SERVICE'],
+            ['company_name' => 'PT. AFM AVIASI INDONESIA'],
+            ['company_name' => 'PT. ANGKASA PURA SUPPORTS'],
+            ['company_name' => 'PT. ASIA DIGITAL ENGINEERING INDONESIA'],
+            ['company_name' => 'PT. AVIA TECHNICS DIRGANTARA'],
+            ['company_name' => 'PT. CATHAY PACIFIC AIRLINES'],
+            ['company_name' => 'PT. CELEBI AVIATION INDONESIA'],
+            ['company_name' => 'PT. CITILINK INDONESIA'],
+            ['company_name' => 'PT. ENGGANG ANGKASA SARANA'],
+            ['company_name' => 'PT. GAPURA ANGKASA'],
+            ['company_name' => 'PT. GARDA TAWANG REKSA INDONESIA'],
+            ['company_name' => 'PT. GMF AERO ASIA'],
+            ['company_name' => 'PT. IAS CARGO & LOGISTICS'],
+            ['company_name' => 'PT. IAS FOOD SERVICES'],
+            ['company_name' => 'PT. JAS AERO ENGINEERING SERVICES'],
+            ['company_name' => 'PT. JASA ANGKASA SEMESTA'],
+            ['company_name' => 'PT. KARISMA BAHANA AVIASI'],
+            ['company_name' => 'PT. LION AIR'],
+            ['company_name' => 'PT. NATRA ABADINUGRAHA UTAMA PUTRA'],
+            ['company_name' => 'PT. PAREWA KATERING'],
+            ['company_name' => 'PT. PERTAMINA (PERSERO)'],
+            ['company_name' => 'PT. SARI RAHAYU BIOMANTARA'],
+            ['company_name' => 'PT. SRIWIJAYA AIR'],
+            ['company_name' => 'PT. TRANSNUSA AVIATION MANDIRI'],
         ];
 
         foreach ($perusahaan as $data) {
-            PerusahaanModel::create($data);
+            CompanyGseModel::create($data);
         }
 
         // ################################################ Peralatan Seeder
         $peralatan = [
-            ['nama_peralatan' => 'MOBIL/KENDARAAN OPERASIONAL'],
-            ['nama_peralatan' => 'CATERING TRUCK (CTT)'],
-            ['nama_peralatan' => 'AIRCRAFT TOWING TRACTOR (ATT)'],
-            ['nama_peralatan' => 'LAVATORY SERVICE CART (LSC)'],
-            ['nama_peralatan' => 'WATER SERVICE CART (WSC)'],
-            ['nama_peralatan' => 'BAGGAGE CART (BCT)'],
-            ['nama_peralatan' => 'MAINTENANCE STAIR'],
-            ['nama_peralatan' => 'FIREX'],
-            ['nama_peralatan' => 'TOWED PASSANGER STAIRS (TPS)'],
-            ['nama_peralatan' => 'BAGGAGE TOWING TRACTOR (BTT)'],
-            ['nama_peralatan' => 'AIRCRAFT TOWING BAR (ATB)'],
-            ['nama_peralatan' => 'CREW TRANSPORTATION VEHICLE (CTV)'],
-            ['nama_peralatan' => 'APRON PASSENGER BUS (APB)'],
-            ['nama_peralatan' => 'COMPRESSOR WASHING'],
-            ['nama_peralatan' => 'TANGGA TEKNIK'],
-            ['nama_peralatan' => 'TOWBARLESS TRACTOR (TBT)'],
-            ['nama_peralatan' => 'GROUND POWER UNIT/SYSTEM (GPU/GPS)'],
-            ['nama_peralatan' => 'AIRSIDE OPERATION VEHICLE (AOV)'],
-            ['nama_peralatan' => 'PASSENGER BOARDING STAIRS (PBS)'],
-            ['nama_peralatan' => 'CONVEYOR BELT LOADER (CBL)'],
-            ['nama_peralatan' => 'AIR CONDITIONING UNIT (ACU)'],
-            ['nama_peralatan' => 'AIR STARTER UNIT/SYSTEM (ASU/ASS)'],
-            ['nama_peralatan' => 'LAVATORY SERVICE TRUCK (LST)'],
-            ['nama_peralatan' => 'WATER SERVICE TRUCK (WST)'],
-            ['nama_peralatan' => 'PORTABLE GENSET (P-GNS)'],
-            ['nama_peralatan' => 'PALLET DOLLIES (PDL)'],
-            ['nama_peralatan' => 'CONTAINER DOLLIES (CDL)'],
-            ['nama_peralatan' => 'HIGH LIFT LOADER (HLL)'],
-            ['nama_peralatan' => 'FORKLIFT (FLT)'],
-            ['nama_peralatan' => 'FUEL SERVICE TRUCK'],
-            ['nama_peralatan' => 'MARSHALLING CAR'],
-            ['nama_peralatan' => 'INCAPACITED PAX LOAD VEHICLE (IPL) / AMBULIFT'],
-            ['nama_peralatan' => 'GENSET'],
-            ['nama_peralatan' => 'PALLET RACK (PRK)'],
-            ['nama_peralatan' => 'CONTAINER RACK (CRK)'],
-            ['nama_peralatan' => 'BATTERY CART'],
-            ['nama_peralatan' => 'MAINTENANCE UNIT TRUCK'],
-            ['nama_peralatan' => 'NITROGEN CART'],
-            ['nama_peralatan' => 'JACK CART'],
-            ['nama_peralatan' => 'MAIN WHEEL CART'],
-            ['nama_peralatan' => 'WASHING CART'],
-            ['nama_peralatan' => 'HIGH LIFT CATERING TRUCK (HCT)'],
-            ['nama_peralatan' => 'AXLE JACK'],
-            ['nama_peralatan' => 'WHEEL CHANGER'],
-            ['nama_peralatan' => 'FUEL BOWSER'],
-            ['nama_peralatan' => 'WORKING STAIRS'],
-            ['nama_peralatan' => 'BAGGAGE CARGO CART (BCC)'],
-            ['nama_peralatan' => 'REFUELING DE-REFUELING TRUCK (RDT)'],
-            ['nama_peralatan' => 'FUEL HYDRANT DISPENCER TRUCK (HDT)'],
+            ['type_name' => 'MOBIL/KENDARAAN OPERASIONAL'],
+            ['type_name' => 'CATERING TRUCK (CTT)'],
+            ['type_name' => 'AIRCRAFT TOWING TRACTOR (ATT)'],
+            ['type_name' => 'LAVATORY SERVICE CART (LSC)'],
+            ['type_name' => 'WATER SERVICE CART (WSC)'],
+            ['type_name' => 'BAGGAGE CART (BCT)'],
+            ['type_name' => 'MAINTENANCE STAIR'],
+            ['type_name' => 'FIREX'],
+            ['type_name' => 'TOWED PASSANGER STAIRS (TPS)'],
+            ['type_name' => 'BAGGAGE TOWING TRACTOR (BTT)'],
+            ['type_name' => 'AIRCRAFT TOWING BAR (ATB)'],
+            ['type_name' => 'CREW TRANSPORTATION VEHICLE (CTV)'],
+            ['type_name' => 'APRON PASSENGER BUS (APB)'],
+            ['type_name' => 'COMPRESSOR WASHING'],
+            ['type_name' => 'TANGGA TEKNIK'],
+            ['type_name' => 'TOWBARLESS TRACTOR (TBT)'],
+            ['type_name' => 'GROUND POWER UNIT/SYSTEM (GPU/GPS)'],
+            ['type_name' => 'AIRSIDE OPERATION VEHICLE (AOV)'],
+            ['type_name' => 'PASSENGER BOARDING STAIRS (PBS)'],
+            ['type_name' => 'CONVEYOR BELT LOADER (CBL)'],
+            ['type_name' => 'AIR CONDITIONING UNIT (ACU)'],
+            ['type_name' => 'AIR STARTER UNIT/SYSTEM (ASU/ASS)'],
+            ['type_name' => 'LAVATORY SERVICE TRUCK (LST)'],
+            ['type_name' => 'WATER SERVICE TRUCK (WST)'],
+            ['type_name' => 'PORTABLE GENSET (P-GNS)'],
+            ['type_name' => 'PALLET DOLLIES (PDL)'],
+            ['type_name' => 'CONTAINER DOLLIES (CDL)'],
+            ['type_name' => 'HIGH LIFT LOADER (HLL)'],
+            ['type_name' => 'FORKLIFT (FLT)'],
+            ['type_name' => 'FUEL SERVICE TRUCK'],
+            ['type_name' => 'MARSHALLING CAR'],
+            ['type_name' => 'INCAPACITED PAX LOAD VEHICLE (IPL) / AMBULIFT'],
+            ['type_name' => 'GENSET'],
+            ['type_name' => 'PALLET RACK (PRK)'],
+            ['type_name' => 'CONTAINER RACK (CRK)'],
+            ['type_name' => 'BATTERY CART'],
+            ['type_name' => 'MAINTENANCE UNIT TRUCK'],
+            ['type_name' => 'NITROGEN CART'],
+            ['type_name' => 'JACK CART'],
+            ['type_name' => 'MAIN WHEEL CART'],
+            ['type_name' => 'WASHING CART'],
+            ['type_name' => 'HIGH LIFT CATERING TRUCK (HCT)'],
+            ['type_name' => 'AXLE JACK'],
+            ['type_name' => 'WHEEL CHANGER'],
+            ['type_name' => 'FUEL BOWSER'],
+            ['type_name' => 'WORKING STAIRS'],
+            ['type_name' => 'BAGGAGE CARGO CART (BCC)'],
+            ['type_name' => 'REFUELING DE-REFUELING TRUCK (RDT)'],
+            ['type_name' => 'FUEL HYDRANT DISPENCER TRUCK (HDT)'],
 
         ];
 
         foreach ($peralatan as $data) {
-            PeralatanModel::create($data);
+            TypeGseModel::create($data);
         }
 
         $kategori = [
-            ['nama_kategori' => 'MOTORIZED'],
-            ['nama_kategori' => 'NON-MOTORIZED'],
+            ['category_name' => 'MOTORIZED'],
+            ['category_name' => 'NON-MOTORIZED'],
         ];
         foreach ($kategori as $data) {
-            KategoriModel::create($data);
+            CategoryGseModel::create($data);
         }
 
         $bahanBakar = [
-            ['nama_bahan_bakar' => 'PERTALITE/PERTAMAX'],
-            ['nama_bahan_bakar' => 'ELECTRIC VEHICLE'],
-            ['nama_bahan_bakar' => 'SOLAR'],
-            ['nama_bahan_bakar' => 'OTHERS'],
+            ['fuel_type_name' => 'PERTALITE/PERTAMAX'],
+            ['fuel_type_name' => 'ELECTRIC VEHICLE'],
+            ['fuel_type_name' => 'SOLAR'],
+            ['fuel_type_name' => 'OTHERS'],
         ];
         foreach ($bahanBakar as $data) {
-            BahanBakarModel::create($data);
+            FuelTypeModel::create($data);
         }
 
         $statusKepemilikan = [
-            ['nama_kepemilikan' => 'Milik Perusahaan'],
-            ['nama_kepemilikan' => 'Sewa/Sub Kontrak'],
+            ['ownership_name' => 'Milik Perusahaan'],
+            ['ownership_name' => 'Sewa/Sub Kontrak'],
         ];
 
         foreach ($statusKepemilikan as $data) {
-            KepemilikanModel::create($data);
+            OwnershipTypeGseModel::create($data);
         }
 
         $kodeGh = [
-            ['kode_gh' => 'ACS'],
-            ['kode_gh' => 'AFM'],
-            ['kode_gh' => 'APS'],
-            ['kode_gh' => 'ADEI'],
-            ['kode_gh' => 'FLT'],
-            ['kode_gh' => 'CPA'],
-            ['kode_gh' => 'CAI'],
-            ['kode_gh' => 'CTV'],
-            ['kode_gh' => 'EAS'],
-            ['kode_gh' => 'GAPURA'],
-            ['kode_gh' => 'GTRI'],
-            ['kode_gh' => 'GMF'],
-            ['kode_gh' => 'IASC'],
-            ['kode_gh' => 'IASFS'],
-            ['kode_gh' => 'JAES'],
-            ['kode_gh' => 'JAS'],
-            ['kode_gh' => 'KBA'],
-            ['kode_gh' => 'LNI'],
-            ['kode_gh' => 'NATRA'],
-            ['kode_gh' => 'PAREWA'],
-            ['kode_gh' => 'PERTAMINA'],
-            ['kode_gh' => 'SRB'],
-            ['kode_gh' => 'SJY'],
-            ['kode_gh' => 'TNU'],
+            ['code_gh' => 'ACS'],
+            ['code_gh' => 'AFM'],
+            ['code_gh' => 'APS'],
+            ['code_gh' => 'ADEI'],
+            ['code_gh' => 'FLT'],
+            ['code_gh' => 'CPA'],
+            ['code_gh' => 'CAI'],
+            ['code_gh' => 'CTV'],
+            ['code_gh' => 'EAS'],
+            ['code_gh' => 'GAPURA'],
+            ['code_gh' => 'GTRI'],
+            ['code_gh' => 'GMF'],
+            ['code_gh' => 'IASC'],
+            ['code_gh' => 'IASFS'],
+            ['code_gh' => 'JAES'],
+            ['code_gh' => 'JAS'],
+            ['code_gh' => 'KBA'],
+            ['code_gh' => 'LNI'],
+            ['code_gh' => 'NATRA'],
+            ['code_gh' => 'PAREWA'],
+            ['code_gh' => 'PERTAMINA'],
+            ['code_gh' => 'SRB'],
+            ['code_gh' => 'SJY'],
+            ['code_gh' => 'TNU'],
         ];
 
         foreach ($kodeGh as $data) {
-            KodeGhModel::create($data);
+            CodeGhModel::create($data);
         }
 
         $kodeGse = [
-            ['kode_gse' => 'AOV'],
-            ['kode_gse' => 'CTT'],
-            ['kode_gse' => 'ATT'],
-            ['kode_gse' => 'LSC'],
-            ['kode_gse' => 'WSC'],
-            ['kode_gse' => 'BCT'],
-            ['kode_gse' => 'AMS'],
-            ['kode_gse' => 'FIREX'],
-            ['kode_gse' => 'TPS'],
-            ['kode_gse' => 'BTT'],
-            ['kode_gse' => 'ATB'],
-            ['kode_gse' => 'CTV'],
-            ['kode_gse' => 'APB'],
-            ['kode_gse' => 'CDL'],
-            ['kode_gse' => 'TBT'],
-            ['kode_gse' => 'GPU'],
-            ['kode_gse' => 'PBS'],
-            ['kode_gse' => 'CBL'],
-            ['kode_gse' => 'ACU'],
-            ['kode_gse' => 'ASU'],
-            ['kode_gse' => 'LST'],
-            ['kode_gse' => 'P-GNS'],
-            ['kode_gse' => 'PDL'],
-            ['kode_gse' => 'HLL'],
-            ['kode_gse' => 'FLT'],
-            ['kode_gse' => 'HDT'],
-            ['kode_gse' => 'MSC'],
-            ['kode_gse' => 'IPL'],
-            ['kode_gse' => 'GNS'],
-            ['kode_gse' => 'PRK'],
-            ['kode_gse' => 'CRK'],
-            ['kode_gse' => 'OTHERS'],
-            ['kode_gse' => 'HCT'],
-            ['kode_gse' => 'BCC'],
-            ['kode_gse' => 'RDT'],
+            ['code_gse' => 'AOV'],
+            ['code_gse' => 'CTT'],
+            ['code_gse' => 'ATT'],
+            ['code_gse' => 'LSC'],
+            ['code_gse' => 'WSC'],
+            ['code_gse' => 'BCT'],
+            ['code_gse' => 'AMS'],
+            ['code_gse' => 'FIREX'],
+            ['code_gse' => 'TPS'],
+            ['code_gse' => 'BTT'],
+            ['code_gse' => 'ATB'],
+            ['code_gse' => 'CTV'],
+            ['code_gse' => 'APB'],
+            ['code_gse' => 'CDL'],
+            ['code_gse' => 'TBT'],
+            ['code_gse' => 'GPU'],
+            ['code_gse' => 'PBS'],
+            ['code_gse' => 'CBL'],
+            ['code_gse' => 'ACU'],
+            ['code_gse' => 'ASU'],
+            ['code_gse' => 'LST'],
+            ['code_gse' => 'P-GNS'],
+            ['code_gse' => 'PDL'],
+            ['code_gse' => 'HLL'],
+            ['code_gse' => 'FLT'],
+            ['code_gse' => 'HDT'],
+            ['code_gse' => 'MSC'],
+            ['code_gse' => 'IPL'],
+            ['code_gse' => 'GNS'],
+            ['code_gse' => 'PRK'],
+            ['code_gse' => 'CRK'],
+            ['code_gse' => 'OTHERS'],
+            ['code_gse' => 'HCT'],
+            ['code_gse' => 'BCC'],
+            ['code_gse' => 'RDT'],
         ];
         foreach ($kodeGse as $data) {
-            KodeGseModel::create($data);
+            CodeGseModel::create($data);
         }
     }
 }

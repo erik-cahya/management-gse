@@ -6,22 +6,22 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class KodeGhModel extends Model
+class CodeGhModel extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $table = 'kode_gh';
-    protected $guarded = ['kode_gh_id'];
+    protected $table = 'code_gh';
+    protected $guarded = ['code_gh_id'];
 
     public function uniqueIds()
     {
-        return ['kode_gh_id'];
+        return ['code_gh_id'];
     }
 
-    public function setKodeGhIdAttribute($value)
+    public function setCodeGhIdAttribute($value)
     {
         if ($value !== null) {
-            $this->attributes['kode_gh_id'] = strtoupper($value);
+            $this->attributes['code_gh_id'] = strtoupper($value);
         }
     }
 }

@@ -6,22 +6,22 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PeralatanModel extends Model
+class CodeGseModel extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $table = 'peralatan';
-    protected $guarded = ['peralatan_id'];
+    protected $table = 'code_gse';
+    protected $guarded = ['code_gse_id'];
 
     public function uniqueIds()
     {
-        return ['peralatan_id'];
+        return ['code_gse_id'];
     }
 
-    public function setPeralatanIdAttribute($value)
+    public function setCodeGseIdAttribute($value)
     {
         if ($value !== null) {
-            $this->attributes['peralatan_id'] = strtoupper($value);
+            $this->attributes['code_gse_id'] = strtoupper($value);
         }
     }
 }

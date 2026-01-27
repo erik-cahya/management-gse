@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('perusahaan', function (Blueprint $table) {
-            $table->ulid('perusahaan_id')->primary()->unique();
-            $table->string('nama_perusahaan');
+        Schema::create('fuel_type_gse', function (Blueprint $table) {
+            $table->ulid('fuel_id')->primary()->unique();
+            $table->string('fuel_type_name');
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perusahaan');
+        Schema::dropIfExists('bahan_bakar');
     }
 };
