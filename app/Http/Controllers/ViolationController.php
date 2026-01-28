@@ -169,44 +169,19 @@ class ViolationController extends Controller
     /**
      * Display the specified resource.
      */
-    // public function show(string $id)
-    // {
-    //     // $data['violator'] = ViolatorModel::where('violator_id', $id)
-    //     //     ->with(
-    //     //         'gseData',
-    //     //         'violationReports.violatorReportDetails',
-    //     //     )->first();
-
-    //     $violator = ViolatorModel::where('violator_id', $id)
-    //         ->with([
-    //             'gseData',
-    //             'violationReports.violationReportDetails',
-    //             'violationReports.violationSanctions',
-    //         ])
-    //         ->firstOrFail();
-
-    //     $report = $violator->violationReports->first(); // atau last()
-
-    //     $data['violationType'] = ViolationTypesModel::get();
-    //     $data['dataSanction'] = SanctionModel::get();
-
-    //     dd($data['violator']);
-    //     return view('admin-panel.violations.show', $data);
-    // }
-
     public function show(string $id)
     {
-        // 1. Ambil violator + semua relasi yang dibutuhkan
         $violator = ViolatorModel::where('violator_id', $id)
             ->with([
-                'gseData',
+                'gseData.companies',
+                'gseData.types',
+                'gseData.categories',
                 'violationReports.violatorReportDetails',
                 'violationReports.violationSanctions',
             ])
             ->firstOrFail();
 
-
-
+        // dd($violator);
 
         $violationChecked = $violator->violationReports
             ? $violator->violationReports->violatorReportDetails
@@ -219,41 +194,12 @@ class ViolationController extends Controller
             ->keyBy('sanction_id')
             : collect();
 
-
-
-
-
-        // /**
-        //  * Asumsi:
-        //  * - 1 violator = 1 violation report aktif
-        //  * - kalau lebih dari 1, pakai ->last() / filter by status
-        //  */
-        // $violationReport = $violator->violationReports->violatorReportDetails->first();
-
-        // dd($violationReport->violation_report_id);
-
-        // // 2. Lookup violation (keyBy violation_type_id)
-        // $violationChecked = $violationReport
-        //     ? $violationReport
-        //     ->keyBy('violation_type_id')
-        //     : collect();
-
-        // dd($violationChecked);
-
-        // // 3. Lookup sanction (keyBy sanction_id)
-        // $sanctionChecked = $violationReport
-        //     ? $violationReport->violationSanctions
-        //     ->keyBy('sanction_id')
-        //     : collect();
-
-        // 4. Kirim ke Blade
         return view('admin-panel.violations.show', [
             'violator'         => $violator,
             'violationType'    => ViolationTypesModel::all(),
             'dataSanction'     => SanctionModel::all(),
             'violationChecked' => $violationChecked,
             'sanctionChecked'  => $sanctionChecked,
-            // 'violationReport'  => $violationReport,
         ]);
     }
 
@@ -279,7 +225,7 @@ class ViolationController extends Controller
     public function destroy(string $id)
     {
         // GSEViolationModel::where('id', $id)->delete();
-        GSEViolationModel::where('id', $id)->delete();
+        ViolatorModel::where('violator_id', $id)->delete();
         $flashData = [
             'judul' => 'Delete User Success',
             'pesan' => 'Data User Deleted Successfully',

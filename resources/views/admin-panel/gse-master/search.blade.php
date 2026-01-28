@@ -98,44 +98,34 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="timeline timeline-left">
-                                                    {{-- @foreach ($dataViolations as $pelanggaran)
-                                                        @php
-                                                            if ($pelanggaran->violation_level === 'berat') {
-                                                                $textClass = 'text-danger';
-                                                                $bgClass = 'bg-danger';
-                                                            } elseif ($pelanggaran->violation_level === 'sedang') {
-                                                                $textClass = 'text-primary';
-                                                                $bgClass = 'bg-primary';
-                                                            } else {
-                                                                $textClass = 'text-success';
-                                                                $bgClass = 'bg-success';
-                                                            }
-                                                        @endphp
-                                                        <article class="timeline-item">
-                                                            <div class="timeline-desk">
-                                                                <div class="panel">
-                                                                    <div class="timeline-box">
-                                                                        <span class="arrow"></span>
-                                                                        <span class="timeline-icon {{ $bgClass }}"><i class="mdi mdi-record-circle-outline"></i></span>
-                                                                        <span class="d-flex justify-content-between">
+                                                <table id="scroll-horizontal-datatable" class="table-striped table-bordered table-sm fs-12 w-100 nowrap table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Nama Pelanggar</th>
+                                                            <th>Instansi</th>
+                                                            <th>Tanggal Kejadian</th>
+                                                            <th>Lokasi Kejadian</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($dataViolations as $violation)
+                                                            {{-- {{ dd($violation) }} --}}
+                                                            <tr>
+                                                                <td>{{ $loop->iteration }}</td>
+                                                                <td>{{ $violation->full_name }}</td>
+                                                                <td>{{ $violation->company_name }}</td>
+                                                                <td>{{ \Carbon\Carbon::parse($violation->violationReports->incident_date)->locale('id')->translatedFormat('l, d F Y') }}</td>
+                                                                <td>{{ $violation->violationReports->incident_location }}</td>
+                                                                <td>
+                                                                    <a href="{{ route('violation.show', $violation->violator_id) }}">Details</a>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
 
-                                                                            <h4 class="fs-14 fw-semibold text-capitalize mb-1">{{ $pelanggaran->violation_name }} - {{ $pelanggaran->violation_type }}</h4>
-                                                                            <h4 class="fs-14 fw-semibold {{ $textClass }} text-capitalize mb-1">Level {{ $pelanggaran->violation_level }}</h4>
-                                                                        </span>
-
-                                                                        <p class="timeline-date text-muted d-inline"><small> <i class="ri-calendar-line"></i> {{ \Carbon\Carbon::parse($pelanggaran->examination_date)->format('d M Y') }}</small></p>
-
-                                                                        <p class="timeline-date text-muted d-inline p-2"><small> <i class="ri-user-fill"></i> {{ $pelanggaran->employee }}</small></p>
-                                                                        <p class="timeline-date text-muted d-inline text-capitalize p-2"><small> <i class="ri-map-pin-2-fill"></i> {{ $pelanggaran->location }}</small></p>
-                                                                        <hr>
-                                                                        <p class="mt-1">{{ $pelanggaran->description }} </p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </article>
-                                                    @endforeach --}}
-                                                </div>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>

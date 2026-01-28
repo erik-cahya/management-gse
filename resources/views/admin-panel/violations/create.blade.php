@@ -7,8 +7,6 @@
 @endpush
 @section('content')
     <div class="content">
-
-        <!-- Start Content-->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">

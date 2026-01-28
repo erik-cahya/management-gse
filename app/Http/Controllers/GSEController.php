@@ -107,12 +107,10 @@ class GSEController extends Controller
     public function show(string $id)
     {
         $data['dataGse'] = GseMasterModel::where('gse_master.gse_id', $id)->first();
-        // $data['dataViolations'] = GSEViolationModel::where('gse_serial', $id)->orderBy('examination_date', 'DESC')->get();
 
         $data['dataViolations'] = ViolatorModel::where('gse_id', $id)->with('violationReports')->get();
         $data['inputSerial'] = $id;
 
-        // dd($data['dataViolations']);
         return view('admin-panel.gse-master.show', $data);
     }
 
@@ -202,40 +200,34 @@ class GSEController extends Controller
 
     public function getSearchData(Request $request)
     {
-        // dd($request->all());
-        // $data['dataGse'] = GseMasterModel::where('gse_master.gse_serial', $request->gse_serial)->first();
-
         $keyword = $request->keyword_search;
         $data['dataGse'] = GseMasterModel::where(function ($q) use ($keyword) {
             $q->where('gse_serial', 'like', "%{$keyword}%")
                 ->orWhere('asset_number', 'like', "%{$keyword}%")
                 ->orWhere('vehicle_number', 'like', "%{$keyword}%");
         })->with(
-            'companies',
-            'types',
-            'categories',
-            'fuels',
-            'ownerships',
+            'companies:company_id,company_name',
+            'types:type_id,type_name',
+            'categories:category_id,category_name',
+            'fuels:fuel_id,fuel_type_name',
+            'ownerships:ownership_type_id,ownership_name',
             'codeGH',
             'codeGSE',
         )
             ->first();
 
-        // dd($data['dataGse']);
+        $data['dataViolations'] = collect();
 
-        // $data['dataViolations'] = GSEViolationModel::where('gse_id', $request->keyword_search)
-        //     ->select(
-        //         'violation_name',
-        //         'violation_type',
-        //         'violation_level',
-        //         'description',
-        //         'examination_date',
-        //         'employee',
-        //         'location',
-        //     )->orderBy('examination_date', 'DESC')->get();
+        if ($data['dataGse']) {
+            $data['dataViolations'] = ViolatorModel::where(
+                'gse_id',
+                $data['dataGse']->gse_id
+            )
+                ->with('violationReports')
+                ->get();
+        }
 
-        // dd($data['dataViolations']);
-        $data['inputSerial'] = $request->keyword_search;
+        $data['inputSerial'] = $keyword;
 
         return view('admin-panel.gse-master.search', $data);
     }
