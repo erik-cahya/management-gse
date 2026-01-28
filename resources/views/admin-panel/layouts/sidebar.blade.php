@@ -91,6 +91,30 @@
                 </div>
             </li>
 
+            <li class="side-nav-item {{ request()->routeIs('checkup.*') ? 'menuitem-active' : '' }}">
+                <a data-bs-toggle="collapse" href="#checkupMenu" aria-expanded="false" aria-controls="checkupMenu" class="side-nav-link">
+                    <i class="ri-car-fill"></i>
+                    <span> Check Kendaraan </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="{{ request()->routeIs('checkup.*') ? 'show' : '' }} collapse" id="checkupMenu">
+                    <ul class="side-nav-second-level">
+                        <li class="side-nav-item {{ request()->routeIs('checkup.index') ? 'menuitem-active' : '' }}">
+                            <a class="side-nav-link {{ request()->routeIs('checkup.index') ? 'active' : '' }}" href="{{ route('checkup.index') }}">
+                                List Pemeriksaan
+                            </a>
+                        </li>
+
+                        <li class="side-nav-item {{ request()->routeIs('checkup.create') ? 'menuitem-active' : '' }}">
+                            <a class="side-nav-link {{ request()->routeIs('checkup.create') ? 'active' : '' }}" href="{{ route('checkup.create') }}">
+                                Input Kendaraan
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
             <li class="side-nav-title">Settings</li>
 
             @if (Auth::user()->roles === 'master')

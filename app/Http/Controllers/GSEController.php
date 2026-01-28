@@ -74,23 +74,23 @@ class GSEController extends Controller
 
         GseMasterModel::create([
             'gse_serial' => $request->gse_serial,
-            'asset_number' => $request->nomor_asset,
-            'vehicle_number' => $request->nopol_kendaraan,
-            'company_id' => $request->perusahaan_id,
-            'type_id' => $request->type_peralatan_gse,
-            'brand' => $request->merk,
-            'category_id' => $request->kategori,
-            'fuel_type' => $request->bahan_bakar,
-            'length' => $this->floatNumbering($request->panjang),
-            'width' => $this->floatNumbering($request->lebar),
-            'area' => $this->floatNumbering($request->luas),
+            'asset_number' => $request->asset_number,
+            'vehicle_number' => $request->vehicle_number,
+            'company_id' => $request->company_id,
+            'type_id' => $request->type_id,
+            'brand' => $request->brand,
+            'category_id' => $request->category_id,
+            'fuel_type' => $request->fuel_type,
+            'length' => $this->floatNumbering($request->length),
+            'width' => $this->floatNumbering($request->width),
+            'area' => $this->floatNumbering($request->area),
             'manufacture_year' => $request->manufacture_year,
-            'owneship_type' => $request->status_kepemilikan,
-            'rental_company' => $request->perusahaan_sewa,
-            'rental_status' => $request->status_sewa,
-            'rental_date' => $request->tanggal_sewa,
-            'code_gh' => $request->kode_gh,
-            'code_gse' => $request->kode_gse,
+            'ownership_type' => $request->ownership_type,
+            'rental_company' => $request->rental_company,
+            'rental_status' => $request->rental_status,
+            'rental_date' => $request->rental_date,
+            'code_gh' => $request->code_gh,
+            'code_gse' => $request->code_gse,
             'status' => $request->status,
         ]);
 
@@ -119,7 +119,10 @@ class GSEController extends Controller
      */
     public function edit(string $id)
     {
-        $data['dataGse'] = GseMasterModel::where('gse_serial', $id)->select('gse_master.*', 'kategori as id_kategori')->first();
+
+        // $data['dataGse'] = GseMasterModel::where('gse_serial', $id)->select('gse_master.*', 'kategori as id_kategori')->first();
+
+        $data['dataGse'] = GseMasterModel::where('gse_master.gse_id', $id)->select('gse_master.*', 'category_id as id_kategori')->first();
 
         $data['dataPerusahaan'] = CompanyGseModel::get();
         $data['typePeralatan'] = TypeGseModel::get();
@@ -140,8 +143,8 @@ class GSEController extends Controller
     {
         $validated = $request->validate([
             'gse_serial' => 'required|unique:gse_master,gse_serial,' . $id . ',gse_id',
-            'nomor_asset' => 'required|unique:gse_master,nomor_asset,' . $id . ',gse_id',
-            'nopol_kendaraan' => 'required|unique:gse_master,nopol_kendaraan,' . $id . ',gse_id',
+            'asset_number' => 'required|unique:gse_master,asset_number,' . $id . ',gse_id',
+            'vehicle_number' => 'required|unique:gse_master,vehicle_number,' . $id . ',gse_id',
             'status' => 'required',
         ], [
             'gse_serial.required' => 'Silahkan inputkan nomor serial',
@@ -150,23 +153,23 @@ class GSEController extends Controller
 
         GseMasterModel::where('gse_id', $id)->update([
             'gse_serial' => $request->gse_serial,
-            'asset_number' => $request->nomor_asset,
-            'vehicle_number' => $request->nopol_kendaraan,
-            'company_id' => $request->perusahaan_id,
-            'type_id' => $request->type_peralatan_gse,
-            'brand' => $request->merk,
-            'category_id' => $request->kategori,
-            'fuel_type' => $request->bahan_bakar,
-            'length' => $this->floatNumbering($request->panjang),
-            'width' => $this->floatNumbering($request->lebar),
-            'area' => $this->floatNumbering($request->luas),
+            'asset_number' => $request->asset_number,
+            'vehicle_number' => $request->vehicle_number,
+            'company_id' => $request->company_id,
+            'type_id' => $request->type_id,
+            'brand' => $request->brand,
+            'category_id' => $request->category_id,
+            'fuel_type' => $request->fuel_type,
+            'length' => $this->floatNumbering($request->length),
+            'width' => $this->floatNumbering($request->width),
+            'area' => $this->floatNumbering($request->area),
             'manufacture_year' => $request->manufacture_year,
-            'owneship_type' => $request->status_kepemilikan,
-            'rental_company' => $request->perusahaan_sewa,
-            'rental_status' => $request->status_sewa,
-            'rental_date' => $request->tanggal_sewa,
-            'code_gh' => $request->kode_gh,
-            'code_gse' => $request->kode_gse,
+            'ownership_type' => $request->ownership_type,
+            'rental_company' => $request->rental_company,
+            'rental_status' => $request->rental_status,
+            'rental_date' => $request->rental_date,
+            'code_gh' => $request->code_gh,
+            'code_gse' => $request->code_gse,
             'status' => $request->status,
         ]);
 
@@ -183,7 +186,7 @@ class GSEController extends Controller
      */
     public function destroy(string $id)
     {
-        GseMasterModel::destroy($id);
+        GseMasterModel::where('gse_id', $id)->delete();
         $flashData = [
             'judul' => 'Delete Data Success',
             'pesan' => 'Data Deleted Successfully',

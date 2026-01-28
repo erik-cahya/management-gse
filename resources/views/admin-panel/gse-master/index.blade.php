@@ -110,9 +110,9 @@
                                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                                             <a href="{{ route('gse.show', $gse->gse_id) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="See Details" data-bs-custom-class="success-tooltip"><i class="mdi mdi-eye"></i> </a>
 
-                                            <a href="{{ route('gse.edit', $gse->gse_serial) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Data" data-bs-custom-class="warning-tooltip"><i class="mdi mdi-lead-pencil"></i> </a>
+                                            <a href="{{ route('gse.edit', $gse->gse_id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Data" data-bs-custom-class="warning-tooltip"><i class="mdi mdi-lead-pencil"></i> </a>
 
-                                            <input type="hidden" class="gseID" value="{{ $gse->id }}">
+                                            <input type="hidden" class="gseID" value="{{ $gse->gse_id }}">
                                             <button type="button" class="btn btn-sm btn-danger deleteButton" data-nama="{{ $gse->gse_serial }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Data" data-bs-custom-class="danger-tooltip">
                                                 <i class="mdi mdi-trash-can"></i>
                                             </button>

@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DataSeeder::class);
         $this->call(ViolationTypeSeeder::class);
         $this->call(SanctionSeeder::class);
+        $this->call(VehicleListCheckupSeeder::class);
     }
 }
