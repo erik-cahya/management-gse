@@ -23,7 +23,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nomor Stiker Angkasa Pura</th>
-                                <th>Nomor Jenis Kendaraan</th>
+                                <th>Jenis Kendaraan</th>
                                 <th>Nopol/Nolam</th>
                                 <th>Perusahaan</th>
                                 <th>Petugas Pemeriksa</th>
@@ -57,10 +57,10 @@
                         </tbody>
                     </table>
 
-                </div> <!-- end card body-->
-            </div> <!-- end card -->
-        </div><!-- end col-->
-    </div> <!-- end row-->
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('script')
     <!-- Datatables js -->

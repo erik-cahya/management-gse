@@ -33,36 +33,43 @@ class VehicleCheckupController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'checkup_list_id'   => 'required|array',
             'checkup_list_id.*' => 'required|in:baik,tidak baik',
+
+            'keterangan'        => 'nullable|array',
+            'keterangan.*'      => 'nullable|string|max:255',
         ]);
 
         DB::transaction(function () use ($request) {
 
             $vehicleCheckup = VehicleCheckupModel::create([
-                'no_sticker' => $request->no_sticker,
-                'vehicle_type' => $request->vehicle_type,
+                'no_sticker'     => $request->no_sticker,
+                'vehicle_type'   => $request->vehicle_type,
                 'vehicle_number' => $request->vehicle_number,
-                'company' => $request->company,
-                'staff_auditor' => $request->staff_auditor,
+                'company'        => $request->company,
+                'staff_auditor'  => $request->staff_auditor,
             ]);
 
             foreach ($request->checkup_list_id as $checkupListId => $result) {
+
                 VehicleCheckupReportModel::create([
                     'vehicle_checkup_id' => $vehicleCheckup->vehicle_checkup_id,
-                    'checkup_list_id' => $checkupListId,
-                    'additional_note' => $result,
+                    'checkup_list_id'    => $checkupListId,
+                    'result'             => $result,
+                    'information'        => $request->keterangan[$checkupListId] ?? null,
                 ]);
             }
         });
 
-        $flashData = [
-            'title' => 'Tambah Data Success',
-            'message' => 'Data Checkup Berhasil Ditambahkan',
-            'swalFlashIcon' => 'success',
-        ];
-        return redirect()->route('checkup.index')->with('flashData', $flashData);
+        return redirect()
+            ->route('checkup.index')
+            ->with('flashData', [
+                'title' => 'Tambah Data Success',
+                'message' => 'Data Checkup Berhasil Ditambahkan',
+                'swalFlashIcon' => 'success',
+            ]);
     }
 
     /**
@@ -72,11 +79,13 @@ class VehicleCheckupController extends Controller
     {
         $data['dataCheckup'] = VehicleCheckupModel::where('vehicle_checkup_id', $id)
             ->with(
-                'reports:vehicle_checkup_report_id,vehicle_checkup_id,checkup_list_id,additional_name,additional_note',
+                'reports:vehicle_checkup_report_id,vehicle_checkup_id,checkup_list_id,additional_name,result,information',
                 'reports.listCheckups:checkup_list_id,list_name'
             )->first();
 
-        dd($data['dataCheckup']);
+        // dd($data['dataCheckup']);
+
+        return view('admin-panel.vehicle-checkup.show', $data);
     }
 
     /**

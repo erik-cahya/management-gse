@@ -40,16 +40,19 @@
                                                     <div class="card border-secondary border-secondary gap-2 border">
                                                         <div class="card-body">
                                                             <h5 class="card-title text-dark">{{ $loop->iteration }}. {{ $list->list_name }}</h5>
-                                                            <div class="d-flex mt-2" bis_skin_checked="1">
+                                                            <div class="d-flex mt-2 mb-2" bis_skin_checked="1">
                                                                 <div class="form-check form-check-inline" bis_skin_checked="1">
                                                                     <input type="radio" id="baik_check_{{ $list->checkup_list_id }}" name="checkup_list_id[{{ $list->checkup_list_id }}]" value="baik" class="form-check-input">
                                                                     <label class="form-check-label fw-normal" for="baik_check_{{ $list->checkup_list_id }}">Baik</label>
                                                                 </div>
+
                                                                 <div class="form-check form-check-inline" bis_skin_checked="1">
                                                                     <input type="radio" id="tidak_check_{{ $list->checkup_list_id }}" name="checkup_list_id[{{ $list->checkup_list_id }}]" value="tidak baik" class="form-check-input">
                                                                     <label class="form-check-label fw-normal" for="tidak_check_{{ $list->checkup_list_id }}">Tidak Baik</label>
                                                                 </div>
                                                             </div>
+                                                            <label for="keterangan[{{ $list->checkup_list_id }}]" class="form-label fs-12 fw-normal">Keterangan : </label>
+                                                            <input type="text" id="keterangan[{{ $list->checkup_list_id }}]" name="keterangan[{{ $list->checkup_list_id }}]" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>

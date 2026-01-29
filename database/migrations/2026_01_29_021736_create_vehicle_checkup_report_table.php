@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignUlid('vehicle_checkup_id')->references('vehicle_checkup_id')->on('vehicle_checkup')->cascadeOnDelete();
             $table->foreignUlid('checkup_list_id')->nullable()->references('checkup_list_id')->on('vehicle_checkup_list')->cascadeOnDelete();
             $table->string('additional_name')->nullable();
-            $table->text('additional_note')->nullable();
+            $table->text('result')->nullable();
+            $table->text('information')->nullable();
 
             $table->timestamps();
         });
