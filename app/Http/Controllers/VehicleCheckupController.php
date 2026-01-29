@@ -15,7 +15,8 @@ class VehicleCheckupController extends Controller
      */
     public function index()
     {
-        return view('admin-panel.vehicle-checkup.index');
+        $data['checkupData'] = VehicleCheckupModel::get();
+        return view('admin-panel.vehicle-checkup.index', $data);
     }
 
     /**
@@ -34,8 +35,9 @@ class VehicleCheckupController extends Controller
     {
         $request->validate([
             'checkup_list_id'   => 'required|array',
-            'checkup_list_id.*' => 'required|in:baik,tidak_baik',
+            'checkup_list_id.*' => 'required|in:baik,tidak baik',
         ]);
+
         DB::transaction(function () use ($request) {
 
             $vehicleCheckup = VehicleCheckupModel::create([
@@ -68,7 +70,13 @@ class VehicleCheckupController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data['dataCheckup'] = VehicleCheckupModel::where('vehicle_checkup_id', $id)
+            ->with(
+                'reports:vehicle_checkup_report_id,vehicle_checkup_id,checkup_list_id,additional_name,additional_note',
+                'reports.listCheckups:checkup_list_id,list_name'
+            )->first();
+
+        dd($data['dataCheckup']);
     }
 
     /**
@@ -92,6 +100,14 @@ class VehicleCheckupController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // GSEViolationModel::where('id', $id)->delete();
+        VehicleCheckupModel::where('vehicle_checkup_id', $id)->delete();
+        $flashData = [
+            'judul' => 'Delete Data Success',
+            'pesan' => 'Data Checkup Berhasil Dihapus',
+            'swalFlashIcon' => 'success',
+        ];
+
+        return response()->json($flashData);
     }
 }

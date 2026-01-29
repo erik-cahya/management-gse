@@ -31,26 +31,29 @@
                             </tr>
                         </thead>
                         <tbody class="text-capitalize">
-                            <tr>
-                                <td>1</td>
-                                <td>251764</td>
-                                <td>Mobil/kendaraan operasional</td>
-                                <td>19</td>
-                                <td>PT. Asia digital engineering indonesia</td>
-                                <td>AMC, AVSEC, ARFF</td>
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                        <a href="#" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="See Details" data-bs-custom-class="success-tooltip"><i class="mdi mdi-eye"></i> </a>
+                            @foreach ($checkupData as $checkup)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $checkup->no_sticker }}</td>
+                                    <td>{{ $checkup->vehicle_type }}</td>
+                                    <td>{{ $checkup->vehicle_number }}</td>
+                                    <td>{{ $checkup->company }}</td>
+                                    <td>{{ $checkup->staff_auditor }}</td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                            <a href="{{ route('checkup.show', $checkup->vehicle_checkup_id) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="See Details" data-bs-custom-class="success-tooltip"><i class="mdi mdi-eye"></i> </a>
 
-                                        <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Data" data-bs-custom-class="warning-tooltip"><i class="mdi mdi-lead-pencil"></i> </a>
+                                            <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Data" data-bs-custom-class="warning-tooltip"><i class="mdi mdi-lead-pencil"></i> </a>
 
-                                        <input type="hidden" class="gseID" value="#">
-                                        <button type="button" class="btn btn-sm btn-danger deleteButton" data-nama="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Data" data-bs-custom-class="danger-tooltip">
-                                            <i class="mdi mdi-trash-can"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                                            <input type="hidden" class="gseID" value="{{ $checkup->vehicle_checkup_id }}">
+                                            <button type="button" class="btn btn-sm btn-danger deleteButton" data-nama="{{ $checkup->no_sticker }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Data" data-bs-custom-class="danger-tooltip">
+                                                <i class="mdi mdi-trash-can"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
 
@@ -103,7 +106,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Kirim DELETE request manual lewat JavaScript
-                            fetch('/gse/' + gseID, {
+                            fetch('/checkup/' + gseID, {
                                     method: 'DELETE',
                                     headers: {
                                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
