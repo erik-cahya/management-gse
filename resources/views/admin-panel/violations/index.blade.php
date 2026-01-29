@@ -49,7 +49,6 @@
                                                     </span>
                                                 </td>
                                                 <td class="text-center">
-
                                                     <a href="{{ route('violation.show', $violation->violator_id) }}" class="text-reset fs-16 px-1"> <i class="ri-eye-line"></i></a>
 
                                                     <input type="hidden" class="gseID" value="{{ $violation->violator_id }}">

@@ -38,6 +38,7 @@ class ViolationController extends Controller
         $data['violationType'] = ViolationTypesModel::get();
         $data['dataSanction'] = SanctionModel::get();
         $data['dataGSE'] = GseMasterModel::with('types')->get();
+
         return view('admin-panel.violations.create', $data);
     }
 
@@ -178,21 +179,15 @@ class ViolationController extends Controller
                 'gseData.categories',
                 'violationReports.violatorReportDetails',
                 'violationReports.violationSanctions',
-            ])
-            ->firstOrFail();
-
-        // dd($violator);
+            ])->firstOrFail();
 
         $violationChecked = $violator->violationReports
             ? $violator->violationReports->violatorReportDetails
-            ->keyBy('violation_type_id')
-            : collect();
-
+            ->keyBy('violation_type_id') : collect();
 
         $sanctionChecked = $violator->violationReports
             ? $violator->violationReports->violationSanctions
-            ->keyBy('sanction_id')
-            : collect();
+            ->keyBy('sanction_id') : collect();
 
         return view('admin-panel.violations.show', [
             'violator'         => $violator,
