@@ -9,95 +9,92 @@
         <!-- Start Content-->
         <div class="container-fluid">
 
-            <div class="row">
-                <div class="col-xl-4">
-                    <div class="card border-top-0 overflow-hidden">
-                        <div class="progress progress-sm rounded-0 bg-light" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar bg-primary" style="width: 90%"></div>
-                        </div>
+            <div class="row mb-1">
+                <div class="col-md-3">
+                    <div class="card text-center">
                         <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="">
-                                    <p class="text-muted fw-semibold fs-16 mb-1">Total GSE</p>
-                                    <p class="text-muted mb-4">
-
-                                        Jumlah Asset
-                                    </p>
-                                </div>
-                                <div class="avatar-sm mb-4">
-                                    <div class="avatar-title bg-primary-subtle text-primary fs-24 rounded">
-                                        <i class="bi bi-receipt"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-lg-nowrap justify-content-between align-items-end flex-wrap">
-                                <h3 class="d-flex mb-0"><i class="bi bi-currency-dollar"></i>1,226.71k </h3>
-                                <div class="d-flex align-items-end h-100">
-                                    <div id="daily-orders" data-colors="#007aff"></div>
-                                </div>
-                            </div>
-                        </div><!-- end card-body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-
-                <div class="col-xl-4">
-                    <div class="card border-top-0 overflow-hidden">
-                        <div class="progress progress-sm rounded-0 bg-light" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar bg-dark" style="width: 40%"></div>
+                            <h6>Total GSE</h6>
+                            <h3>{{ $totalGse }} GSE</h3>
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="">
-                                    <p class="text-muted fw-semibold fs-16 mb-1">Pelanggaran GSE</p>
-                                    <p class="text-muted mb-4">Total Pelanggaran GSE
-                                    </p>
-                                </div>
-                                <div class="avatar-sm mb-4">
-                                    <div class="avatar-title bg-dark-subtle text-dark fs-24 rounded">
-                                        <i class="bi bi-people"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-lg-nowrap justify-content-between align-items-end flex-wrap">
-                                <h3 class="d-flex mb-0"><i class="bi bi-person"></i> 1,226.71k </h3>
-                                <div class="d-flex align-items-end h-100">
-                                    <div id="new-leads-chart" data-colors="#404040"></div>
-                                </div>
-                            </div>
-                        </div><!-- end card-body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
+                    </div>
+                </div>
 
-                <div class="col-xl-4">
-                    <div class="card border-top-0 overflow-hidden">
-                        <div class="progress progress-sm rounded-0 bg-light" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar bg-danger" style="width: 60%"></div>
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h6>GSE Aktif</h6>
+                            <h3 class="text-success">{{ $gseAktif }} GSE</h3>
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="">
-                                    <p class="text-muted fw-semibold fs-16 mb-1">Pelanggaran Hari Ini </p>
-                                    <p class="text-muted mb-4">
+                    </div>
+                </div>
 
-                                        Jumlah Pelanggaran per Hari Ini
-                                    </p>
-                                </div>
-                                <div class="avatar-sm mb-4">
-                                    <div class="avatar-title bg-danger-subtle text-danger fs-24 rounded">
-                                        <i class="bi bi-clipboard-data"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-lg-nowrap justify-content-between align-items-end flex-wrap">
-                                <h3 class="d-flex mb-0"><i class="bi bi-currency-dollar"></i>12,029.71k </h3>
-                                <div class="d-flex align-items-end h-100">
-                                    <div id="booked-revenue-chart" data-colors="#bb3939"></div>
-                                </div>
-                            </div>
-                        </div><!-- end card-body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-            </div><!-- end row -->
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h6>GSE Tidak Aktif</h6>
+                            <h3 class="text-danger">{{ $gseTidakAktif }} GSE</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h6>Total Pelanggaran</h6>
+                            <h3>{{ $totalViolation }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-md-4">
+                    <div class="alert alert-purple">
+                        <strong>All Time</strong><br>
+                        {{ $totalViolation }} Pelanggaran
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="alert alert-info">
+                        <strong>Bulan Ini</strong><br>
+                        {{ $monthlyViolation }} Pelanggaran
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="alert alert-danger">
+                        <strong>Hari Ini</strong><br>
+                        {{ $dailyViolation }} Pelanggaran
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header fw-bold">
+                    Jenis GSE Berdasarkan Maskapai
+                </div>
+                <div class="card-body">
+                    <table class="table-bordered table-sm table">
+                        <thead>
+                            <tr>
+                                <th>Maskapai</th>
+                                <th>Jenis GSE</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($gseByCompanyAndType as $row)
+                                <tr>
+                                    <td>{{ $row->company_name ?? '-' }}</td>
+                                    <td>{{ $row->type_name ?? '-' }}</td>
+                                    <td>{{ $row->total }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
         </div>
         <!-- end container -->
