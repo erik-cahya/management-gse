@@ -13,7 +13,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xxl-6">
+            <div class="col-xxl-8">
                 <div class="card">
                     <div class="card-header">
                         <h4 class=".card-title">Pemeriksaan Kendaraan</h4>
@@ -29,7 +29,7 @@
                                 <x-form.input className="col-md-6 mb-3" type="text" name="no_sticker" label="Petugas Pemeriksa" value="{{ $dataCheckup->staff_auditor }}" disabled />
                             </div>
 
-                            <table id="scroll-horizontal-datatable" class="w-100 nowrap table-bordered table text-uppercase table-sm fs-12">
+                            <table id="scroll-horizontal-datatable" class="w-100 nowrap table-bordered text-uppercase table-sm fs-12 table">
                                 <thead>
                                     <tr>
                                         <th>No</th>

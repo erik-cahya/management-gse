@@ -13,6 +13,9 @@ class ViolationReportDetailModel extends Model
 
     protected $table = 'violation_reports_details';
     protected $guarded = ['violation_report_detail_id'];
+    protected $primaryKey = 'violation_report_detail_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     public function uniqueIds()
     {

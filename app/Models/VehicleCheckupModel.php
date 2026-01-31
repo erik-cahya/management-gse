@@ -13,6 +13,9 @@ class VehicleCheckupModel extends Model
 
     protected $table = 'vehicle_checkup';
     protected $guarded = ['vehicle_checkup_id'];
+    protected $primaryKey = 'vehicle_checkup_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     public function uniqueIds()
     {

@@ -93,7 +93,32 @@ class VehicleCheckupController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $dataCheckup = VehicleCheckupModel::where('vehicle_checkup_id', $id)
+            ->with(
+                'reports:vehicle_checkup_report_id,vehicle_checkup_id,checkup_list_id,additional_name,result,information',
+                'reports.listCheckups:checkup_list_id,list_name'
+            )->first();
+
+        $vehicleCheckup = VehicleCheckupModel::with([
+            'reports' => function ($q) {
+                $q->select(
+                    'vehicle_checkup_id',
+                    'checkup_list_id',
+                    'result',
+                    'information'
+                );
+            }
+        ])->findOrFail($id);
+
+        $checkupResults = $vehicleCheckup->reports->keyBy('checkup_list_id');
+
+        return view('admin-panel.vehicle-checkup.edit', [
+            'dataCheckup' => $dataCheckup,
+            'vehicleCheckup' => $vehicleCheckup,
+            'checkupList'    => VehicleCheckupListModel::all(),
+            'checkupResults' => $checkupResults,
+        ]);
     }
 
     /**
@@ -101,7 +126,50 @@ class VehicleCheckupController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'checkup_list_id'   => 'required|array',
+            'checkup_list_id.*' => 'required|in:baik,tidak baik',
+
+            'keterangan'        => 'nullable|array',
+            'keterangan.*'      => 'nullable|string|max:255',
+        ]);
+
+        DB::transaction(function () use ($request, $id) {
+
+            $vehicleCheckup = VehicleCheckupModel::findOrFail($id);
+
+            // 1️⃣ Update header
+            $vehicleCheckup->update([
+                'no_sticker'     => $request->no_sticker,
+                'vehicle_type'   => $request->vehicle_type,
+                'vehicle_number' => $request->vehicle_number,
+                'company'        => $request->company,
+                'staff_auditor'  => $request->staff_auditor,
+            ]);
+
+            // 2️⃣ Update detail
+            foreach ($request->checkup_list_id as $checkupListId => $result) {
+
+                VehicleCheckupReportModel::updateOrCreate(
+                    [
+                        'vehicle_checkup_id' => $vehicleCheckup->vehicle_checkup_id,
+                        'checkup_list_id'    => $checkupListId,
+                    ],
+                    [
+                        'result'      => $result,
+                        'information' => $request->keterangan[$checkupListId] ?? null,
+                    ]
+                );
+            }
+        });
+
+        return redirect()
+            ->route('checkup.index')
+            ->with('flashData', [
+                'title' => 'Update Success',
+                'message' => 'Data Checkup Berhasil Diperbarui',
+                'swalFlashIcon' => 'success',
+            ]);
     }
 
     /**

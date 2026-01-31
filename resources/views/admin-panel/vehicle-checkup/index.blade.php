@@ -18,7 +18,7 @@
                     <h4 class=".card-title">All Data GSE</h4>
                 </div>
                 <div class="card-body">
-                    <table id="scroll-horizontal-datatable" class="w-100 nowrap table-bordered table text-center text-uppercase">
+                    <table id="scroll-horizontal-datatable" class="w-100 nowrap table-bordered text-uppercase table text-center">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -43,7 +43,7 @@
                                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                                             <a href="{{ route('checkup.show', $checkup->vehicle_checkup_id) }}" class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="See Details" data-bs-custom-class="success-tooltip"><i class="mdi mdi-eye"></i> </a>
 
-                                            <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Data" data-bs-custom-class="warning-tooltip"><i class="mdi mdi-lead-pencil"></i> </a>
+                                            <a href="{{ route('checkup.edit', $checkup->vehicle_checkup_id) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit Data" data-bs-custom-class="warning-tooltip"><i class="mdi mdi-lead-pencil"></i> </a>
 
                                             <input type="hidden" class="gseID" value="{{ $checkup->vehicle_checkup_id }}">
                                             <button type="button" class="btn btn-sm btn-danger deleteButton" data-nama="{{ $checkup->no_sticker }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete Data" data-bs-custom-class="danger-tooltip">

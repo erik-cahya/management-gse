@@ -12,6 +12,9 @@ class VehicleCheckupListModel extends Model
 
     protected $table = 'vehicle_checkup_list';
     protected $guarded = ['checkup_list_id'];
+    protected $primaryKey = 'checkup_list_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     public function uniqueIds()
     {
@@ -23,5 +26,14 @@ class VehicleCheckupListModel extends Model
         if ($value !== null) {
             $this->attributes['checkup_list_id'] = strtoupper($value);
         }
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(
+            VehicleCheckupReportModel::class,
+            'vehicle_checkup_id',
+            'vehicle_checkup_id'
+        );
     }
 }
