@@ -49,23 +49,23 @@
 
             <div class="row mb-1">
                 <div class="col-md-4">
-                    <div class="alert alert-purple">
+                    <div class="alert alert-purple text-bg-purple border-0">
                         <strong>All Time</strong><br>
-                        {{ $totalViolation }} Pelanggaran
+                        <small>{{ $totalViolation }} Pelanggaran</small>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="alert alert-info">
+                    <div class="alert alert-info text-bg-info border-0">
                         <strong>Bulan Ini</strong><br>
-                        {{ $monthlyViolation }} Pelanggaran
+                        <small>{{ $monthlyViolation }} Pelanggaran</small>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger text-bg-danger border-0">
                         <strong>Hari Ini</strong><br>
-                        {{ $dailyViolation }} Pelanggaran
+                        <small>{{ $dailyViolation }} Pelanggaran</small>
                     </div>
                 </div>
             </div>
@@ -98,20 +98,6 @@
 
         </div>
         <!-- end container -->
-
-        <!-- Footer Start -->
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script> © Techmin - Theme by <b>Techzaa</b>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- end Footer -->
 
     </div>
 @endsection
